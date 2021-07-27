@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title=" ">
+        <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:background="@android:color/transparent"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_arrow_left" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/ToolBarStyle"
+            android:text="Titlt"/>
+    </androidx.appcompat.widget.Toolbar>
+<!--    <androidx.appcompat.widget.AppCompatImageButton-->
+<!--        android:id="@+id/backButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/spacing_small"-->
+<!--        android:layout_marginTop="@dimen/spacing_small"-->
+<!--        android:layout_marginEnd="@dimen/spacing_small"-->
+<!--        android:layout_marginBottom="@dimen/spacing_small"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:foreground="?android:attr/selectableItemBackground"-->
+<!--        android:src="@drawable/ic_arrow_left" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_margin="@dimen/spacing_small"-->
+<!--        android:layout_marginStart="@dimen/spacing_small"-->
+<!--        android:layout_marginTop="@dimen/spacing_small"-->
+<!--        android:layout_marginEnd="@dimen/spacing_small"-->
+<!--        android:layout_marginBottom="@dimen/spacing_small"-->
+<!--        android:text="Title"-->
+<!--        android:textSize="25sp" />-->
+</RelativeLayout>

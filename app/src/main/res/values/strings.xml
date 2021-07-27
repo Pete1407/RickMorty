@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RickMorty</string>
+
+    <!-- MENU BOTTOM NAVIGATION -->
+    <string name="menu_character">Character</string>
+    <string name="menu_location">Location</string>
+    <string name="menu_episode">Episode</string>
+    <string name="menu_favorite">Favorite</string>
 </resources>
