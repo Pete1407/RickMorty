@@ -10,6 +10,8 @@ class CustomToolBar @JvmOverloads constructor(
     attributeSet: AttributeSet? = null
 ) : LinearLayout(context,attributeSet) {
 
+    private var textTitle : String? = null
+
     init{
         attributeSet?.let{ setAttribure(it)}
     }
