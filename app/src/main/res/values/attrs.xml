@@ -4,4 +4,11 @@
         <attr name="showBackButton" format="boolean"/>
         <attr name="addText" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="CustomTextView">
+        <attr name="titleSize" format="dimension"/>
+        <attr name="titleColor" format="color"/>
+        <attr name="titleText" format="string"/>
+        <attr name="styleText" format="integer"/>
+    </declare-styleable>
 </resources>

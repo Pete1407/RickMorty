@@ -2,6 +2,7 @@ package com.example.rickmorty.base.custom
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.rickmorty.R
 
@@ -10,14 +11,16 @@ class CustomToolBar @JvmOverloads constructor(
     attributeSet: AttributeSet? = null
 ) : LinearLayout(context,attributeSet) {
 
+    private var binding = LayoutInflater.from(context).inflate(R.layout.custom_toolbar,this,true)
+
     private var textTitle : String? = null
 
     init{
-        attributeSet?.let{ setAttribure(it)}
+        setAttributes(attributeSet)
     }
 
-    private fun setAttribure(attributeSet: AttributeSet){
-        val arr = context.obtainStyledAttributes(attributeSet, R.styleable.CustomToolBar)
+    private fun setAttributes(attributeSet: AttributeSet?){
 
     }
+
 }

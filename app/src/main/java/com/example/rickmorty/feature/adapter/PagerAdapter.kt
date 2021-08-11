@@ -1,4 +1,4 @@
-package com.example.rickmorty.presentation
+package com.example.rickmorty.feature.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

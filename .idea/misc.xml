@@ -6,6 +6,7 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.19722222222222222" />
         <entry key="app/src/main/res/drawable/ic_arrow_left.xml" value="0.1065" />
         <entry key="app/src/main/res/drawable/ic_back_arrow.xml" value="0.1065" />
+        <entry key="app/src/main/res/drawable/selector_bottom_nav.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20334320068359377" />
         <entry key="app/src/main/res/layout/custom_toolbar.xml" value="0.2436157226562499" />

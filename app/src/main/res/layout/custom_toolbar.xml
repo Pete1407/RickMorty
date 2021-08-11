@@ -1,53 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title=" ">
-        <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/backButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginEnd="@dimen/spacing_small"
-                android:layout_marginBottom="@dimen/spacing_small"
-                android:background="@android:color/transparent"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_arrow_left" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_left"/>
+
+        <com.example.rickmorty.base.custom.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            style="@style/ToolBarStyle"
-            android:text="Titlt"/>
+            android:textStyle="bold"
+            android:fontFamily="@font/georama_medium"
+            app:titleSize="13sp"
+            app:titleColor="@color/black"
+            tools:text="Character"/>
     </androidx.appcompat.widget.Toolbar>
-<!--    <androidx.appcompat.widget.AppCompatImageButton-->
-<!--        android:id="@+id/backButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="@dimen/spacing_small"-->
-<!--        android:layout_marginTop="@dimen/spacing_small"-->
-<!--        android:layout_marginEnd="@dimen/spacing_small"-->
-<!--        android:layout_marginBottom="@dimen/spacing_small"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:foreground="?android:attr/selectableItemBackground"-->
-<!--        android:src="@drawable/ic_arrow_left" />-->
 
-<!--    <androidx.appcompat.widget.AppCompatTextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_margin="@dimen/spacing_small"-->
-<!--        android:layout_marginStart="@dimen/spacing_small"-->
-<!--        android:layout_marginTop="@dimen/spacing_small"-->
-<!--        android:layout_marginEnd="@dimen/spacing_small"-->
-<!--        android:layout_marginBottom="@dimen/spacing_small"-->
-<!--        android:text="Title"-->
-<!--        android:textSize="25sp" />-->
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
