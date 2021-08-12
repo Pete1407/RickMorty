@@ -17,8 +17,15 @@ class CustomToolBar @JvmOverloads constructor(
     private var textTitle : String = ""
     private var isShowButton : Boolean = false
 
+    private var onclickListener : (()-> Unit)? = null
+
+
     init {
         setAttributes(attributeSet)
+    }
+
+    fun setOnClickListener(event : ()-> Unit){
+        onclickListener = event
     }
 
     private fun setAttributes(attributeSet: AttributeSet?){
@@ -27,6 +34,11 @@ class CustomToolBar @JvmOverloads constructor(
         isShowButton = attr.getBoolean(R.styleable.CustomToolBar_showBackButton,false)
         setTextTitle(textTitle)
         setShowButton(isShowButton)
+
+        binding.backButton.setOnClickListener {
+            onclickListener?.invoke()
+        }
+
     }
 
     private fun setTextTitle(txt : String){

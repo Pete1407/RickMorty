@@ -33,5 +33,5 @@
             tools:text="Paris Tropical"/>
 
     </androidx.appcompat.widget.Toolbar>
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
