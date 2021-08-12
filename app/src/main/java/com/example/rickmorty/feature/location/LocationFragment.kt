@@ -17,8 +17,8 @@ class LocationFragment : BaseFragment(),CustomState{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = FragmentLocationBinding.inflate(inflater,container,false)
-        return view.root
+       binding = FragmentLocationBinding.inflate(layoutInflater,container,false)
+       return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

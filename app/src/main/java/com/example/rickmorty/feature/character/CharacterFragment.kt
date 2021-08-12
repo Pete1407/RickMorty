@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.rickmorty.R
 import com.example.rickmorty.base.BaseFragment
 import com.example.rickmorty.base.CustomState
 import com.example.rickmorty.databinding.FragmentCharacterBinding
@@ -16,8 +17,8 @@ class CharacterFragment : BaseFragment(),CustomState{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = FragmentCharacterBinding.inflate(inflater,container,false)
-        return view.root
+        binding = FragmentCharacterBinding.inflate(layoutInflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

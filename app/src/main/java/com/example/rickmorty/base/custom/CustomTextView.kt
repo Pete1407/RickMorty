@@ -28,35 +28,7 @@ class CustomTextView @JvmOverloads constructor(
         titleSize = attr.getDimensionPixelSize(R.styleable.CustomTextView_titleSize,0)
         titleColor = attr.getColor(R.styleable.CustomTextView_titleColor,0)
         styleTitle = attr.getInt(R.styleable.CustomTextView_styleText,0)
-
-        setTitleText(titleText)
-        setColorText(titleColor)
-        setStyle(styleTitle)
-        setTitleSize(titleSize)
-
     }
 
-    private fun setTitleText(title : String){
-        this.text = title
-    }
-
-    private fun setColorText(color : Int){
-        this.setTextColor(color)
-    }
-
-    private fun setTitleSize(sizeText : Int){
-        this.textSize = sizeText.toFloat()
-    }
-
-    private fun setStyle(style : Int){
-        when(style){
-            Typeface.BOLD -> {
-                this.setTypeface(this.typeface,Typeface.BOLD)
-            }else ->{
-                this.setTypeface(this.typeface,Typeface.NORMAL)
-            }
-        }
-
-    }
 
 }

@@ -16,8 +16,8 @@ class EpisodeFragment : BaseFragment(),CustomState {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = FragmentEpisodeBinding.inflate(inflater,container,false)
-        return view.root
+        binding = FragmentEpisodeBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

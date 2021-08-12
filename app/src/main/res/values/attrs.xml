@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Toolbar -->
     <declare-styleable name="CustomToolBar">
         <attr name="showBackButton" format="boolean"/>
         <attr name="addText" format="string"/>
     </declare-styleable>
 
+    <!-- TextView -->
     <declare-styleable name="CustomTextView">
         <attr name="titleSize" format="dimension"/>
         <attr name="titleColor" format="color"/>
