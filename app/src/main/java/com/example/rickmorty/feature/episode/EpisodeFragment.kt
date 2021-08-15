@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.rickmorty.base.BaseFragment
-import com.example.rickmorty.base.CustomState
+import com.example.rickmorty.app.base.BaseFragment
+import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.databinding.FragmentEpisodeBinding
 
 class EpisodeFragment : BaseFragment(),CustomState {

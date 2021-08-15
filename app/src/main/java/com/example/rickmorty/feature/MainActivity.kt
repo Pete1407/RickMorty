@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import com.example.rickmorty.R
-import com.example.rickmorty.base.BaseActivity
-import com.example.rickmorty.base.BaseFragment
+import com.example.rickmorty.app.base.BaseActivity
+import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.databinding.ActivityMainBinding
 import com.example.rickmorty.feature.character.CharacterFragment
 import com.example.rickmorty.feature.episode.EpisodeFragment
 import com.example.rickmorty.feature.favorite_character.FavoriteFragment
 import com.example.rickmorty.feature.location.LocationFragment
-import com.example.rickmorty.feature.adapter.PagerAdapter
+import com.example.rickmorty.app.data.utils.adapter.PagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity(),BottomNavigationView.OnNavigationItemSelectedListener {
