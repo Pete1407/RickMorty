@@ -7,5 +7,5 @@ class CharacterViewModel(
     private val getCharactersUseCase: GetAllCharacterUsecase
 ) : ViewModel() {
 
-
+ // test naaa
 }
