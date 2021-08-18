@@ -13,7 +13,9 @@ import com.example.rickmorty.feature.favorite_character.FavoriteFragment
 import com.example.rickmorty.feature.location.LocationFragment
 import com.example.rickmorty.app.data.utils.adapter.PagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity(),BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding : ActivityMainBinding
     private var view : View? = null

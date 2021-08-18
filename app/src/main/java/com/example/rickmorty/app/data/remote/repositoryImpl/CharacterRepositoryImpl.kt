@@ -1,5 +1,6 @@
 package com.example.rickmorty.app.data.remote.repositoryImpl
 
+import android.util.Log
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
@@ -10,6 +11,7 @@ import retrofit2.Response
 class CharacterRepositoryImpl(
     private val remoteDataSource: CharacterRemoteDataSource
 ): CharacterRepository {
+
     override suspend fun getAllCharacter(): Resource<Characters> {
         return convertResponseToResource(remoteDataSource.getAllCharacters())
     }
@@ -23,12 +25,14 @@ class CharacterRepositoryImpl(
     }
 
     private fun convertResponseToResource(data : Response<Characters>?):Resource<Characters>{
-        data?.let {
-            if(it.isSuccessful){
-                val body = it.body()
+            if(data?.isSuccessful == true){
+                Log.i("result","-- GetAllCharacter --")
+                Log.i("result","${data.body()}")
+                val body = data.body()
                 return Resource.Success(body,"Success")
+            }else{
+                Log.i("result","isNotSuccessful")
             }
-        }
         return Resource.Error(data?.message(),null)
     }
 }

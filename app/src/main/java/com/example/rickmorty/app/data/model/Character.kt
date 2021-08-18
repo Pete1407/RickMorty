@@ -1,8 +1,10 @@
 package com.example.rickmorty.app.data.model
 
+import java.io.Serializable
+
 data class Character(
     val created: String,
-    val episode: List<String>,
+    val episode: ArrayList<String>,
     val gender: String,
     val id: Int,
     val image: String,
@@ -13,4 +15,4 @@ data class Character(
     val status: String,
     val type: String,
     val url: String
-)
+):Serializable

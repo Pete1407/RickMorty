@@ -1,6 +1,8 @@
 package com.example.rickmorty.app.data.model
 
+import java.io.Serializable
+
 data class Characters(
     val info: Info,
-    val characters: List<Character>
-)
+    val results: ArrayList<Character>
+):Serializable

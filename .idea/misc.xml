@@ -14,7 +14,7 @@
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20334320068359377" />
         <entry key="app/src/main/res/layout/custom_toolbar.xml" value="0.2436157226562499" />
-        <entry key="app/src/main/res/layout/fragment_character.xml" value="0.18115942028985507" />
+        <entry key="app/src/main/res/layout/fragment_character.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_episode.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/fragment_favor.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/fragment_location.xml" value="0.18115942028985507" />

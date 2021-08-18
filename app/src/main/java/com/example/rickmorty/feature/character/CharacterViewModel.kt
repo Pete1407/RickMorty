@@ -1,17 +1,34 @@
 package com.example.rickmorty.feature.character
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.rickmorty.app.data.model.Character
+import androidx.lifecycle.viewModelScope
+import com.example.rickmorty.app.base.RmKey
+import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.GetAllCharacterUsecase
-import java.util.ArrayList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CharacterViewModel(
     private val getCharactersUseCase: GetAllCharacterUsecase
 ) : ViewModel() {
 
-    private var characterLists = MutableLiveData<ArrayList<Character>>()
-    val characterLiveData : LiveData<ArrayList<Character>>
-    get() = characterLists
+    var characters = MutableLiveData<Resource<Characters>>()
+
+    fun getCharactersData(){
+        characters.postValue(Resource.Loading())
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = getCharactersUseCase.execute().data
+            result?.let {
+                if(it.results.size > 0){
+                    Log.i("result","result come...")
+                }else{
+                    Log.i("result","result not come!!!!")
+                }
+            }
+            characters.postValue(Resource.Success(result,RmKey.SUCCESS))
+        }
+    }
 }
