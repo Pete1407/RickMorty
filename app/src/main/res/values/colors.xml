@@ -16,4 +16,6 @@
     <color name="bg_main">#ededee</color>
 
     <color name="cardItem_character">#C4C4C4</color>
+
+    <color name="bg_info_character">#EDEDEE</color>
 </resources>
