@@ -15,6 +15,7 @@ import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.data.utils.SpacesItemDecoration
 import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
+import com.example.rickmorty.feature.character.info_character.InfoCharacterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -66,6 +67,10 @@ class CharacterFragment : BaseFragment(),CustomState{
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         val itemDec = SpacesItemDecoration(16)
         val adapter = CharacterAdapter(itemList)
+        adapter.setChooseEvent {
+            //Toast.makeText(requireContext(),"name:${it.name}",Toast.LENGTH_SHORT).show()
+            setCharacterToInfo(it)
+        }
         binding.recyclerView.addItemDecoration(itemDec)
         binding.recyclerView.adapter = adapter
     }
@@ -80,6 +85,10 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun hideLoading() {
         binding.loading.visibility = View.GONE
+    }
+
+    private fun setCharacterToInfo(character : Character){
+        startActivity(InfoCharacterActivity.create(requireContext(),character))
     }
 
     companion object{

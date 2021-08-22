@@ -41,7 +41,7 @@ class CustomToolBar @JvmOverloads constructor(
 
     }
 
-    private fun setTextTitle(txt : String){
+    fun setTextTitle(txt : String){
         binding.title.text = txt
     }
 

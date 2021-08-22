@@ -1,7 +1,10 @@
 package com.example.rickmorty.app.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
+@Parcelize
 data class Character(
     val created: String,
     val episode: ArrayList<String>,
@@ -15,4 +18,4 @@ data class Character(
     val status: String,
     val type: String,
     val url: String
-):Serializable
+):Parcelable

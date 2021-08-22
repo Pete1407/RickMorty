@@ -10,4 +10,6 @@ object RmKey {
     // type for using recyclerview
     const val HEADING = 0
     const val BODY = 1
+
+    const val ITEM_CHARACTER = "item-character"
 }
