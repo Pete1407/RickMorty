@@ -6,7 +6,7 @@ import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSourc
 import retrofit2.Response
 
 class CharacterRemoteDataSourceImpl(
-    val serviceAPI: ServiceAPI
+    private val serviceAPI: ServiceAPI
 ) : CharacterRemoteDataSource {
 
     override suspend fun getAllCharacters(): Response<Characters> {

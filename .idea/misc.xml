@@ -14,10 +14,11 @@
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20334320068359377" />
         <entry key="app/src/main/res/layout/custom_toolbar.xml" value="0.2436157226562499" />
-        <entry key="app/src/main/res/layout/fragment_character.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_character.xml" value="0.10268108728654046" />
         <entry key="app/src/main/res/layout/fragment_episode.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/fragment_favor.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/fragment_location.xml" value="0.18115942028985507" />
+        <entry key="app/src/main/res/layout/item_card_character.xml" value="0.2457972418663002" />
         <entry key="app/src/main/res/layout/layout_toolbar_back.xml" value="0.1733523611295021" />
         <entry key="app/src/main/res/layout/widget_custom_toolbar.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.240625" />

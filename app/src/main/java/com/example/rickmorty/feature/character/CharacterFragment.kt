@@ -1,17 +1,19 @@
 package com.example.rickmorty.feature.character
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
-import com.example.rickmorty.app.base.RmKey
+import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.utils.Resource
+import com.example.rickmorty.app.data.utils.SpacesItemDecoration
+import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -38,11 +40,34 @@ class CharacterFragment : BaseFragment(),CustomState{
         initViewModel()
         vm.getCharactersData()
         initUI()
-
     }
 
     override fun initUI() {
+        vm.characters.observe(viewLifecycleOwner, Observer {
+            when(it){
+                is Resource.Loading ->{
+                    showLoading()
+                }
+                is Resource.Success ->{
+                    hideLoading()
+                    it.data?.results?.let { items->
+                       vm.list.addAll(items)
+                    }
+                    updateUI(vm.list)
+                }
+                else ->{
+                    Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
 
+    private fun updateUI(itemList : ArrayList<Character>){
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        val itemDec = SpacesItemDecoration(16)
+        val adapter = CharacterAdapter(itemList)
+        binding.recyclerView.addItemDecoration(itemDec)
+        binding.recyclerView.adapter = adapter
     }
 
     override fun initViewModel() {

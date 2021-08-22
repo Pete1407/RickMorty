@@ -1,6 +1,7 @@
 package com.example.rickmorty.app.data.remote.repositoryImpl
 
 import android.util.Log
+import com.example.rickmorty.app.base.RmKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
@@ -16,6 +17,17 @@ class CharacterRepositoryImpl(
         return convertResponseToResource(remoteDataSource.getAllCharacters())
     }
 
+    private fun convertResponseToResource(response : Response<Characters>):Resource<Characters>{
+        val success = response.isSuccessful
+        if(success){
+            response.body()?.let { result ->
+                return Resource.Success(result)
+            }
+        }
+        return Resource.Error(response.message(),null)
+
+    }
+
     override suspend fun getSingleCharacter(): Resource<Character> {
         TODO("Not yet implemented")
     }
@@ -24,15 +36,4 @@ class CharacterRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    private fun convertResponseToResource(data : Response<Characters>?):Resource<Characters>{
-            if(data?.isSuccessful == true){
-                Log.i("result","-- GetAllCharacter --")
-                Log.i("result","${data.body()}")
-                val body = data.body()
-                return Resource.Success(body,"Success")
-            }else{
-                Log.i("result","isNotSuccessful")
-            }
-        return Resource.Error(data?.message(),null)
-    }
 }

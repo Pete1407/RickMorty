@@ -8,7 +8,6 @@ import com.example.rickmorty.app.domain.repository.CharacterRepository
 class GetAllCharacterUsecase(private val repository: CharacterRepository) {
 
     suspend fun execute():Resource<Characters>{
-        Log.i("result","run this usecase...")
         return repository.getAllCharacter()
     }
 }

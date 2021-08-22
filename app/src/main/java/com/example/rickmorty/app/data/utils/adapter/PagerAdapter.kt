@@ -20,4 +20,6 @@ class PagerAdapter(manager : FragmentManager) : FragmentStatePagerAdapter(manage
         return list[position]
     }
 
+
+
 }
