@@ -16,40 +16,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/bg_info_character">
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <androidx.appcompat.widget.LinearLayoutCompat
+          android:id="@+id/mainLayout"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:background="@color/bg_info_character">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:gravity="center">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_menu_character"/>
+          <androidx.appcompat.widget.LinearLayoutCompat
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/spacing_medium"
+              android:gravity="center">
+              <de.hdodenhof.circleimageview.CircleImageView
+                  android:id="@+id/imageProfile"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/icon_menu_character"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/cardItem_character">
-            <com.example.rickmorty.app.base.custom.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+          </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+          <androidx.appcompat.widget.LinearLayoutCompat
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+          </androidx.appcompat.widget.LinearLayoutCompat>
+      </androidx.appcompat.widget.LinearLayoutCompat>
+  </FrameLayout>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

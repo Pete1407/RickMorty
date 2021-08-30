@@ -6,13 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.rickmorty.R
 import com.example.rickmorty.app.base.BaseActivity
+import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.app.base.RmKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.databinding.ActivityInfoCharacterBinding
+import dagger.hilt.android.AndroidEntryPoint
+import okio.JvmStatic
 
-class InfoCharacterActivity : BaseActivity() {
+@AndroidEntryPoint
+class InfoCharacterActivity : BaseActivity(),CustomState {
     private lateinit var binding : ActivityInfoCharacterBinding
     private var characterChosen : Character? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,25 +28,37 @@ class InfoCharacterActivity : BaseActivity() {
         initUI()
     }
 
-    private fun initUI(){
+    override fun initUI() {
         characterChosen?.let{
             binding.toolBar.setTextTitle(it.name)
         }?:kotlin.run {
             binding.toolBar.setTextTitle(resources.getString(R.string.info_character))
         }
-
         binding.toolBar.setOnClickListener {
             finish()
         }
+    }
+
+    override fun initViewModel() {
+
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
 
     }
 
     companion object{
+        const val ITEM_CHARACTER = "item-character"
 
-        fun create(context : Context,item : Character):Intent{
-            val intent = Intent(context,InfoCharacterActivity::class.java)
-            intent.putExtra(RmKey.ITEM_CHARACTER,item)
-            return intent
+        @JvmStatic
+        fun create(context : Context,item : Character){
+            context.startActivity(Intent(context,InfoCharacterActivity::class.java).apply {
+                putExtra(ITEM_CHARACTER,item)
+            })
         }
     }
 }

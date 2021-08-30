@@ -68,7 +68,6 @@ class CharacterFragment : BaseFragment(),CustomState{
         val itemDec = SpacesItemDecoration(16)
         val adapter = CharacterAdapter(itemList)
         adapter.setChooseEvent {
-            //Toast.makeText(requireContext(),"name:${it.name}",Toast.LENGTH_SHORT).show()
             setCharacterToInfo(it)
         }
         binding.recyclerView.addItemDecoration(itemDec)
@@ -80,6 +79,7 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     override fun showLoading() {
+        binding.loading.playAnimation()
         binding.loading.visibility = View.VISIBLE
     }
 
@@ -88,7 +88,7 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     private fun setCharacterToInfo(character : Character){
-        startActivity(InfoCharacterActivity.create(requireContext(),character))
+         InfoCharacterActivity.create(requireContext(),character)
     }
 
     companion object{

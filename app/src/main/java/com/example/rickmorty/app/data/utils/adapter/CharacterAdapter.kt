@@ -47,6 +47,7 @@ class CharacterAdapter(val list : ArrayList<Character>) : RecyclerView.Adapter<C
                 event.invoke(item)
             }
 
+
         }
     }
 }

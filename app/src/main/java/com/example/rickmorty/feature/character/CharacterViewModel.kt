@@ -9,11 +9,13 @@ import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.GetAllCharacterUsecase
+import com.example.rickmorty.app.domain.usecase.GetSingleCharacterUsecase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CharacterViewModel(
-    private val getCharactersUseCase: GetAllCharacterUsecase
+    private val getCharactersUseCase: GetAllCharacterUsecase,
+    private val getCharacterUsecaseUseCase : GetSingleCharacterUsecase
 ) : ViewModel() {
 
     var characters = MutableLiveData<Resource<Characters>>()

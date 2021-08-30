@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg_main"
     android:orientation="vertical">
 
@@ -21,17 +22,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/loading_planet"
+            app:lottie_loop="true" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_card_character"/>
     </FrameLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
