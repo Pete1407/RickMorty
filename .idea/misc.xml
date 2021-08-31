@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.19722222222222222" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/bg_info_character.xml" value="0.11614583333333334" />
         <entry key="app/src/main/res/drawable/ic_arrow_left.xml" value="0.1065" />
         <entry key="app/src/main/res/drawable/ic_back_arrow.xml" value="0.1065" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.13645833333333332" />
@@ -12,7 +13,7 @@
         <entry key="app/src/main/res/drawable/selector_bottom_nav.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/toolbar_drop_shadow.xml" value="0.134375" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.18115942028985507" />
-        <entry key="app/src/main/res/layout/activity_info_character.xml" value="0.13549924919106843" />
+        <entry key="app/src/main/res/layout/activity_info_character.xml" value="0.24789148426439567" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20334320068359377" />
         <entry key="app/src/main/res/layout/custom_toolbar.xml" value="0.2436157226562499" />
         <entry key="app/src/main/res/layout/fragment_character.xml" value="0.10268108728654046" />

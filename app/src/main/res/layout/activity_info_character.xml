@@ -19,33 +19,95 @@
   <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
+
       <androidx.appcompat.widget.LinearLayoutCompat
           android:id="@+id/mainLayout"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:orientation="vertical"
-          android:background="@color/bg_info_character">
+          android:background="@color/bg_info_character"
+          android:orientation="vertical">
 
           <androidx.appcompat.widget.LinearLayoutCompat
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/spacing_medium"
               android:gravity="center">
+
               <de.hdodenhof.circleimageview.CircleImageView
                   android:id="@+id/imageProfile"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:src="@drawable/icon_menu_character"/>
+                  android:src="@drawable/icon_menu_character" />
 
           </androidx.appcompat.widget.LinearLayoutCompat>
-
 
           <androidx.appcompat.widget.LinearLayoutCompat
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/spacing_medium"
+              android:background="@drawable/bg_info_character"
+              android:padding="@dimen/spacing_small"
+              android:orientation="vertical">
 
+              <com.example.rickmorty.app.base.custom.CustomTextView
+                  android:id="@+id/textName"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/georama_medium"
+                  android:textColor="@color/black"
+                  android:textSize="18sp"
+                  android:textStyle="bold"
+                  tools:text="Character name" />
 
+              <androidx.appcompat.widget.LinearLayoutCompat
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+
+                  <androidx.appcompat.widget.AppCompatImageView
+                      android:id="@+id/icon_specie"
+                      android:layout_width="30dp"
+                      android:layout_height="30dp"
+                      android:src="@drawable/icon_person" />
+
+                  <com.example.rickmorty.app.base.custom.CustomTextView
+                      android:id="@+id/text_specie"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:textColor="@color/white"
+                      android:layout_marginStart="@dimen/spacing_small"
+                      android:layout_marginTop="2dp"
+                      tools:text="Human" />
+
+                  <View
+                      android:layout_width="1dp"
+                      android:layout_height="20dp"
+                      android:layout_marginStart="@dimen/spacing_medium"
+                      android:layout_marginEnd="@dimen/spacing_medium"
+                      android:background="@color/color_gray"/>
+
+                  <androidx.appcompat.widget.AppCompatImageView
+                      android:id="@+id/icon_gender"
+                      android:layout_width="30dp"
+                      android:layout_height="30dp"
+                      android:src="@drawable/icon_male"/>
+
+                  <androidx.appcompat.widget.AppCompatTextView
+                      android:id="@+id/text_gender"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:textColor="@color/white"
+                      android:layout_marginTop="2dp"
+                      android:layout_marginStart="@dimen/spacing_small"
+                      tools:text="Male"/>
+              </androidx.appcompat.widget.LinearLayoutCompat>
           </androidx.appcompat.widget.LinearLayoutCompat>
+
       </androidx.appcompat.widget.LinearLayoutCompat>
   </FrameLayout>
 
