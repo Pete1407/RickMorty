@@ -8,7 +8,7 @@ interface CharacterRepository {
 
     suspend fun getAllCharacter():Resource<Characters>
 
-    suspend fun getSingleCharacter():Resource<Character>
+    suspend fun getSingleCharacter(id : String):Resource<Character>
 
     suspend fun getMultipleCharacter():Resource<Characters>
 }

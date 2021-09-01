@@ -15,9 +15,10 @@ import kotlinx.coroutines.launch
 
 class CharacterViewModel(
     private val getCharactersUseCase: GetAllCharacterUsecase,
-    private val getCharacterUsecaseUseCase : GetSingleCharacterUsecase
+    private val getSingleCharacterUseCase : GetSingleCharacterUsecase
 ) : ViewModel() {
 
+    var character = MutableLiveData<Resource<Character>>()
     var characters = MutableLiveData<Resource<Characters>>()
     var list = ArrayList<Character>()
 
@@ -29,6 +30,16 @@ class CharacterViewModel(
                 characters.postValue(Resource.Success(it,RmKey.SUCCESS))
             }?:kotlin.run {
                 Log.d("!!!  debug","result is null.  !!!")
+            }
+        }
+    }
+
+    fun getSingleCharacter(id : String){
+        character.postValue(Resource.Loading())
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = getSingleCharacterUseCase.execute(id)
+            result?.let {
+                character.postValue(it)
             }
         }
     }

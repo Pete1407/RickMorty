@@ -20,6 +20,14 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
+      <com.airbnb.lottie.LottieAnimationView
+          android:id="@+id/loading"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:visibility="gone"
+          app:lottie_rawRes="@raw/loading_planet"/>
+
       <androidx.appcompat.widget.LinearLayoutCompat
           android:id="@+id/mainLayout"
           android:layout_width="match_parent"
@@ -57,7 +65,7 @@
                   android:textColor="@color/black"
                   android:textSize="18sp"
                   android:textStyle="bold"
-                  tools:text="Character name" />
+                  android:text="Rick Sanchez" />
 
               <androidx.appcompat.widget.LinearLayoutCompat
                   android:layout_width="match_parent"
@@ -107,6 +115,98 @@
                       tools:text="Male"/>
               </androidx.appcompat.widget.LinearLayoutCompat>
           </androidx.appcompat.widget.LinearLayoutCompat>
+
+          <androidx.appcompat.widget.LinearLayoutCompat
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/spacing_medium"
+              android:orientation="horizontal">
+              <androidx.appcompat.widget.LinearLayoutCompat
+                  android:id="@+id/group1"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/bg_info_character"
+                  android:padding="@dimen/spacing_small"
+                  android:layout_weight="1"
+                  android:layout_marginEnd="@dimen/spacing_small"
+                  android:orientation="vertical">
+                  <androidx.appcompat.widget.LinearLayoutCompat
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:orientation="horizontal">
+                      <androidx.appcompat.widget.AppCompatImageView
+                          android:layout_width="25dp"
+                          android:layout_height="25dp"
+                          android:src="@drawable/icon_location"/>
+                      <com.example.rickmorty.app.base.custom.CustomTextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:fontFamily="@font/georama_medium"
+                          android:textColor="@color/black"
+                          android:textSize="18sp"
+                          android:textStyle="bold"
+                          android:layout_marginStart="@dimen/spacing_small"
+                          tools:text="@string/title_origin"/>
+                  </androidx.appcompat.widget.LinearLayoutCompat>
+
+                  <com.example.rickmorty.app.base.custom.CustomTextView
+                      android:id="@+id/textOrigin"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="@dimen/spacing_small"
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:textColor="@color/white"
+                      tools:text="Name: The earth"/>
+
+                  <com.example.rickmorty.app.base.custom.CustomTextView
+                      android:id="@+id/typeOrigin"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="@dimen/spacing_small"
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      android:textColor="@color/white"
+                      tools:text="Type: Planet"/>
+              </androidx.appcompat.widget.LinearLayoutCompat>
+
+              <androidx.appcompat.widget.LinearLayoutCompat
+                  android:id="@+id/group2"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:background="@drawable/bg_status_alive">
+                  <androidx.appcompat.widget.AppCompatImageView
+                      android:id="@+id/type_status"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:src="@drawable/icon_live"/>
+
+                  <com.example.rickmorty.app.base.custom.CustomTextView
+                      android:id="@+id/text_statusType"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="20sp"
+                      android:fontFamily="@font/georama_medium"
+                      android:textStyle="bold"
+                      android:textColor="@color/white"
+                      tools:text="Alive"/>
+              </androidx.appcompat.widget.LinearLayoutCompat>
+          </androidx.appcompat.widget.LinearLayoutCompat>
+
+          <androidx.appcompat.widget.LinearLayoutCompat
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center">
+              <com.airbnb.lottie.LottieAnimationView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:lottie_rawRes="@raw/love_character" />
+          </androidx.appcompat.widget.LinearLayoutCompat>
+
 
       </androidx.appcompat.widget.LinearLayoutCompat>
   </FrameLayout>

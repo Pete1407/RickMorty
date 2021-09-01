@@ -28,8 +28,14 @@ class CharacterRepositoryImpl(
 
     }
 
-    override suspend fun getSingleCharacter(): Resource<Character> {
-        TODO("Not yet implemented")
+    override suspend fun getSingleCharacter(id : String): Resource<Character> {
+       val output = remoteDataSource.getSingleCharacter(id)
+       if(output.isSuccessful) {
+            output.body()?.let {
+                return Resource.Success(it)
+            }
+       }
+       return Resource.Error(output.message(),null)
     }
 
     override suspend fun getMultipleCharacter(): Resource<Characters> {

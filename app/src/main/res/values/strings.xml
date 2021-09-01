@@ -7,4 +7,10 @@
     <string name="menu_episode">Episode</string>
     <string name="menu_favorite">Favorite</string>
     <string name="info_character">Info</string>
+
+    <!-- Info Character -->
+    <string name="title_character_name">Character name</string>
+    <string name="title_origin">Origin</string>
+    <string name="title_name">Name</string>
+    <string name="title_type">Type</string>
 </resources>
