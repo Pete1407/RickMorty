@@ -13,8 +13,8 @@ object RmKey {
 
     const val ITEM_CHARACTER = "item-character"
 
-    const val TYPE_ALIVE = "alive"
-    const val TYPE_DEAD = "dead"
+    const val TYPE_ALIVE = "Alive"
+    const val TYPE_DEAD = "Dead"
     const val TYPE_UNKNOWN = "unknown"
 
     const val TYPE_FEMALE = "female"

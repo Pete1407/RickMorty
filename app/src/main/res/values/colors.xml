@@ -20,4 +20,5 @@
     <color name="bg_info_character">#EDEDEE</color>
     <color name="bg_white">#FFFFFF</color>
     <color name="color_gray">#B5BCB5</color>
+    <color name="bg_unknown">#5F3B11</color>
 </resources>

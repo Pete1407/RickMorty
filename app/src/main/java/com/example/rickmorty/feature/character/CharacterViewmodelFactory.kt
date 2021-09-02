@@ -8,11 +8,11 @@ import com.example.rickmorty.app.domain.usecase.GetSingleCharacterUsecase
 class CharacterViewModelFactory(
     private val allCharacterUseCase: GetAllCharacterUsecase,
     private val getSingleCharacterUsecase: GetSingleCharacterUsecase
-): ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(CharacterViewModel::class.java)){
-            return CharacterViewModel(allCharacterUseCase,getSingleCharacterUsecase) as T
+        if (modelClass.isAssignableFrom(CharacterViewModel::class.java)) {
+            return CharacterViewModel(allCharacterUseCase, getSingleCharacterUsecase) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }

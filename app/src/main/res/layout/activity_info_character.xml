@@ -25,7 +25,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
-          android:visibility="gone"
           app:lottie_rawRes="@raw/loading_planet"/>
 
       <androidx.appcompat.widget.LinearLayoutCompat
@@ -43,8 +42,8 @@
 
               <de.hdodenhof.circleimageview.CircleImageView
                   android:id="@+id/imageProfile"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
+                  android:layout_width="120dp"
+                  android:layout_height="120dp"
                   android:src="@drawable/icon_menu_character" />
 
           </androidx.appcompat.widget.LinearLayoutCompat>
@@ -147,7 +146,7 @@
                           android:textSize="18sp"
                           android:textStyle="bold"
                           android:layout_marginStart="@dimen/spacing_small"
-                          tools:text="@string/title_origin"/>
+                          android:text="@string/title_origin"/>
                   </androidx.appcompat.widget.LinearLayoutCompat>
 
                   <com.example.rickmorty.app.base.custom.CustomTextView
@@ -160,7 +159,7 @@
                       android:textColor="@color/white"
                       tools:text="Name: The earth"/>
 
-                  <com.example.rickmorty.app.base.custom.CustomTextView
+                  <!--<com.example.rickmorty.app.base.custom.CustomTextView
                       android:id="@+id/typeOrigin"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -168,7 +167,7 @@
                       android:textSize="16sp"
                       android:textStyle="bold"
                       android:textColor="@color/white"
-                      tools:text="Type: Planet"/>
+                      tools:text="Type: Planet"/>-->
               </androidx.appcompat.widget.LinearLayoutCompat>
 
               <androidx.appcompat.widget.LinearLayoutCompat
@@ -179,34 +178,31 @@
                   android:gravity="center"
                   android:orientation="vertical"
                   android:background="@drawable/bg_status_alive">
-                  <androidx.appcompat.widget.AppCompatImageView
-                      android:id="@+id/type_status"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:src="@drawable/icon_live"/>
+               <androidx.appcompat.widget.LinearLayoutCompat
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:orientation="vertical">
+                   <androidx.appcompat.widget.AppCompatImageView
+                       android:id="@+id/type_status"
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:src="@drawable/icon_live"/>
 
-                  <com.example.rickmorty.app.base.custom.CustomTextView
-                      android:id="@+id/text_statusType"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:textSize="20sp"
-                      android:fontFamily="@font/georama_medium"
-                      android:textStyle="bold"
-                      android:textColor="@color/white"
-                      tools:text="Alive"/>
+                   <com.example.rickmorty.app.base.custom.CustomTextView
+                       android:id="@+id/text_statusType"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/georama_medium"
+                       android:textStyle="bold"
+                       android:layout_marginTop="@dimen/spacing_small"
+                       android:textColor="@color/white"
+                       tools:text="Alive"/>
+               </androidx.appcompat.widget.LinearLayoutCompat>
+
               </androidx.appcompat.widget.LinearLayoutCompat>
           </androidx.appcompat.widget.LinearLayoutCompat>
-
-          <androidx.appcompat.widget.LinearLayoutCompat
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center">
-              <com.airbnb.lottie.LottieAnimationView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  app:lottie_rawRes="@raw/love_character" />
-          </androidx.appcompat.widget.LinearLayoutCompat>
-
 
       </androidx.appcompat.widget.LinearLayoutCompat>
   </FrameLayout>
