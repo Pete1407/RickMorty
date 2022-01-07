@@ -17,7 +17,6 @@ class SplashScreenActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        requestWindowFeature(Window.FEATURE_ACTION_BAR)
         val view = binding.root
         setContentView(view)
         initUI()

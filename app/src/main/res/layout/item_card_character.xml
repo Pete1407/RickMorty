@@ -1,48 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<LinearLayout
+    android:id="@+id/mainLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_small"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/spacing_small"
-    app:cardBackgroundColor="@color/colorPrimary"
-    app:cardCornerRadius="@dimen/spacing_small">
+   >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-   <FrameLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-       <androidx.appcompat.widget.AppCompatImageView
-           android:id="@+id/imageCharacter"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:src="@drawable/icon_menu_character"/>
-   </FrameLayout>
-
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/cardItem_character">
-        <com.example.rickmorty.app.base.custom.CustomTextView
-            android:id="@+id/nameCharacter"
-            android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/spacing_small"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="@dimen/spacing_small">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:maxLines="1"
-            android:ellipsize="end"
-            tools:text="Rick Sanchez"/>
-    </LinearLayout>
-    </LinearLayout>
+            android:orientation="vertical">
 
-</androidx.cardview.widget.CardView>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageCharacter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_menu_character"/>
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/cardItem_character">
+                <com.example.rickmorty.app.base.custom.CustomTextView
+                    android:id="@+id/nameCharacter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="Rick Sanchez"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

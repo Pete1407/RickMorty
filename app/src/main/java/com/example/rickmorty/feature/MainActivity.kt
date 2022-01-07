@@ -3,6 +3,7 @@ package com.example.rickmorty.feature
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.example.rickmorty.R
 import com.example.rickmorty.app.base.BaseActivity
 import com.example.rickmorty.app.base.BaseFragment
@@ -16,11 +17,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(),BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(){
     private lateinit var binding : ActivityMainBinding
     private var view : View? = null
     private var list = ArrayList<BaseFragment>()
     private lateinit var pager : PagerAdapter
+    private var menuTexts = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,7 +34,32 @@ class MainActivity : BaseActivity(),BottomNavigationView.OnNavigationItemSelecte
 
     private fun initUI(){
        setMenuBottomNavigation()
-       binding.bottomNav.setOnNavigationItemSelectedListener(this)
+       binding.bottomNav.setOnItemSelectedListener {
+          when(it.itemId){
+              R.id.character ->{
+                  loadFragment(CharacterFragment())
+                  return@setOnItemSelectedListener true
+              }
+              R.id.location ->{
+                  loadFragment(LocationFragment())
+                  return@setOnItemSelectedListener true
+              }
+              R.id.episode ->{
+                  loadFragment(EpisodeFragment())
+                  return@setOnItemSelectedListener true
+              }
+              else -> {
+                  loadFragment(FavoriteFragment())
+                  return@setOnItemSelectedListener true
+              }
+          }
+       }
+    }
+
+    private fun loadFragment(fragment:Fragment){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frameLayout,fragment)
+        fragmentTransaction.commit()
     }
 
     private fun setMenuBottomNavigation(){
@@ -41,29 +69,6 @@ class MainActivity : BaseActivity(),BottomNavigationView.OnNavigationItemSelecte
         list.add(EpisodeFragment.newInstance())
         list.add(FavoriteFragment.newInstance())
         pager.setPageItems(list)
-        binding.viewPager.adapter = pager
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.character ->{
-                binding.viewPager.currentItem = 0
-                return true
-            }
-            R.id.location ->{
-                binding.viewPager.currentItem = 1
-                return true
-            }
-            R.id.episode ->{
-                binding.viewPager.currentItem = 2
-                return true
-            }
-            R.id.favorite ->{
-                binding.viewPager.currentItem = 3
-                return true
-            }
-        }
-        return false
     }
 
 }

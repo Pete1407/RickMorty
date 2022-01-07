@@ -18,6 +18,12 @@ import com.example.rickmorty.databinding.FragmentCharacterBinding
 import com.example.rickmorty.feature.character.info_character.InfoCharacterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import com.google.android.material.internal.ViewUtils.dpToPx
+
+import com.example.rickmorty.app.data.utils.adapter.GridSpacingItemDecoration
+
+
+
 
 @AndroidEntryPoint
 class CharacterFragment : BaseFragment(),CustomState{
@@ -64,13 +70,18 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     private fun updateUI(itemList : ArrayList<Character>){
-        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-        val itemDec = SpacesItemDecoration(16)
+        //binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        //val itemDec = SpacesItemDecoration(16)
         val adapter = CharacterAdapter(itemList)
         adapter.setChooseEvent {
             setCharacterToInfo(it)
         }
-        binding.recyclerView.addItemDecoration(itemDec)
+        binding.recyclerView.addItemDecoration(
+            GridSpacingItemDecoration(
+                2,
+                10,
+                true
+            ))
         binding.recyclerView.adapter = adapter
     }
 
