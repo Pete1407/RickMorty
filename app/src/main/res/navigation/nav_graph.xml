@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/characterFragment">
 
     <fragment
         android:id="@+id/characterFragment"
         android:name="com.example.rickmorty.feature.character.CharacterFragment"
-        android:label="CharacterFragment" />
+        android:label="CharacterFragment"
+        tools:layout="@layout/fragment_character"/>
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.rickmorty.feature.location.LocationFragment"
-        android:label="LocationFragment" />
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location"/>
+
 </navigation>
