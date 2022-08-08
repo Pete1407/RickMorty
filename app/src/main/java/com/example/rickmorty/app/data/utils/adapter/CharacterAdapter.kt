@@ -12,35 +12,42 @@ import android.app.Activity
 import android.widget.LinearLayout
 
 
-class CharacterAdapter(val list : ArrayList<Character>) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
+class CharacterAdapter(val list: ArrayList<Character>) :
+    RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
-    var chooseListener : ((item : Character)-> Unit)? = null
+    var chooseListener: ((item: Character) -> Unit)? = null
 
-   fun setChooseEvent(event : (item:Character)->Unit){
-       chooseListener = event
-   }
+    fun setChooseEvent(event: (item: Character) -> Unit) {
+        chooseListener = event
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterAdapter.CharacterViewHolder {
-        val viewHolder = ItemCardCharacterBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        val width = (parent.context.resources.displayMetrics.widthPixels*0.5).toInt()
-        viewHolder.mainLayout.layoutParams = LinearLayout.LayoutParams(width,LinearLayout.LayoutParams.WRAP_CONTENT)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CharacterAdapter.CharacterViewHolder {
+        val viewHolder =
+            ItemCardCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val width = (parent.context.resources.displayMetrics.widthPixels * 0.5).toInt()
+        viewHolder.mainLayout.layoutParams =
+            LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT)
         return CharacterViewHolder(viewHolder)
     }
 
     override fun onBindViewHolder(holder: CharacterAdapter.CharacterViewHolder, position: Int) {
-            holder.setItem(list[position],chooseListener!!)
+        holder.setItem(list[position], chooseListener!!)
 
     }
 
     override fun getItemCount(): Int {
-       return list.size
+        return list.size
     }
 
 
-    inner class CharacterViewHolder(private val binding : ItemCardCharacterBinding):RecyclerView.ViewHolder(binding.root){
+    inner class CharacterViewHolder(private val binding: ItemCardCharacterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
-        fun setItem(item : Character,event : (item:Character)->Unit){
+        fun setItem(item: Character, event: (item: Character) -> Unit) {
             Glide.with(binding.imageCharacter)
                 .load(item.image)
                 .into(binding.imageCharacter)
