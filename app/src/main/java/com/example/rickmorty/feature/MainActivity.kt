@@ -17,52 +17,52 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(){
-    private lateinit var binding : ActivityMainBinding
-    private var view : View? = null
+class MainActivity : BaseActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private var view: View? = null
     private var list = ArrayList<BaseFragment>()
-    private lateinit var pager : PagerAdapter
-    private var menuTexts = ArrayList<String>()
+    private lateinit var pager: PagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         view = binding.root
         setContentView(view)
+        loadFragment(CharacterFragment())
         initUI()
     }
 
-    private fun initUI(){
-       setMenuBottomNavigation()
-       binding.bottomNav.setOnItemSelectedListener {
-          when(it.itemId){
-              R.id.character ->{
-                  loadFragment(CharacterFragment())
-                  return@setOnItemSelectedListener true
-              }
-              R.id.location ->{
-                  loadFragment(LocationFragment())
-                  return@setOnItemSelectedListener true
-              }
-              R.id.episode ->{
-                  loadFragment(EpisodeFragment())
-                  return@setOnItemSelectedListener true
-              }
-              else -> {
-                  loadFragment(FavoriteFragment())
-                  return@setOnItemSelectedListener true
-              }
-          }
-       }
+    private fun initUI() {
+        setMenuBottomNavigation()
+        binding.bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.character -> {
+                    loadFragment(CharacterFragment())
+                    return@setOnItemSelectedListener true
+                }
+                R.id.location -> {
+                    loadFragment(LocationFragment())
+                    return@setOnItemSelectedListener true
+                }
+                R.id.episode -> {
+                    loadFragment(EpisodeFragment())
+                    return@setOnItemSelectedListener true
+                }
+                else -> {
+                    loadFragment(FavoriteFragment())
+                    return@setOnItemSelectedListener true
+                }
+            }
+        }
     }
 
-    private fun loadFragment(fragment:Fragment){
+    private fun loadFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout,fragment)
+        fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
     }
 
-    private fun setMenuBottomNavigation(){
+    private fun setMenuBottomNavigation() {
         pager = PagerAdapter(supportFragmentManager)
         list.add(CharacterFragment.newInstance())
         list.add(LocationFragment.newInstance())
