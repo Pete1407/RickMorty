@@ -7,18 +7,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.utils.Resource
-import com.example.rickmorty.app.data.utils.SpacesItemDecoration
 import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
-import com.example.rickmorty.feature.character.info_character.InfoCharacterActivity
+import com.example.rickmorty.feature.character.detail_character.DetailCharacterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.google.android.material.internal.ViewUtils.dpToPx
 
 import com.example.rickmorty.app.data.utils.adapter.GridSpacingItemDecoration
 
@@ -99,7 +96,7 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     private fun setCharacterToInfo(character : Character){
-         InfoCharacterActivity.create(requireContext(),character)
+         DetailCharacterActivity.create(requireContext(),character)
     }
 
     companion object{
