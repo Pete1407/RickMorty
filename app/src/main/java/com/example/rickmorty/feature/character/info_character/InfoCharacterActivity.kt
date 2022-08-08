@@ -20,7 +20,6 @@ import com.example.rickmorty.databinding.ActivityInfoCharacterBinding
 import com.example.rickmorty.feature.character.CharacterViewModel
 import com.example.rickmorty.feature.character.CharacterViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import okio.JvmStatic
 import javax.inject.Inject
 
 @AndroidEntryPoint
