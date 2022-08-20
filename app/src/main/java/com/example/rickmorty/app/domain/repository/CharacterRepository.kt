@@ -12,6 +12,12 @@ interface CharacterRepository {
 
     suspend fun getMultipleCharacter():Resource<Characters>
 
-    suspend fun getCharacterBySpecies(specie : String):Resource<Characters>
+    suspend fun getCharacterByHuman(specie : String):Resource<Characters>
+
+    suspend fun getCharacterByAlien(specie: String):Resource<Characters>
+
+    suspend fun getCharacterByAnimal(specie: String):Resource<Characters>
+
+    suspend fun getCharacterByUnknown(specie : String):Resource<Characters>
 
 }

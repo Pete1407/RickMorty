@@ -18,9 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.example.rickmorty.app.data.utils.extension.gone
 import com.example.rickmorty.app.data.utils.extension.visible
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
@@ -32,16 +30,18 @@ class CharacterFragment : BaseFragment(),CustomState{
     private lateinit var viewModel : CharacterViewModel
     private var adapter : CharacterAdapter?= null
 
-    private val human = RMKey.TYPE_HUMAN
-    private val alien = RMKey.TYPE_ALIEN
-    private val animal = RMKey.TYPE_ANIMAL
-    private val unknown = RMKey.TYPE_UNKNOWN
+//    private val human = RMKey.TYPE_HUMAN
+//    private val alien = RMKey.TYPE_ALIEN
+//    private val animal = RMKey.TYPE_ANIMAL
+//    private val unknown = RMKey.TYPE_UNKNOWN
 
     private var humanList = mutableListOf<Character>()
     private var alienList = mutableListOf<Character>()
     private var animalList = mutableListOf<Character>()
     private var unknownList = mutableListOf<Character>()
     private var allList = mutableListOf<Character>()
+
+    private var job : Job = Job()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,13 +54,15 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun onResume() {
         super.onResume()
-        val job = Job()
-        
-        viewModel.getCharacterBySpecies()
-        viewModel.getCharacterBySpecies(human)
-        viewModel.getCharacterBySpecies(alien)
-        viewModel.getCharacterBySpecies(animal)
-        viewModel.getCharacterBySpecies(unknown)
+        val uiScope = CoroutineScope(Dispatchers.IO+ job)
+        uiScope.launch(Dispatchers.IO) {
+            viewModel.getCharacterByAllSpecies()
+            viewModel.getCharacterByAlienSpecies()
+            viewModel.getCharacterByAnimalSpecies()
+            viewModel.getCharacterByHumanSpecies()
+            viewModel.getCharacterByUnknownSpecies()
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,8 +79,11 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(CharacterViewModel::class.java)
-        viewModel._uiState.observe(viewLifecycleOwner,state)
-
+        viewModel.allData.observe(viewLifecycleOwner,allState)
+        viewModel.humanData.observe(viewLifecycleOwner,humanState)
+        viewModel.alienData.observe(viewLifecycleOwner,alienState)
+        viewModel.animalData.observe(viewLifecycleOwner,animalState)
+        viewModel.unknownData.observe(viewLifecycleOwner,unknownState)
     }
 
     override fun showLoading() {
@@ -88,21 +93,6 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun hideLoading() {
         binding.loading.visibility = View.GONE
-    }
-
-    private val state = Observer<CharacterViewModel.BaseState>{
-        when(it){
-            is BaseState.Loading -> {
-                showLoading(it.isLoad)
-            }
-            is BaseState.Success ->{
-                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
-                Log.d(RMKey.TAG,"${it.data}")
-            }
-            else -> {
-                // error
-            }
-        }
     }
 
     private fun showLoading(isLoad : Boolean) {
@@ -118,7 +108,63 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     override fun onDestroy() {
+        job.cancel()
         super.onDestroy()
+    }
+
+    private val allState = Observer<CharacterViewModel.BaseState>{
+        when(it){
+            is BaseState.Loading -> { showLoading(it.isLoad) }
+            is BaseState.Success ->{
+                Log.d(RMKey.TAG,"### All ###")
+                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
+                Log.d(RMKey.TAG,"${it.data}")
+            }else -> {}
+        }
+    }
+
+    private val humanState = Observer<CharacterViewModel.BaseState>{
+        when(it){
+            is BaseState.Loading -> { showLoading(it.isLoad) }
+            is BaseState.Success ->{
+                Log.d(RMKey.TAG,"### HUMAN ###")
+                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
+                Log.d(RMKey.TAG,"${it.data}")
+            }else -> {}
+        }
+    }
+
+    private val alienState = Observer<CharacterViewModel.BaseState>{
+        when(it){
+            is BaseState.Loading -> { showLoading(it.isLoad) }
+            is BaseState.Success ->{
+                Log.d(RMKey.TAG,"### ALIEN ###")
+                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
+                Log.d(RMKey.TAG,"${it.data}")
+            }else -> {}
+        }
+    }
+
+    private val animalState = Observer<CharacterViewModel.BaseState>{
+        when(it){
+            is BaseState.Loading -> { showLoading(it.isLoad) }
+            is BaseState.Success ->{
+                Log.d(RMKey.TAG,"### ANIMAL ###")
+                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
+                Log.d(RMKey.TAG,"${it.data}")
+            }else -> {}
+        }
+    }
+
+    private val unknownState = Observer<CharacterViewModel.BaseState>{
+        when(it){
+            is BaseState.Loading -> { showLoading(it.isLoad) }
+            is BaseState.Success ->{
+                Log.d(RMKey.TAG,"### UNKNOWN ###")
+                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
+                Log.d(RMKey.TAG,"${it.data}")
+            }else -> {}
+        }
     }
 
     companion object{

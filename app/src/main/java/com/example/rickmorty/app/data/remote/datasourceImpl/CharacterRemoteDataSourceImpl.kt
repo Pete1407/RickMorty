@@ -22,4 +22,16 @@ class CharacterRemoteDataSourceImpl(
         return serviceAPI.getCharacterBySpecie(specie)
     }
 
+    override suspend fun getAlienSpecies(specie: String): Response<Characters> {
+        return serviceAPI.getCharacterBySpecie(specie)
+    }
+
+    override suspend fun getAnimalSpecies(specie: String): Response<Characters> {
+        return serviceAPI.getCharacterBySpecie(specie)
+    }
+
+    override suspend fun getUnknownSpecies(specie: String): Response<Characters> {
+        return serviceAPI.getCharacterBySpecie(specie)
+    }
+
 }

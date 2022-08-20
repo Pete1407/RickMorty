@@ -9,21 +9,49 @@ import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.utils.Resource
-import com.example.rickmorty.app.domain.usecase.GetAllCharacterUsecase
-import com.example.rickmorty.app.domain.usecase.GetHumanSpeciesUsecase
-import com.example.rickmorty.app.domain.usecase.GetSingleCharacterUsecase
+import com.example.rickmorty.app.domain.usecase.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CharacterViewModel(
-    private val getCharactersUseCase: GetAllCharacterUsecase,
-    private val getSingleCharacterUseCase : GetSingleCharacterUsecase,
-    private val getHumanSpecieUsecase : GetHumanSpeciesUsecase
+    private val getHumanSpecieUsecase : GetHumanSpeciesUsecase,
+    private val getAlienSpecieUsecase : GetAlienSpeciesUsecase,
+    private val getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,
+    private val getUnknownSpeciesUsecase: GetUnknownSpeciesUsecase,
+    private val getAllCharacterUsecase: GetAllCharacterUsecase
 ) : ViewModel() {
 
-    var character = MutableLiveData<Resource<Character>>()
-    var characters = MutableLiveData<Resource<Characters>>()
-    var list = ArrayList<Character>()
+    //var character = MutableLiveData<Resource<Character>>()
+    //var characters = MutableLiveData<Resource<Characters>>()
+    //var list = ArrayList<Character>()
+
+    /*
+    1. Human
+    2. Alien
+    3. Animal
+    4. Unknown
+    5. All and load more
+*/
+
+    private var humans = MutableLiveData<BaseState>()
+    val humanData : LiveData<BaseState>
+    get() = humans
+
+    private var aliens = MutableLiveData<BaseState>()
+    val alienData : LiveData<BaseState>
+        get() = aliens
+
+    private var animals = MutableLiveData<BaseState>()
+    val animalData : LiveData<BaseState>
+        get() = animals
+
+    private var unknown = MutableLiveData<BaseState>()
+    val unknownData : LiveData<BaseState>
+        get() = unknown
+
+    private var all = MutableLiveData<BaseState>()
+    val allData : LiveData<BaseState>
+        get() = all
 
     private var uiState = MutableLiveData<BaseState>()
     val _uiState : LiveData<BaseState>
@@ -35,30 +63,53 @@ class CharacterViewModel(
         data class Success(var data : List<Character>):BaseState()
     }
 
-/*
-    1. Human
-    2. Alien
-    3. Animal
-    4. Unknown
-    5. All and load more
-*/
-
-    fun getCharacterBySpecies(specie : String = ""){
+    // human
+    fun getCharacterByHumanSpecies(){
         viewModelScope.launch {
-            val result = getHumanSpecieUsecase.getCharacterSpecies(specie)
+            val result = getHumanSpecieUsecase.getCharacterSpecies(RMKey.TYPE_HUMAN)
             result.let {
-                uiState.postValue(BaseState.Success(it.data!!.results))
+                humans.postValue(BaseState.Success(it.data!!.results))
             }
         }
     }
 
-//    fun getSingleCharacter(id : String){
-//        character.postValue(Resource.Loading())
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val result = getSingleCharacterUseCase.execute(id)
-//            result.let {
-//                character.postValue(it)
-//            }
-//        }
-//    }
+    // alien
+    fun getCharacterByAlienSpecies(){
+        viewModelScope.launch {
+            val result = getAlienSpecieUsecase.getCharacterSpecies(RMKey.TYPE_ALIEN)
+            result.let {
+                aliens.postValue(BaseState.Success(it.data!!.results))
+            }
+        }
+    }
+
+    // animal
+    fun getCharacterByAnimalSpecies(){
+        viewModelScope.launch {
+            val result = getAnimalSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_ANIMAL)
+            result.let {
+                animals.postValue(BaseState.Success(it.data!!.results))
+            }
+        }
+    }
+
+    // unknown
+    fun getCharacterByUnknownSpecies(){
+        viewModelScope.launch {
+            val result = getUnknownSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_UNKNOWN)
+            result.let {
+                unknown.postValue(BaseState.Success(it.data!!.results))
+            }
+        }
+    }
+
+    // all species
+    fun getCharacterByAllSpecies(){
+        viewModelScope.launch {
+            val result = getAllCharacterUsecase.getCharacterAllSpecies()
+            result.let {
+                all.postValue(BaseState.Success(it.data!!.results))
+            }
+        }
+    }
 }

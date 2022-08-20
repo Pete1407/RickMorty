@@ -88,22 +88,22 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(CharacterViewModel::class.java)
 
-        viewModel.character.observe(this, Observer { state ->
-            when (state) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    hideLoading()
-                    state.data?.let {
-                        updateUI(it)
-                    }
-                }
-                else -> {
-                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
+//        viewModel.character.observe(this, Observer { state ->
+//            when (state) {
+//                is Resource.Loading -> {
+//                    showLoading()
+//                }
+//                is Resource.Success -> {
+//                    hideLoading()
+//                    state.data?.let {
+//                        updateUI(it)
+//                    }
+//                }
+//                else -> {
+//                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        })
     }
 
     override fun showLoading() {

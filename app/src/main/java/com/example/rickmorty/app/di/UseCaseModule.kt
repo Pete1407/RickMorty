@@ -1,9 +1,7 @@
 package com.example.rickmorty.app.di
 
 import com.example.rickmorty.app.domain.repository.CharacterRepository
-import com.example.rickmorty.app.domain.usecase.GetAllCharacterUsecase
-import com.example.rickmorty.app.domain.usecase.GetHumanSpeciesUsecase
-import com.example.rickmorty.app.domain.usecase.GetSingleCharacterUsecase
+import com.example.rickmorty.app.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +25,20 @@ class UseCaseModule {
     @Provides
     fun getHumanSpeciesUseCase(repository: CharacterRepository):GetHumanSpeciesUsecase{
         return GetHumanSpeciesUsecase(repository)
+    }
+
+    @Provides
+    fun getAlienSpeciesUseCase(repository: CharacterRepository):GetAlienSpeciesUsecase{
+        return GetAlienSpeciesUsecase(repository)
+    }
+
+    @Provides
+    fun getAnimalSpeciesUseCase(repository: CharacterRepository):GetAnimalSpeciesUsecase{
+        return GetAnimalSpeciesUsecase(repository)
+    }
+
+    @Provides
+    fun getUnknownSpeciesUseCase(repository: CharacterRepository):GetUnknownSpeciesUsecase{
+        return GetUnknownSpeciesUsecase(repository)
     }
 }

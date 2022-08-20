@@ -7,7 +7,7 @@ import com.example.rickmorty.app.domain.repository.CharacterRepository
 
 class GetAllCharacterUsecase(private val repository: CharacterRepository) {
 
-    suspend fun execute():Resource<Characters>{
+    suspend fun getCharacterAllSpecies():Resource<Characters>{
         return repository.getAllCharacter()
     }
 }

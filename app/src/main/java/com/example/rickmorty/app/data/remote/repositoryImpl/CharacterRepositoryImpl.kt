@@ -27,19 +27,48 @@ class CharacterRepositoryImpl(
        return Resource.Error(output.message(),null)
     }
 
-    // main function
     override suspend fun getMultipleCharacter(): Resource<Characters> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCharacterBySpecies(specie: String): Resource<Characters> {
-        val result = remoteDataSource.getHumanSpecies(specie)
-        if(result.isSuccessful){
-            result.body()?.let {
+    override suspend fun getCharacterByHuman(specie: String): Resource<Characters> {
+        val output = remoteDataSource.getHumanSpecies(specie)
+        if(output.isSuccessful) {
+            output.body()?.let {
                 return Resource.Success(it)
             }
         }
-        return Resource.Error(result.message(),null)
+        return Resource.Error(output.message(),null)
+    }
+
+    override suspend fun getCharacterByAlien(specie: String): Resource<Characters> {
+        val output = remoteDataSource.getAlienSpecies(specie)
+        if(output.isSuccessful) {
+            output.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(output.message(),null)
+    }
+
+    override suspend fun getCharacterByAnimal(specie: String): Resource<Characters> {
+        val output = remoteDataSource.getAnimalSpecies(specie)
+        if(output.isSuccessful) {
+            output.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(output.message(),null)
+    }
+
+    override suspend fun getCharacterByUnknown(specie: String): Resource<Characters> {
+        val output = remoteDataSource.getUnknownSpecies(specie)
+        if(output.isSuccessful) {
+            output.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(output.message(),null)
     }
 
     private fun convertResponseToResource(response : Response<Characters>):Resource<Characters>{

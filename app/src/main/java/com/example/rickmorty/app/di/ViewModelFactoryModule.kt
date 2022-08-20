@@ -1,8 +1,6 @@
 package com.example.rickmorty.app.di
 
-import com.example.rickmorty.app.domain.usecase.GetAllCharacterUsecase
-import com.example.rickmorty.app.domain.usecase.GetHumanSpeciesUsecase
-import com.example.rickmorty.app.domain.usecase.GetSingleCharacterUsecase
+import com.example.rickmorty.app.domain.usecase.*
 import com.example.rickmorty.feature.character.CharacterViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -17,10 +15,18 @@ class ViewModelFactoryModule {
     @Singleton
     @Provides
     fun provideViewCharacterViewModelFactory(
-        getAllCharacterUsecase: GetAllCharacterUsecase,
-        getCharacterUsecase : GetSingleCharacterUsecase,
-        getHumanSpeciesUsecase: GetHumanSpeciesUsecase
+        getHumanSpeciesUsecase: GetHumanSpeciesUsecase,
+        getAlienSpecieUsecase : GetAlienSpeciesUsecase,
+        getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,
+        getUnknownSpeciesUsecase: GetUnknownSpeciesUsecase,
+        getAllCharacterUsecase: GetAllCharacterUsecase
     ):CharacterViewModelFactory{
-        return CharacterViewModelFactory(getAllCharacterUsecase,getCharacterUsecase,getHumanSpeciesUsecase)
+        return CharacterViewModelFactory(
+            getHumanSpeciesUsecase,
+            getAlienSpecieUsecase,
+            getAnimalSpeciesUsecase,
+            getUnknownSpeciesUsecase,
+            getAllCharacterUsecase
+        )
     }
 }

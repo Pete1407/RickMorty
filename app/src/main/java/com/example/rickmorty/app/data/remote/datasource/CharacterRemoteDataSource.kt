@@ -10,5 +10,11 @@ interface CharacterRemoteDataSource {
 
     suspend fun getSingleCharacter(id : String):Response<Character>
 
-    suspend fun getHumanSpecies(specie : String): Response<Characters>
+    suspend fun getHumanSpecies(specie : String):Response<Characters>
+
+    suspend fun getAlienSpecies(specie : String):Response<Characters>
+
+    suspend fun getAnimalSpecies(specie : String):Response<Characters>
+
+    suspend fun getUnknownSpecies(specie : String):Response<Characters>
 }
