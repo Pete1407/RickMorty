@@ -32,7 +32,7 @@ class CharacterRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getHumanSpecies(specie : String): Resource<Characters> {
+    override suspend fun getCharacterBySpecies(specie: String): Resource<Characters> {
         val result = remoteDataSource.getHumanSpecies(specie)
         if(result.isSuccessful){
             result.body()?.let {

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.app.base.RMKey
+import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.feature.character.CharacterViewModel.BaseState
 import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
@@ -17,6 +18,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.example.rickmorty.app.data.utils.extension.gone
 import com.example.rickmorty.app.data.utils.extension.visible
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
 
 @AndroidEntryPoint
@@ -27,6 +31,17 @@ class CharacterFragment : BaseFragment(),CustomState{
     lateinit var viewModelFactory : CharacterViewModelFactory
     private lateinit var viewModel : CharacterViewModel
     private var adapter : CharacterAdapter?= null
+
+    private val human = RMKey.TYPE_HUMAN
+    private val alien = RMKey.TYPE_ALIEN
+    private val animal = RMKey.TYPE_ANIMAL
+    private val unknown = RMKey.TYPE_UNKNOWN
+
+    private var humanList = mutableListOf<Character>()
+    private var alienList = mutableListOf<Character>()
+    private var animalList = mutableListOf<Character>()
+    private var unknownList = mutableListOf<Character>()
+    private var allList = mutableListOf<Character>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +54,13 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun onResume() {
         super.onResume()
-        //viewModel.getCharactersData()
+        val job = Job()
+        
+        viewModel.getCharacterBySpecies()
+        viewModel.getCharacterBySpecies(human)
+        viewModel.getCharacterBySpecies(alien)
+        viewModel.getCharacterBySpecies(animal)
+        viewModel.getCharacterBySpecies(unknown)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,7 +100,7 @@ class CharacterFragment : BaseFragment(),CustomState{
                 Log.d(RMKey.TAG,"${it.data}")
             }
             else -> {
-
+                // error
             }
         }
     }
@@ -96,11 +117,14 @@ class CharacterFragment : BaseFragment(),CustomState{
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     companion object{
         @JvmStatic
         fun newInstance() = CharacterFragment().apply {
 
         }
     }
-
 }

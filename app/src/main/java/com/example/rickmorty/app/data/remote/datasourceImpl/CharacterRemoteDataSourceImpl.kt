@@ -19,7 +19,7 @@ class CharacterRemoteDataSourceImpl(
     }
 
     override suspend fun getHumanSpecies(specie: String): Response<Characters> {
-        TODO("Not yet implemented")
+        return serviceAPI.getCharacterBySpecie(specie)
     }
 
 }

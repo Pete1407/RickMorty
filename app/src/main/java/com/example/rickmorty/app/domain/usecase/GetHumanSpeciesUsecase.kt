@@ -6,7 +6,7 @@ import com.example.rickmorty.app.domain.repository.CharacterRepository
 
 class GetHumanSpeciesUsecase(private val repository : CharacterRepository) {
 
-    suspend fun getHumanSpecies(specie : String):Resource<Characters>{
-        return repository.getHumanSpecies(specie)
+    suspend fun getCharacterSpecies(specie : String):Resource<Characters>{
+        return repository.getCharacterBySpecies(specie)
     }
 }

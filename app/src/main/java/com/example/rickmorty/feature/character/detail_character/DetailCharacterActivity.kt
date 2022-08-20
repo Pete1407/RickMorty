@@ -37,9 +37,9 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
         val view = binding.root
         setContentView(view)
         binding.mainLayout.visibility = View.GONE
-        initUI()
-        initViewModel()
-        viewModel.getSingleCharacter(characterChosen?.id.toString())
+        //initUI()
+        //initViewModel()
+        //viewModel.getSingleCharacter(characterChosen?.id.toString())
     }
 
     override fun initUI() {

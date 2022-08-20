@@ -35,42 +35,30 @@ class CharacterViewModel(
         data class Success(var data : List<Character>):BaseState()
     }
 
+/*
+    1. Human
+    2. Alien
+    3. Animal
+    4. Unknown
+    5. All and load more
+*/
 
-//    fun getCharactersData(){
-//        uiState.postValue(BaseState.Loading(true))
+    fun getCharacterBySpecies(specie : String = ""){
+        viewModelScope.launch {
+            val result = getHumanSpecieUsecase.getCharacterSpecies(specie)
+            result.let {
+                uiState.postValue(BaseState.Success(it.data!!.results))
+            }
+        }
+    }
+
+//    fun getSingleCharacter(id : String){
+//        character.postValue(Resource.Loading())
 //        viewModelScope.launch(Dispatchers.IO) {
-//            uiState.postValue(BaseState.Loading(false))
-//            val result = getCharactersUseCase.execute().data
-//            result?.let {
-//                uiState.postValue(BaseState.Success(it.results))
-//            }?:kotlin.run {
-//                Log.d("!!!  debug","result is null.  !!!")
+//            val result = getSingleCharacterUseCase.execute(id)
+//            result.let {
+//                character.postValue(it)
 //            }
 //        }
 //    }
-
-    fun getSingleCharacter(id : String){
-        character.postValue(Resource.Loading())
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = getSingleCharacterUseCase.execute(id)
-            result.let {
-                //character.postValue(it)
-            }
-        }
-    }
-
-    fun getCharacterByHumanSpecies(specie : String){
-        viewModelScope.launch {
-
-        }
-    }
-
-    fun getCharacterByAlienSpecie(specie : String){
-        viewModelScope.launch {
-            val result = getHumanSpecieUsecase.getHumanSpecies(specie)
-            result.let {
-
-            }
-        }
-    }
 }

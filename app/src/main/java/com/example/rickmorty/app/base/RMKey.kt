@@ -24,5 +24,14 @@ object RMKey {
 
     const val TYPE_HUMAN = "human"
     const val TYPE_ALIEN = "alien"
+    const val TYPE_ANIMAL = "animal"
+
+  /*  1. Human
+    2. Alien
+    3. Animal
+    4. Unknown
+    5. All and load more*/
+    
+
 
 }
