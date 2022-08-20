@@ -8,10 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#B7A770</color>
-    <color name="colorAccent">#000000</color>
-
-    <color name="bg_bottomNav">#FCFAF8</color>
+    <color name="colorPrimary">#F0E14A</color>
+    <color name="colorAccent">#F6EFA0</color>
+    <color name="main_background">#F5EB6D</color>
+    <color name="bg_bottomNav">@color/colorAccent</color>
     <color name="bg_button_nav">#006c67</color>
     <color name="bg_main">#ededee</color>
 
@@ -21,4 +21,5 @@
     <color name="bg_white">#FFFFFF</color>
     <color name="color_gray">#B5BCB5</color>
     <color name="bg_unknown">#5F3B11</color>
+    <color name="color_text_title">#837B18</color>
 </resources>

@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/bg_main"
+    android:background="@color/main_background"
     android:orientation="vertical">
 
-    <com.example.rickmorty.app.base.custom.CustomToolBar
-        android:id="@+id/tool_bar"
-        android:layout_width="match_parent"
+    <com.example.rickmorty.app.base.custom.CustomTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:addText="@string/menu_character"
-        app:showBackButton="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        style="@style/Title_toolbar"
+        android:text="@string/menu_character"/>
 
     <FrameLayout
         android:layout_width="match_parent"

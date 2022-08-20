@@ -14,12 +14,12 @@ import javax.inject.Singleton
 class UseCaseModule {
 
     @Provides
-    fun provideGetAllCharacterUseCase(repository : CharacterRepository):GetAllCharacterUsecase{
-        return GetAllCharacterUsecase(repository)
+    fun provideGetCharacterUseCase(repository : CharacterRepository):GetSingleCharacterUsecase{
+        return GetSingleCharacterUsecase(repository)
     }
 
     @Provides
-    fun provideGetCharacterUseCase(repository : CharacterRepository):GetSingleCharacterUsecase{
-        return GetSingleCharacterUsecase(repository)
+    fun provideGetAllCharacterUseCase(repository : CharacterRepository):GetAllCharacterUsecase{
+        return GetAllCharacterUsecase(repository)
     }
 }

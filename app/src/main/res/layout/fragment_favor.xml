@@ -7,11 +7,11 @@
     android:background="@color/bg_main"
     android:orientation="vertical">
 
-    <com.example.rickmorty.app.base.custom.CustomToolBar
-        android:id="@+id/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:addText="@string/menu_favorite"
-        app:showBackButton="false"/>
+<!--    <com.example.rickmorty.app.base.custom.CustomToolBar-->
+<!--        android:id="@+id/tool_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:addText="@string/menu_favorite"-->
+<!--        app:showBackButton="false"/>-->
 
 </androidx.appcompat.widget.LinearLayoutCompat>

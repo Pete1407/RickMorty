@@ -7,11 +7,11 @@
     android:background="@color/colorPrimary"
     tools:context=".feature.SplashScreenActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/appCompatImageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/icon_rm"
+        android:src="@drawable/rickmorty_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/georama_medium"
         android:text="@string/app_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textAlignment="center"
+        android:layout_marginTop="@dimen/spacing_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />

@@ -14,4 +14,6 @@ interface ServiceAPI {
 
     @GET("character/{id}")
     suspend fun getCharacter(@Path("id") id : String):Response<Character>
+
+   // @GET("character/")
 }

@@ -1,7 +1,5 @@
 package com.example.rickmorty.app.data.remote.repositoryImpl
 
-import android.util.Log
-import com.example.rickmorty.app.base.RmKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
@@ -13,8 +11,35 @@ class CharacterRepositoryImpl(
     private val remoteDataSource: CharacterRemoteDataSource
 ): CharacterRepository {
 
+    // main function
     override suspend fun getAllCharacter(): Resource<Characters> {
         return convertResponseToResource(remoteDataSource.getAllCharacters())
+    }
+
+    // main function
+    override suspend fun getSingleCharacter(id : String): Resource<Character> {
+       val output = remoteDataSource.getSingleCharacter(id)
+       if(output.isSuccessful) {
+            output.body()?.let {
+                return Resource.Success(it)
+            }
+       }
+       return Resource.Error(output.message(),null)
+    }
+
+    // main function
+    override suspend fun getMultipleCharacter(): Resource<Characters> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getHumanSpecies(specie : String): Resource<Characters> {
+        val result = remoteDataSource.getHumanSpecies(specie)
+        if(result.isSuccessful){
+            result.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(result.message(),null)
     }
 
     private fun convertResponseToResource(response : Response<Characters>):Resource<Characters>{
@@ -26,20 +51,6 @@ class CharacterRepositoryImpl(
         }
         return Resource.Error(response.message(),null)
 
-    }
-
-    override suspend fun getSingleCharacter(id : String): Resource<Character> {
-       val output = remoteDataSource.getSingleCharacter(id)
-       if(output.isSuccessful) {
-            output.body()?.let {
-                return Resource.Success(it)
-            }
-       }
-       return Resource.Error(output.message(),null)
-    }
-
-    override suspend fun getMultipleCharacter(): Resource<Characters> {
-        TODO("Not yet implemented")
     }
 
 }

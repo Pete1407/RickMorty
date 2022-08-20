@@ -18,10 +18,4 @@
         android:title="@string/menu_episode"
         android:icon="@drawable/icon_menu_episode"
         app:showAsAction="always"/>
-
-    <item
-        android:id="@+id/favorite"
-        android:title="@string/menu_favorite"
-        android:icon="@drawable/icon_menu_favorite"
-        app:showAsAction="always"/>
 </menu>

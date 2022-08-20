@@ -1,28 +1,23 @@
 package com.example.rickmorty.feature.character
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
-import com.example.rickmorty.app.data.model.Character
-import com.example.rickmorty.app.data.utils.Resource
-import com.example.rickmorty.app.data.utils.SpacesItemDecoration
+import com.example.rickmorty.app.base.RMKey
+import com.example.rickmorty.feature.character.CharacterViewModel.BaseState
 import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
-import com.example.rickmorty.feature.character.info_character.InfoCharacterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.google.android.material.internal.ViewUtils.dpToPx
 
-import com.example.rickmorty.app.data.utils.adapter.GridSpacingItemDecoration
-
-
+import com.example.rickmorty.app.data.utils.extension.gone
+import com.example.rickmorty.app.data.utils.extension.visible
 
 
 @AndroidEntryPoint
@@ -31,7 +26,8 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     @Inject
     lateinit var viewModelFactory : CharacterViewModelFactory
-    private lateinit var vm : CharacterViewModel
+    private lateinit var viewModel : CharacterViewModel
+    private var adapter : CharacterAdapter?= null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,51 +38,27 @@ class CharacterFragment : BaseFragment(),CustomState{
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        //viewModel.getCharactersData()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        vm.getCharactersData()
         initUI()
     }
 
     override fun initUI() {
-        vm.characters.observe(viewLifecycleOwner, Observer {
-            when(it){
-                is Resource.Loading ->{
-                    showLoading()
-                }
-                is Resource.Success ->{
-                    hideLoading()
-                    it.data?.results?.let { items->
-                       vm.list.addAll(items)
-                    }
-                    updateUI(vm.list)
-                }
-                else ->{
-                    Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-    }
-
-    private fun updateUI(itemList : ArrayList<Character>){
-        //binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-        //val itemDec = SpacesItemDecoration(16)
-        val adapter = CharacterAdapter(itemList)
-        adapter.setChooseEvent {
-            setCharacterToInfo(it)
+        if (adapter == null) {
+            adapter = CharacterAdapter(arrayListOf())
         }
-        binding.recyclerView.addItemDecoration(
-            GridSpacingItemDecoration(
-                2,
-                10,
-                true
-            ))
-        binding.recyclerView.adapter = adapter
     }
 
     override fun initViewModel() {
-        vm = ViewModelProvider(this,viewModelFactory).get(CharacterViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(CharacterViewModel::class.java)
+        viewModel._uiState.observe(viewLifecycleOwner,state)
+
     }
 
     override fun showLoading() {
@@ -98,8 +70,31 @@ class CharacterFragment : BaseFragment(),CustomState{
         binding.loading.visibility = View.GONE
     }
 
-    private fun setCharacterToInfo(character : Character){
-         InfoCharacterActivity.create(requireContext(),character)
+    private val state = Observer<CharacterViewModel.BaseState>{
+        when(it){
+            is BaseState.Loading -> {
+                showLoading(it.isLoad)
+            }
+            is BaseState.Success ->{
+                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
+                Log.d(RMKey.TAG,"${it.data}")
+            }
+            else -> {
+
+            }
+        }
+    }
+
+    private fun showLoading(isLoad : Boolean){
+        binding.loading.apply {
+            if(isLoad){
+                this.visible()
+                this.playAnimation()
+            }else{
+                this.gone()
+                this.pauseAnimation()
+            }
+        }
     }
 
     companion object{

@@ -1,6 +1,8 @@
 package com.example.rickmorty.app.base
 
-object RmKey {
+object RMKey {
+
+    const val TAG = "debug"
 
     // status of states
     const val SUCCESS = "success"

@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Rick And Morty\nApp</string>
+    <string name="app_name">Rick And Morty \nFanclub App</string>
 
     <!-- MENU BOTTOM NAVIGATION -->
-    <string name="menu_character">Character</string>
-    <string name="menu_location">Location</string>
-    <string name="menu_episode">Episode</string>
+    <string name="menu_character">Characters</string>
+    <string name="menu_location">Locations</string>
+    <string name="menu_episode">Episodes</string>
     <string name="menu_favorite">Favorite</string>
     <string name="info_character">Info</string>
 

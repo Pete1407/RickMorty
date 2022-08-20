@@ -3,7 +3,7 @@
     <dimen name="spacing_xxs">2dp</dimen>
     <dimen name="spacing_xs">4dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
-    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_standard">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_xl">32dp</dimen>
     <dimen name="spacing_xxl">48dp</dimen>

@@ -24,4 +24,13 @@
 <!--        <item name="colorAccent">@color/colorAccent</item>-->
 <!--        <item name="android:statusBarColor">@color/colorAccent</item>-->
 <!--    </style>-->
+
+    <style name="Title_toolbar">
+        <item name="fontFamily">@font/roboto_serif_regular</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:layout_margin">@dimen/spacing_standard</item>
+    </style>
 </resources>

@@ -37,7 +37,7 @@
           <androidx.appcompat.widget.LinearLayoutCompat
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/spacing_medium"
+              android:layout_marginTop="@dimen/spacing_standard"
               android:gravity="center">
 
               <de.hdodenhof.circleimageview.CircleImageView
@@ -51,7 +51,7 @@
           <androidx.appcompat.widget.LinearLayoutCompat
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="@dimen/spacing_medium"
+              android:layout_margin="@dimen/spacing_standard"
               android:background="@drawable/bg_info_character"
               android:padding="@dimen/spacing_small"
               android:orientation="vertical">
@@ -92,8 +92,8 @@
                   <View
                       android:layout_width="1dp"
                       android:layout_height="20dp"
-                      android:layout_marginStart="@dimen/spacing_medium"
-                      android:layout_marginEnd="@dimen/spacing_medium"
+                      android:layout_marginStart="@dimen/spacing_standard"
+                      android:layout_marginEnd="@dimen/spacing_standard"
                       android:background="@color/color_gray"/>
 
                   <androidx.appcompat.widget.AppCompatImageView
@@ -118,7 +118,7 @@
           <androidx.appcompat.widget.LinearLayoutCompat
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="@dimen/spacing_medium"
+              android:layout_margin="@dimen/spacing_standard"
               android:orientation="horizontal">
               <androidx.appcompat.widget.LinearLayoutCompat
                   android:id="@+id/group1"

@@ -29,8 +29,7 @@
             android:textSize="20sp"
             android:fontFamily="@font/georama_medium"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            tools:text="Paris Tropical"/>
+            android:textColor="@color/black" />
 
     </androidx.appcompat.widget.Toolbar>
 

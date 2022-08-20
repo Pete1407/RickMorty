@@ -2,9 +2,7 @@ package com.example.rickmorty.feature.character.info_character
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -13,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.rickmorty.R
 import com.example.rickmorty.app.base.BaseActivity
 import com.example.rickmorty.app.base.CustomState
-import com.example.rickmorty.app.base.RmKey
+import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.databinding.ActivityInfoCharacterBinding
@@ -36,7 +34,7 @@ class InfoCharacterActivity : BaseActivity(), CustomState {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInfoCharacterBinding.inflate(layoutInflater)
-        characterChosen = intent.getParcelableExtra<Character>(RmKey.ITEM_CHARACTER) as Character
+        characterChosen = intent.getParcelableExtra<Character>(RMKey.ITEM_CHARACTER) as Character
         val view = binding.root
         setContentView(view)
         binding.mainLayout.visibility = View.GONE
@@ -64,20 +62,20 @@ class InfoCharacterActivity : BaseActivity(), CustomState {
         binding.textName.text = data.name
 
         // set specie
-        if (data.species.equals(RmKey.TYPE_HUMAN, ignoreCase = true)) {
-            binding.textSpecie.text = RmKey.TYPE_HUMAN
+        if (data.species.equals(RMKey.TYPE_HUMAN, ignoreCase = true)) {
+            binding.textSpecie.text = RMKey.TYPE_HUMAN
             binding.iconSpecie.setImageResource(R.drawable.icon_person)
         } else {
-            binding.textSpecie.text = RmKey.TYPE_ALIEN
+            binding.textSpecie.text = RMKey.TYPE_ALIEN
             binding.iconSpecie.setImageResource(R.drawable.icon_alien)
         }
 
         // set gender
-        if (data.gender.equals(RmKey.TYPE_MALE, ignoreCase = true)) {
-            binding.textGender.text = RmKey.TYPE_MALE
+        if (data.gender.equals(RMKey.TYPE_MALE, ignoreCase = true)) {
+            binding.textGender.text = RMKey.TYPE_MALE
             binding.iconGender.setImageResource(R.drawable.icon_male)
         } else {
-            binding.textGender.text = RmKey.TYPE_FEMALE
+            binding.textGender.text = RMKey.TYPE_FEMALE
             binding.iconGender.setImageResource(R.drawable.icon_female)
         }
 
