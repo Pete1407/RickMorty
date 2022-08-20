@@ -15,7 +15,6 @@ import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 import com.example.rickmorty.app.data.utils.extension.gone
 import com.example.rickmorty.app.data.utils.extension.visible
 
@@ -85,12 +84,12 @@ class CharacterFragment : BaseFragment(),CustomState{
         }
     }
 
-    private fun showLoading(isLoad : Boolean){
+    private fun showLoading(isLoad : Boolean) {
         binding.loading.apply {
-            if(isLoad){
+            if (isLoad) {
                 this.visible()
                 this.playAnimation()
-            }else{
+            } else {
                 this.gone()
                 this.pauseAnimation()
             }

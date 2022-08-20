@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.character.info_character.InfoCharacterActivity"
+            android:name=".feature.character.detail_character.DetailCharacterActivity"
             android:exported="true" />
         <activity
             android:name=".feature.MainActivity"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".feature.character.info_character.InfoCharacterActivity">
+    tools:context=".feature.character.detail_character.DetailCharacterActivity">
 
     <com.example.rickmorty.app.base.custom.CustomToolBar
         android:id="@+id/toolBar"

@@ -1,4 +1,4 @@
-package com.example.rickmorty.feature.character.info_character
+package com.example.rickmorty.feature.character.detail_character
 
 import android.content.Context
 import android.content.Intent
@@ -18,11 +18,10 @@ import com.example.rickmorty.databinding.ActivityInfoCharacterBinding
 import com.example.rickmorty.feature.character.CharacterViewModel
 import com.example.rickmorty.feature.character.CharacterViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import okio.JvmStatic
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class InfoCharacterActivity : BaseActivity(), CustomState {
+class DetailCharacterActivity : BaseActivity(), CustomState {
     private lateinit var binding: ActivityInfoCharacterBinding
     private var characterChosen: Character? = null
 
@@ -121,7 +120,7 @@ class InfoCharacterActivity : BaseActivity(), CustomState {
 
         @JvmStatic
         fun create(context: Context, item: Character) {
-            context.startActivity(Intent(context, InfoCharacterActivity::class.java).apply {
+            context.startActivity(Intent(context, DetailCharacterActivity::class.java).apply {
                 putExtra(ITEM_CHARACTER, item)
             })
         }
