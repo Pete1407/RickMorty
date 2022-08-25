@@ -1,8 +1,12 @@
 package com.example.rickmorty.app.data.model
 
-import java.io.Serializable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Characters(
+    @field:Json(name = "info")
     val info: Info,
-    val results: ArrayList<Character>
-):Serializable
+    @field:Json(name = "results")
+    val results: List<Character>
+)

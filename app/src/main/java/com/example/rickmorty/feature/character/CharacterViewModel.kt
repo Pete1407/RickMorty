@@ -12,6 +12,7 @@ import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
 class CharacterViewModel(
     private val getHumanSpecieUsecase : GetHumanSpeciesUsecase,
@@ -21,10 +22,6 @@ class CharacterViewModel(
     private val getAllCharacterUsecase: GetAllCharacterUsecase
 ) : ViewModel() {
 
-    //var character = MutableLiveData<Resource<Character>>()
-    //var characters = MutableLiveData<Resource<Characters>>()
-    //var list = ArrayList<Character>()
-
     /*
     1. Human
     2. Alien
@@ -32,6 +29,8 @@ class CharacterViewModel(
     4. Unknown
     5. All and load more
 */
+
+    //private var isLoading = MutableLiveData<Boolean>()
 
     private var humans = MutableLiveData<BaseState>()
     val humanData : LiveData<BaseState>
@@ -53,13 +52,11 @@ class CharacterViewModel(
     val allData : LiveData<BaseState>
         get() = all
 
-    private var uiState = MutableLiveData<BaseState>()
-    val _uiState : LiveData<BaseState>
-    get() = uiState
+    var error = MutableLiveData<String?>()
 
     sealed class BaseState{
         data class Loading(var isLoad: Boolean) : BaseState()
-        data class Error(var error : String): BaseState()
+        data class Error(var errorMessage : String): BaseState()
         data class Success(var data : List<Character>):BaseState()
     }
 
@@ -103,13 +100,20 @@ class CharacterViewModel(
         }
     }
 
-    // all species
+    // all
     fun getCharacterByAllSpecies(){
+        all.postValue(BaseState.Loading(true))
         viewModelScope.launch {
-            val result = getAllCharacterUsecase.getCharacterAllSpecies()
-            result.let {
-                all.postValue(BaseState.Success(it.data!!.results))
-            }
+            all.postValue(BaseState.Loading(false))
+                val result = getAllCharacterUsecase.getCharacterAllSpecies()
+                when(result){
+                    is Resource.Success ->{
+                        all.postValue(BaseState.Success(result.data!!.results))
+                    }
+                    is Resource.Error ->{
+                       error.postValue(result.message)
+                    }
+                }
         }
     }
 }

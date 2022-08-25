@@ -1,10 +1,17 @@
 package com.example.rickmorty.app.data.model
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
+@JsonClass(generateAdapter = true)
 data class Info(
-    val count: Int,
-    val next: String,
-    val pages: Int,
-    val prev: Any
-):Serializable
+    @field:Json(name = "count")
+    val count: Int? = null,
+    @field:Json(name = "next")
+    val next: String? = null,
+    @field:Json(name = "pages")
+    val pages: Int? = null,
+    @field:Json(name = "prev")
+    val prev: Int? = null
+)

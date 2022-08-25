@@ -1,22 +1,22 @@
 package com.example.rickmorty.app.data.remote.repositoryImpl
 
+import android.util.Log
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.repository.CharacterRepository
 import retrofit2.Response
+import java.lang.Exception
 
 class CharacterRepositoryImpl(
     private val remoteDataSource: CharacterRemoteDataSource
 ): CharacterRepository {
 
-    // main function
     override suspend fun getAllCharacter(): Resource<Characters> {
         return convertResponseToResource(remoteDataSource.getAllCharacters())
     }
 
-    // main function
     override suspend fun getSingleCharacter(id : String): Resource<Character> {
        val output = remoteDataSource.getSingleCharacter(id)
        if(output.isSuccessful) {
@@ -24,7 +24,7 @@ class CharacterRepositoryImpl(
                 return Resource.Success(it)
             }
        }
-       return Resource.Error(output.message(),null)
+       return Resource.Error(output.message())
     }
 
     override suspend fun getMultipleCharacter(): Resource<Characters> {
@@ -38,7 +38,7 @@ class CharacterRepositoryImpl(
                 return Resource.Success(it)
             }
         }
-        return Resource.Error(output.message(),null)
+        return Resource.Error(output.message())
     }
 
     override suspend fun getCharacterByAlien(specie: String): Resource<Characters> {
@@ -48,7 +48,7 @@ class CharacterRepositoryImpl(
                 return Resource.Success(it)
             }
         }
-        return Resource.Error(output.message(),null)
+        return Resource.Error(output.message())
     }
 
     override suspend fun getCharacterByAnimal(specie: String): Resource<Characters> {
@@ -58,7 +58,7 @@ class CharacterRepositoryImpl(
                 return Resource.Success(it)
             }
         }
-        return Resource.Error(output.message(),null)
+        return Resource.Error(output.message())
     }
 
     override suspend fun getCharacterByUnknown(specie: String): Resource<Characters> {
@@ -68,18 +68,16 @@ class CharacterRepositoryImpl(
                 return Resource.Success(it)
             }
         }
-        return Resource.Error(output.message(),null)
+        return Resource.Error(output.message())
     }
 
-    private fun convertResponseToResource(response : Response<Characters>):Resource<Characters>{
-        val success = response.isSuccessful
-        if(success){
-            response.body()?.let { result ->
-                return Resource.Success(result)
-            }
+    private fun convertResponseToResource(response : Response<Characters>):Resource<Characters> {
+        if (response.isSuccessful) {
+            val result = response.body()
+            return Resource.Success(result)
         }
-        return Resource.Error(response.message(),null)
+        val errorMsg = response.errorBody()
+        return Resource.Error(errorMsg.toString())
 
     }
-
 }
