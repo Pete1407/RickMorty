@@ -14,6 +14,8 @@ import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
+import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.feature.character.CharacterViewModel.BaseState
 import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
@@ -38,7 +40,7 @@ class CharacterFragment : BaseFragment(),CustomState{
     private var alienList = mutableListOf<Character>()
     private var animalList = mutableListOf<Character>()
     private var unknownList = mutableListOf<Character>()
-    private var allList = mutableListOf<Character>()
+    private var allList = ArrayList<Character>()
 
     private var job : Job = Job()
 
@@ -79,10 +81,10 @@ class CharacterFragment : BaseFragment(),CustomState{
     override fun initViewModel() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(CharacterViewModel::class.java)
         viewModel.allData.observe(viewLifecycleOwner,allState)
-        viewModel.humanData.observe(viewLifecycleOwner,humanState)
-        viewModel.alienData.observe(viewLifecycleOwner,alienState)
-        viewModel.animalData.observe(viewLifecycleOwner,animalState)
-        viewModel.unknownData.observe(viewLifecycleOwner,unknownState)
+//        viewModel.humanData.observe(viewLifecycleOwner,humanState)
+//        viewModel.alienData.observe(viewLifecycleOwner,alienState)
+//        viewModel.animalData.observe(viewLifecycleOwner,animalState)
+//        viewModel.unknownData.observe(viewLifecycleOwner,unknownState)
         viewModel.error.observe(viewLifecycleOwner,errorState)
     }
 
@@ -103,7 +105,7 @@ class CharacterFragment : BaseFragment(),CustomState{
         }else{
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 hideLoading()
-                Log.d(RMKey.TAG,"Tag for show loading")
+                Log.d(RMKey.DEBUG_TAG,"Tag for show loading")
             },2000)
         }
     }
@@ -113,61 +115,65 @@ class CharacterFragment : BaseFragment(),CustomState{
         super.onDestroy()
     }
 
-    private val allState = Observer<BaseState>{
-        when(it){
-            is BaseState.Loading -> { showLoadingProgress(it.isLoad) }
-            is BaseState.Success ->{
-                Log.d(RMKey.TAG,"### All ###")
-                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
-                Log.d(RMKey.TAG,"${it.data}")
-            }else -> {}
+    private val allState = Observer<Resource<Characters>> {
+        when (it) {
+            is Resource.Loading -> {
+                showLoading()
+            }
+            is Resource.Success -> {
+                hideLoading()
+                val list = ArrayList<Character>(it.data!!.results)
+                allList.addAll(list)
+                Log.d(RMKey.DEBUG_TAG,"Size --> ${allList.size.toString()}")
+            }
+            else-> {}
         }
     }
 
-    private val humanState = Observer<BaseState>{
-        when(it){
-            is BaseState.Loading -> {}
-            is BaseState.Success ->{
-                Log.d(RMKey.TAG,"### HUMAN ###")
-                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
-                Log.d(RMKey.TAG,"${it.data}")
-            }else -> {}
-        }
-    }
+//    private val humanState = Observer<BaseState>{
+//        when(it){
+//            is BaseState.Loading -> {}
+//            is BaseState.Success ->{
+//                Log.d(RMKey.DEBUG_TAG,"### HUMAN ###")
+//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
+//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
+//            }else -> {}
+//        }
+//    }
 
-    private val alienState = Observer<BaseState>{
-        when(it){
-            is BaseState.Loading -> {}
-            is BaseState.Success ->{
-                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
-                Log.d(RMKey.TAG,"${it.data}")
-            }else -> {}
-        }
-    }
+//    private val alienState = Observer<BaseState>{
+//        when(it){
+//            is BaseState.Loading -> {}
+//            is BaseState.Success ->{
+//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
+//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
+//            }else -> {}
+//        }
+//    }
 
-    private val animalState = Observer<BaseState>{
-        when(it){
-            is BaseState.Loading -> {}
-            is BaseState.Success ->{
-                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
-                Log.d(RMKey.TAG,"${it.data}")
-            }else -> {}
-        }
-    }
+//    private val animalState = Observer<BaseState>{
+//        when(it){
+//            is BaseState.Loading -> {}
+//            is BaseState.Success ->{
+//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
+//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
+//            }else -> {}
+//        }
+//    }
 
-    private val unknownState = Observer<BaseState>{
-        when(it){
-            is BaseState.Loading -> {}
-            is BaseState.Success ->{
-                Log.d(RMKey.TAG,"total Size --> ${it.data.size}")
-                Log.d(RMKey.TAG,"${it.data}")
-            }else -> {}
-        }
-    }
+//    private val unknownState = Observer<BaseState>{
+//        when(it){
+//            is BaseState.Loading -> {}
+//            is BaseState.Success ->{
+//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
+//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
+//            }else -> {}
+//        }
+//    }
 
     private val errorState = Observer<String?> {
         if(it!= null){
-            Log.e(RMKey.ERROR_TAG,it)
+            Toast.makeText(requireContext(),"${it.toString()}",Toast.LENGTH_SHORT).show()
         }
     }
 

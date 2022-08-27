@@ -8,10 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.utils.ApiException
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okio.IOException
+import retrofit2.HttpException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class CharacterViewModel(
@@ -48,8 +53,8 @@ class CharacterViewModel(
     val unknownData : LiveData<BaseState>
         get() = unknown
 
-    private var all = MutableLiveData<BaseState>()
-    val allData : LiveData<BaseState>
+    private var all = MutableLiveData<Resource<Characters>>()
+    val allData : LiveData<Resource<Characters>>
         get() = all
 
     var error = MutableLiveData<String?>()
@@ -102,18 +107,29 @@ class CharacterViewModel(
 
     // all
     fun getCharacterByAllSpecies(){
-        all.postValue(BaseState.Loading(true))
         viewModelScope.launch {
-            all.postValue(BaseState.Loading(false))
-                val result = getAllCharacterUsecase.getCharacterAllSpecies()
-                when(result){
-                    is Resource.Success ->{
-                        all.postValue(BaseState.Success(result.data!!.results))
-                    }
-                    is Resource.Error ->{
-                       error.postValue(result.message)
-                    }
-                }
+            all.postValue(Resource.Loading())
+            try {
+                val output = getAllCharacterUsecase.getCharacterAllSpecies()
+                all.postValue(Resource.Success(output.data))
+            }
+            catch (exception : ApiException){
+                error.postValue(exception.message)
+            }
+            catch (exception : UnknownHostException){
+                error.postValue(exception.message)
+            }
+            catch (exception : SocketTimeoutException){
+                error.postValue(exception.message)
+            }
+            catch (exception : ConnectException){
+                error.postValue(exception.message)
+            }
+            catch (exception : Exception){
+                error.postValue(exception.message)
+            }
         }
     }
+
+
 }

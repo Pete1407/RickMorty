@@ -66,5 +66,5 @@ abstract class BaseRepo() {
         } catch (exception: Exception) {
             null
         }
-}
+    }
 }
