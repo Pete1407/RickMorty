@@ -22,4 +22,5 @@
     <color name="color_gray">#B5BCB5</color>
     <color name="bg_unknown">#5F3B11</color>
     <color name="color_text_title">#837B18</color>
+    <color name="white_75_per">#CCFFFFFF</color>
 </resources>

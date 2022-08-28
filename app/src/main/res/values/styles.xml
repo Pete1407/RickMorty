@@ -33,4 +33,10 @@
         <item name="textAllCaps">true</item>
         <item name="android:layout_margin">@dimen/spacing_standard</item>
     </style>
+    
+    <style name="Text_title_list">
+        <item name="android:fontFamily">@font/roboto_mono_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

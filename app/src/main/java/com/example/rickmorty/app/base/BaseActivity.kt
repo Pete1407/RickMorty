@@ -15,4 +15,6 @@ abstract class BaseActivity : AppCompatActivity(){
         super.setContentView(view)
         viewBinding = view
     }
+
+    // TODO: เช็คการเปิด Internet
 }

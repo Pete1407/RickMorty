@@ -42,6 +42,7 @@ class CharacterFragment : BaseFragment(),CustomState{
     private var unknownList = mutableListOf<Character>()
     private var allList = ArrayList<Character>()
 
+    // TODO: แก้ใหม่ 
     private var job : Job = Job()
 
     override fun onCreateView(
@@ -55,6 +56,7 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun onResume() {
         super.onResume()
+        // TODO: แก้ใหม่ 
         val uiScope = CoroutineScope(Dispatchers.IO+ job)
         uiScope.launch(Dispatchers.IO) {
             viewModel.getCharacterByAllSpecies()

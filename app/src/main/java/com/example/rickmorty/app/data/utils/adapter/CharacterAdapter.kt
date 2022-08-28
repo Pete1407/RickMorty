@@ -15,10 +15,36 @@ import android.widget.LinearLayout
 class CharacterAdapter(val list: ArrayList<Character>) :
     RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
+    private val TYPE_HUMAN = 0
+    private val TYPE_ALIEN = 1
+    private val TYPE_ANIMAL = 2
+    private val TYPE_UNKNOWN = 3
+    private val TYPE_ALL = 4
+
     var chooseListener: ((item: Character) -> Unit)? = null
 
     fun setChooseEvent(event: (item: Character) -> Unit) {
         chooseListener = event
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when(position){
+            TYPE_HUMAN ->{
+                TYPE_HUMAN
+            }
+            TYPE_ALIEN ->{
+                TYPE_ALIEN
+            }
+            TYPE_ANIMAL ->{
+                TYPE_ANIMAL
+            }
+            TYPE_UNKNOWN ->{
+                TYPE_UNKNOWN
+            }
+            else -> {
+                TYPE_ALL
+            }
+        }
     }
 
     override fun onCreateViewHolder(

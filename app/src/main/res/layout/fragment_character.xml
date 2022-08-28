@@ -32,9 +32,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingBottom="@dimen/spacing_xxl"
-            app:spanCount="2"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/item_card_character"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/adapter_characters_part_by_specie"/>
     </FrameLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
