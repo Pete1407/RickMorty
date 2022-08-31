@@ -2,11 +2,12 @@ package com.example.rickmorty.app.domain.repository
 
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.utils.Resource
 
 interface CharacterRepository {
 
-    suspend fun getAllCharacter():Resource<Characters>
+    suspend fun getAllCharacter(next : String?):Resource<Characters>
 
     suspend fun getSingleCharacter(id : String):Resource<Character>
 

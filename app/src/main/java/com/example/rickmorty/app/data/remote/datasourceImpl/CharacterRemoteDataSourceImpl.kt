@@ -1,7 +1,11 @@
 package com.example.rickmorty.app.data.remote.datasourceImpl
 
+import android.net.Uri
+import android.util.Log
+import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.remote.ServiceAPI
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
 import retrofit2.Response
@@ -10,8 +14,8 @@ class CharacterRemoteDataSourceImpl(
     private val serviceAPI: ServiceAPI
 ) : CharacterRemoteDataSource {
 
-    override suspend fun getAllCharacters(): Response<Characters> {
-        return serviceAPI.getAllCharacter()
+    override suspend fun getAllCharacters(next : String?): Response<Characters> {
+        return serviceAPI.getAllCharacter(next)
     }
 
     override suspend fun getSingleCharacter(id: String): Response<Character> {

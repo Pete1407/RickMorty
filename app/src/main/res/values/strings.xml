@@ -16,4 +16,10 @@
     <string name="alive">Alive</string>
     <string name="dead">Dead</string>
     <string name="unknown">Unknown</string>
+
+    <string name="category_human">Human</string>
+    <string name="category_animal">Animal</string>
+    <string name="category_alien">Alien</string>
+    <string name="category_unknown">Unknown</string>
+    <string name="category_all">All</string>
 </resources>

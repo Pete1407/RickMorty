@@ -11,7 +11,9 @@ import retrofit2.http.Query
 interface ServiceAPI {
 
     @GET("character")
-    suspend fun getAllCharacter():Response<Characters>
+    suspend fun getAllCharacter(
+        @Query("page")page : String?
+    ):Response<Characters>
 
     @GET("character/{id}")
     suspend fun getCharacter(@Path("id") id : String):Response<Character>

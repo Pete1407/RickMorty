@@ -13,5 +13,5 @@ data class Info(
     @field:Json(name = "pages")
     val pages: Int? = null,
     @field:Json(name = "prev")
-    val prev: Int? = null
+    val prev: String? = null
 )

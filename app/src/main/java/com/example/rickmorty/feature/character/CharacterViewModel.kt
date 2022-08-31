@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.utils.ApiException
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.*
@@ -37,25 +38,30 @@ class CharacterViewModel(
 
     //private var isLoading = MutableLiveData<Boolean>()
 
-    private var humans = MutableLiveData<BaseState>()
-    val humanData : LiveData<BaseState>
+    private var humans = MutableLiveData<Resource<Characters>>()
+    val humanData : LiveData<Resource<Characters>>
     get() = humans
 
-    private var aliens = MutableLiveData<BaseState>()
-    val alienData : LiveData<BaseState>
+    private var aliens = MutableLiveData<Resource<Characters>>()
+    val alienData : LiveData<Resource<Characters>>
         get() = aliens
 
-    private var animals = MutableLiveData<BaseState>()
-    val animalData : LiveData<BaseState>
+    private var animals = MutableLiveData<Resource<Characters>>()
+    val animalData : LiveData<Resource<Characters>>
         get() = animals
 
-    private var unknown = MutableLiveData<BaseState>()
-    val unknownData : LiveData<BaseState>
+    private var unknown = MutableLiveData<Resource<Characters>>()
+    val unknownData : LiveData<Resource<Characters>>
         get() = unknown
 
     private var all = MutableLiveData<Resource<Characters>>()
     val allData : LiveData<Resource<Characters>>
         get() = all
+
+    private var page = MutableLiveData<Info?>()
+    val pageData : LiveData<Info?>
+        get() = page
+
 
     var error = MutableLiveData<String?>()
 
@@ -70,7 +76,7 @@ class CharacterViewModel(
         viewModelScope.launch {
             val result = getHumanSpecieUsecase.getCharacterSpecies(RMKey.TYPE_HUMAN)
             result.let {
-                humans.postValue(BaseState.Success(it.data!!.results))
+                humans.postValue(Resource.Success(it.data))
             }
         }
     }
@@ -80,7 +86,7 @@ class CharacterViewModel(
         viewModelScope.launch {
             val result = getAlienSpecieUsecase.getCharacterSpecies(RMKey.TYPE_ALIEN)
             result.let {
-                aliens.postValue(BaseState.Success(it.data!!.results))
+                aliens.postValue(Resource.Success(it.data))
             }
         }
     }
@@ -90,7 +96,7 @@ class CharacterViewModel(
         viewModelScope.launch {
             val result = getAnimalSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_ANIMAL)
             result.let {
-                animals.postValue(BaseState.Success(it.data!!.results))
+                animals.postValue(Resource.Success(it.data))
             }
         }
     }
@@ -100,30 +106,19 @@ class CharacterViewModel(
         viewModelScope.launch {
             val result = getUnknownSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_UNKNOWN)
             result.let {
-                unknown.postValue(BaseState.Success(it.data!!.results))
+                unknown.postValue(Resource.Success(it.data))
             }
         }
     }
 
     // all
-    fun getCharacterByAllSpecies(){
+    fun getCharacterByAllSpecies(next : String? = null){
         viewModelScope.launch {
             all.postValue(Resource.Loading())
             try {
-                val output = getAllCharacterUsecase.getCharacterAllSpecies()
+                val output = getAllCharacterUsecase.getCharacterAllSpecies(next)
+                page.postValue(output.data!!.info)
                 all.postValue(Resource.Success(output.data))
-            }
-            catch (exception : ApiException){
-                error.postValue(exception.message)
-            }
-            catch (exception : UnknownHostException){
-                error.postValue(exception.message)
-            }
-            catch (exception : SocketTimeoutException){
-                error.postValue(exception.message)
-            }
-            catch (exception : ConnectException){
-                error.postValue(exception.message)
             }
             catch (exception : Exception){
                 error.postValue(exception.message)

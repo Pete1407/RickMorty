@@ -1,5 +1,6 @@
 package com.example.rickmorty.feature.character
 
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -7,24 +8,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.utils.Resource
-import com.example.rickmorty.feature.character.CharacterViewModel.BaseState
-import com.example.rickmorty.app.data.utils.adapter.CharacterAdapter
+import com.example.rickmorty.app.data.utils.adapter.CharactersAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.example.rickmorty.app.data.utils.extension.gone
-import com.example.rickmorty.app.data.utils.extension.visible
 import kotlinx.coroutines.*
-import kotlin.concurrent.thread
 
 
 @AndroidEntryPoint
@@ -34,13 +35,16 @@ class CharacterFragment : BaseFragment(),CustomState{
     @Inject
     lateinit var viewModelFactory : CharacterViewModelFactory
     private lateinit var viewModel : CharacterViewModel
-    private var adapter : CharacterAdapter?= null
+    private var adapter : CharactersAdapter?= null
 
     private var humanList = mutableListOf<Character>()
     private var alienList = mutableListOf<Character>()
     private var animalList = mutableListOf<Character>()
     private var unknownList = mutableListOf<Character>()
     private var allList = ArrayList<Character>()
+
+    private var isLoadFirstTime : Boolean = false
+    private var info : Info? = null
 
     // TODO: แก้ใหม่ 
     private var job : Job = Job()
@@ -76,17 +80,54 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun initUI() {
         if (adapter == null) {
-            adapter = CharacterAdapter(arrayListOf())
+            adapter = CharactersAdapter(
+                requireContext(),
+                arrayListOf(),
+                arrayListOf(),
+                arrayListOf(),
+                arrayListOf(),
+                arrayListOf()
+            )
         }
+        val layoutMng = GridLayoutManager(requireContext(),2)
+        layoutMng.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+            override fun getSpanSize(position: Int): Int {
+                return if(position > 4 ){
+                    1
+                }else{
+                    2
+                }
+            }
+
+        }
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
+                val pastVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
+                val totalItem = binding.recyclerView.layoutManager!!.itemCount
+                if((visibleItemCount + pastVisibleItems) >= totalItem && allList.size > 0){
+                    Toast.makeText(requireContext(),"Load Data...",Toast.LENGTH_SHORT).show()
+                    // TODO: load more
+                    val nextPageUri = Uri.parse(info?.next)
+                    Log.d(RMKey.DEBUG_TAG,"Url --> $nextPageUri")
+                    val numberNextPage = nextPageUri.getQueryParameter("page")
+                    Log.d(RMKey.DEBUG_TAG,"Number of Page --> $numberNextPage")
+                    viewModel.getCharacterByAllSpecies(numberNextPage.toString())
+                }
+            }
+        })
+        binding.recyclerView.layoutManager = layoutMng
+        binding.recyclerView.adapter = adapter
     }
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(CharacterViewModel::class.java)
         viewModel.allData.observe(viewLifecycleOwner,allState)
-//        viewModel.humanData.observe(viewLifecycleOwner,humanState)
-//        viewModel.alienData.observe(viewLifecycleOwner,alienState)
-//        viewModel.animalData.observe(viewLifecycleOwner,animalState)
-//        viewModel.unknownData.observe(viewLifecycleOwner,unknownState)
+        viewModel.humanData.observe(viewLifecycleOwner,humanState)
+        viewModel.alienData.observe(viewLifecycleOwner,alienState)
+        viewModel.animalData.observe(viewLifecycleOwner,animalState)
+        viewModel.unknownData.observe(viewLifecycleOwner,unknownState)
         viewModel.error.observe(viewLifecycleOwner,errorState)
     }
 
@@ -117,6 +158,42 @@ class CharacterFragment : BaseFragment(),CustomState{
         super.onDestroy()
     }
 
+    private val humanState = Observer<Resource<Characters>>{
+        when(it){
+            is Resource.Loading -> {}
+            is Resource.Success ->{
+                adapter?.refreshHumanList(it.data!!.results)
+            }else -> {}
+        }
+    }
+
+    private val alienState = Observer<Resource<Characters>>{
+        when(it){
+            is Resource.Loading -> {}
+            is Resource.Success ->{
+                adapter?.refreshAlienList(it.data!!.results)
+            }else -> {}
+        }
+    }
+
+    private val animalState = Observer<Resource<Characters>>{
+        when(it){
+            is Resource.Loading -> {}
+            is Resource.Success ->{
+                adapter?.refreshAnimalList(it.data!!.results)
+            }else -> {}
+        }
+    }
+
+    private val unknownState = Observer<Resource<Characters>>{
+        when(it){
+            is Resource.Loading -> {}
+            is Resource.Success ->{
+                adapter?.refreshUnknownList(it.data!!.results)
+            }else -> {}
+        }
+    }
+
     private val allState = Observer<Resource<Characters>> {
         when (it) {
             is Resource.Loading -> {
@@ -124,58 +201,27 @@ class CharacterFragment : BaseFragment(),CustomState{
             }
             is Resource.Success -> {
                 hideLoading()
-                val list = ArrayList<Character>(it.data!!.results)
-                allList.addAll(list)
-                Log.d(RMKey.DEBUG_TAG,"Size --> ${allList.size.toString()}")
+                allList = ArrayList<Character>(it.data!!.results)
+                info = it.data.info
+//                if(info!!.prev == null && info!!.next != null){
+//                    isLoadFirstTime = true
+//                }else if(info!!.prev != null && info!!.next != null){
+//                    isLoadFirstTime = false
+//                }
+
+//                if(isLoadFirstTime){
+//                    adapter?.refreshAllList(allList)
+//                }else{
+//                    adapter?.addNewItems(allList)
+//                }
             }
             else-> {}
         }
     }
 
-//    private val humanState = Observer<BaseState>{
-//        when(it){
-//            is BaseState.Loading -> {}
-//            is BaseState.Success ->{
-//                Log.d(RMKey.DEBUG_TAG,"### HUMAN ###")
-//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
-//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
-//            }else -> {}
-//        }
-//    }
-
-//    private val alienState = Observer<BaseState>{
-//        when(it){
-//            is BaseState.Loading -> {}
-//            is BaseState.Success ->{
-//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
-//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
-//            }else -> {}
-//        }
-//    }
-
-//    private val animalState = Observer<BaseState>{
-//        when(it){
-//            is BaseState.Loading -> {}
-//            is BaseState.Success ->{
-//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
-//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
-//            }else -> {}
-//        }
-//    }
-
-//    private val unknownState = Observer<BaseState>{
-//        when(it){
-//            is BaseState.Loading -> {}
-//            is BaseState.Success ->{
-//                Log.d(RMKey.DEBUG_TAG,"total Size --> ${it.data.size}")
-//                Log.d(RMKey.DEBUG_TAG,"${it.data}")
-//            }else -> {}
-//        }
-//    }
-
     private val errorState = Observer<String?> {
         if(it!= null){
-            Toast.makeText(requireContext(),"${it.toString()}",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), it.toString(),Toast.LENGTH_SHORT).show()
         }
     }
 

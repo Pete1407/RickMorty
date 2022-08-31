@@ -5,6 +5,7 @@ import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.model.ErrorResponse
+import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
 import com.example.rickmorty.app.data.utils.ApiException
 import com.example.rickmorty.app.data.utils.Resource
@@ -24,9 +25,9 @@ class CharacterRepositoryImpl(
     private val remoteDataSource: CharacterRemoteDataSource
 ): CharacterRepository {
 
-    override suspend fun getAllCharacter(): Resource<Characters> {
+    override suspend fun getAllCharacter(next : String?): Resource<Characters> {
         return safeApiCall{
-            remoteDataSource.getAllCharacters()
+            remoteDataSource.getAllCharacters(next)
         }
     }
 

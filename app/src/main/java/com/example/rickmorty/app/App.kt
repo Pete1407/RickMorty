@@ -15,10 +15,10 @@ class App : Application(){
     override fun onCreate() {
         super.onCreate()
         app = this
-        setUpServices()
+        //setUpServices()
     }
 
-    private fun setUpServices(){
-        WifiService.instance.initializeWithApplicationContext(this)
-    }
+//    private fun setUpServices(){
+//        WifiService.instance.initializeWithApplicationContext(this)
+//    }
 }
