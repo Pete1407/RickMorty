@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.LayoutDirection
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +45,6 @@ class CharacterFragment : BaseFragment(),CustomState{
     private var allList = ArrayList<Character>()
 
     private var count = 0
-    private var countInScroll = 0
     private var numberPage : String = ""
     private var info : Info? = null
 
@@ -141,7 +141,8 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                adapter?.refreshHumanList(it.data!!.results)
+                humanList = ArrayList(it.data!!.results)
+                adapter?.refreshHumanList(humanList)
             }else -> {}
         }
     }
@@ -150,7 +151,8 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                adapter?.refreshAlienList(it.data!!.results)
+                alienList = ArrayList(it.data!!.results)
+                adapter?.refreshAlienList(alienList)
             }else -> {}
         }
     }
@@ -159,7 +161,8 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                adapter?.refreshAnimalList(it.data!!.results)
+                animalList = ArrayList(it.data!!.results)
+                adapter?.refreshAnimalList(animalList)
             }else -> {}
         }
     }
@@ -168,7 +171,8 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                adapter?.refreshUnknownList(it.data!!.results)
+                unknownList = ArrayList(it.data!!.results)
+                adapter?.refreshUnknownList(unknownList)
             }else -> {}
         }
     }
@@ -203,14 +207,11 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     override fun showLoading() {
-        binding.loading.visibility = View.VISIBLE
-        binding.loading.playAnimation()
-
+        binding.loading.showLoading()
     }
 
     override fun hideLoading() {
-        binding.loading.visibility = View.GONE
-        binding.loading.pauseAnimation()
+        binding.loading.hideLoading()
     }
 
     private val errorState = Observer<String?> {

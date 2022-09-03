@@ -166,9 +166,9 @@ class CharactersAdapter(
     }
 
     fun addNewItems(newList : List<Character>){
-        val lastPosition = allList.size
+        val lastPosition = allList.size+1
         allList.addAll(newList)
-        notifyItemRangeInserted()
+        notifyItemRangeInserted(lastPosition,newList.size)
     }
 
     inner class CategoryCharacterBySpecie(val binding : AdapterCharactersPartBySpecieBinding):RecyclerView.ViewHolder(binding.root){
