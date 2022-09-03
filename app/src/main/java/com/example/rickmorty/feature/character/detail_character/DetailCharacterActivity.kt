@@ -53,6 +53,10 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
         }
     }
 
+    override fun initListener() {
+
+    }
+
     private fun updateUI(data: Character) {
         binding.mainLayout.visibility = View.VISIBLE
         Glide.with(this)

@@ -41,6 +41,11 @@ class LocationFragment : BaseFragment(),CustomState{
 
     }
 
+    override fun initListener() {
+
+
+    }
+
     companion object{
         @JvmStatic
         fun newInstance() = LocationFragment().apply {

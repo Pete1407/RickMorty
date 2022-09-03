@@ -43,11 +43,11 @@ class CharacterFragment : BaseFragment(),CustomState{
     private var unknownList = mutableListOf<Character>()
     private var allList = ArrayList<Character>()
 
-    private var isLoadFirstTime : Boolean = false
+    private var count = 0
+    private var countInScroll = 0
+    private var numberPage : String = ""
     private var info : Info? = null
 
-    // TODO: แก้ใหม่ 
-    private var job : Job = Job()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,22 +60,34 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun onResume() {
         super.onResume()
-        // TODO: แก้ใหม่ 
-        val uiScope = CoroutineScope(Dispatchers.IO+ job)
-        uiScope.launch(Dispatchers.IO) {
-            viewModel.getCharacterByAllSpecies()
-            viewModel.getCharacterByAlienSpecies()
-            viewModel.getCharacterByAnimalSpecies()
-            viewModel.getCharacterByHumanSpecies()
-            viewModel.getCharacterByUnknownSpecies()
-        }
-
+        viewModel.getCharacterByAllSpecies()
+        viewModel.getCharacterByAlienSpecies()
+        viewModel.getCharacterByAnimalSpecies()
+        viewModel.getCharacterByHumanSpecies()
+        viewModel.getCharacterByUnknownSpecies()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initListener()
         initViewModel()
         initUI()
+
+    }
+
+    override fun initListener() {
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
+                val pastVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
+                val totalItem = binding.recyclerView.layoutManager!!.itemCount
+                if((visibleItemCount + pastVisibleItems) >= totalItem && allList.size > 0 && !viewModel.isLoading){
+                    //Log.d(RMKey.DEBUG_TAG,"LOADING DATA ... $countInScroll $numberPage")
+
+                    viewModel.getCharacterByAllSpecies(numberPage)
+                }
+            }
+        })
     }
 
     override fun initUI() {
@@ -100,23 +112,6 @@ class CharacterFragment : BaseFragment(),CustomState{
             }
 
         }
-
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
-                val pastVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
-                val totalItem = binding.recyclerView.layoutManager!!.itemCount
-                if((visibleItemCount + pastVisibleItems) >= totalItem && allList.size > 0){
-                    Toast.makeText(requireContext(),"Load Data...",Toast.LENGTH_SHORT).show()
-                    // TODO: load more
-                    val nextPageUri = Uri.parse(info?.next)
-                    Log.d(RMKey.DEBUG_TAG,"Url --> $nextPageUri")
-                    val numberNextPage = nextPageUri.getQueryParameter("page")
-                    Log.d(RMKey.DEBUG_TAG,"Number of Page --> $numberNextPage")
-                    viewModel.getCharacterByAllSpecies(numberNextPage.toString())
-                }
-            }
-        })
         binding.recyclerView.layoutManager = layoutMng
         binding.recyclerView.adapter = adapter
     }
@@ -131,17 +126,6 @@ class CharacterFragment : BaseFragment(),CustomState{
         viewModel.error.observe(viewLifecycleOwner,errorState)
     }
 
-    override fun showLoading() {
-        binding.loading.visibility = View.VISIBLE
-        binding.loading.playAnimation()
-
-    }
-
-    override fun hideLoading() {
-        binding.loading.visibility = View.GONE
-        binding.loading.pauseAnimation()
-    }
-
     private fun showLoadingProgress(isLoad : Boolean) {
         if(isLoad){
             showLoading()
@@ -151,11 +135,6 @@ class CharacterFragment : BaseFragment(),CustomState{
                 Log.d(RMKey.DEBUG_TAG,"Tag for show loading")
             },2000)
         }
-    }
-
-    override fun onDestroy() {
-        job.cancel()
-        super.onDestroy()
     }
 
     private val humanState = Observer<Resource<Characters>>{
@@ -203,20 +182,35 @@ class CharacterFragment : BaseFragment(),CustomState{
                 hideLoading()
                 allList = ArrayList<Character>(it.data!!.results)
                 info = it.data.info
-//                if(info!!.prev == null && info!!.next != null){
-//                    isLoadFirstTime = true
-//                }else if(info!!.prev != null && info!!.next != null){
-//                    isLoadFirstTime = false
-//                }
+                Log.d(RMKey.DEBUG_TAG,info.toString())
+                numberPage = getNextPageFromLink(info?.next)
+                count++
+                if(info?.prev.isNullOrEmpty() && info?.next!=null){
+                    adapter?.refreshAllList(allList)
+                }else{
+                    adapter?.addNewItems(allList)
+                }
 
-//                if(isLoadFirstTime){
-//                    adapter?.refreshAllList(allList)
-//                }else{
-//                    adapter?.addNewItems(allList)
-//                }
             }
             else-> {}
         }
+    }
+
+    fun getNextPageFromLink(next : String?):String{
+        val nextPageUri = Uri.parse(next)
+        val numberNextPage = nextPageUri.getQueryParameter("page")
+        return numberNextPage.toString()
+    }
+
+    override fun showLoading() {
+        binding.loading.visibility = View.VISIBLE
+        binding.loading.playAnimation()
+
+    }
+
+    override fun hideLoading() {
+        binding.loading.visibility = View.GONE
+        binding.loading.pauseAnimation()
     }
 
     private val errorState = Observer<String?> {

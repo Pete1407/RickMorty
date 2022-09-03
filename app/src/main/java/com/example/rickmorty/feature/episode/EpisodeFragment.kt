@@ -33,6 +33,10 @@ class EpisodeFragment : BaseFragment(),CustomState {
 
     }
 
+    override fun initListener() {
+
+    }
+
     override fun showLoading() {
 
     }

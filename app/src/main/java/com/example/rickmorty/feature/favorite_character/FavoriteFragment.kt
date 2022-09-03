@@ -42,6 +42,10 @@ class FavoriteFragment : BaseFragment(),CustomState {
 
     }
 
+    override fun initListener() {
+
+    }
+
     companion object{
         @JvmStatic
         fun newInstance()=FavoriteFragment().apply {

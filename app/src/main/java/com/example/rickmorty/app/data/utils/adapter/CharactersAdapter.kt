@@ -1,5 +1,6 @@
 package com.example.rickmorty.app.data.utils.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +26,7 @@ class CharactersAdapter(
     val alienList : ArrayList<Character>,
     val animalList : ArrayList<Character>,
     val unknownList : ArrayList<Character>,
-    val allList : ArrayList<Character>
+    var allList : ArrayList<Character>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_HUMAN = 0
@@ -160,15 +161,14 @@ class CharactersAdapter(
 
     fun refreshAllList(list : List<Character>){
         allList.clear()
-        allList.addAll(list)
+        allList = list as ArrayList<Character>
         notifyDataSetChanged()
     }
 
-    fun addNewItems(list : List<Character>){
-        val oldDataCount = allList.size
-        allList.addAll(list)
-        //Log.d(RMKey.DEBUG_TAG,"${allList.size}")
-        notifyDataSetChanged()
+    fun addNewItems(newList : List<Character>){
+        val lastPosition = allList.size
+        allList.addAll(newList)
+        notifyItemRangeInserted()
     }
 
     inner class CategoryCharacterBySpecie(val binding : AdapterCharactersPartBySpecieBinding):RecyclerView.ViewHolder(binding.root){

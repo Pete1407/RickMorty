@@ -62,8 +62,10 @@ class CharacterViewModel(
     val pageData : LiveData<Info?>
         get() = page
 
-
     var error = MutableLiveData<String?>()
+
+     var isLoading : Boolean = false
+
 
     sealed class BaseState{
         data class Loading(var isLoad: Boolean) : BaseState()
@@ -114,9 +116,11 @@ class CharacterViewModel(
     // all
     fun getCharacterByAllSpecies(next : String? = null){
         viewModelScope.launch {
+            isLoading = true
             all.postValue(Resource.Loading())
             try {
                 val output = getAllCharacterUsecase.getCharacterAllSpecies(next)
+                isLoading = false
                 page.postValue(output.data!!.info)
                 all.postValue(Resource.Success(output.data))
             }
