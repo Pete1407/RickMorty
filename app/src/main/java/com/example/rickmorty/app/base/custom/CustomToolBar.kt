@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.example.rickmorty.R
+import com.example.rickmorty.app.data.utils.extension.gone
+import com.example.rickmorty.app.data.utils.extension.visible
 import com.example.rickmorty.databinding.WidgetCustomToolbarBinding
 
 class CustomToolBar @JvmOverloads constructor(
@@ -47,9 +49,9 @@ class CustomToolBar @JvmOverloads constructor(
 
     private fun setShowButton(isShow : Boolean){
         if(isShow){
-            binding.backButton.visibility = View.VISIBLE
+            binding.backButton.visible()
         }else{
-            binding.backButton.visibility = View.GONE
+            binding.backButton.gone()
         }
 
     }

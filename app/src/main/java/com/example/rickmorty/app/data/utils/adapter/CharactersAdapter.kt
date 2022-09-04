@@ -161,7 +161,7 @@ class CharactersAdapter(
 
     fun refreshAllList(list : List<Character>){
         allList.clear()
-        allList = list as ArrayList<Character>
+        allList.addAll(list)
         notifyDataSetChanged()
     }
 

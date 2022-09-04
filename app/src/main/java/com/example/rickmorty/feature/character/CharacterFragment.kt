@@ -44,7 +44,6 @@ class CharacterFragment : BaseFragment(),CustomState{
     private var unknownList = mutableListOf<Character>()
     private var allList = ArrayList<Character>()
 
-    private var count = 0
     private var numberPage : String = ""
     private var info : Info? = null
 
@@ -60,11 +59,7 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCharacterByAllSpecies()
-        viewModel.getCharacterByAlienSpecies()
-        viewModel.getCharacterByAnimalSpecies()
-        viewModel.getCharacterByHumanSpecies()
-        viewModel.getCharacterByUnknownSpecies()
+        refreshList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,14 +71,17 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     override fun initListener() {
+
+        binding.refreshLayout.setOnRefreshListener {
+            refreshList()
+        }
+
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
                 val pastVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
                 val totalItem = binding.recyclerView.layoutManager!!.itemCount
                 if((visibleItemCount + pastVisibleItems) >= totalItem && allList.size > 0 && !viewModel.isLoading){
-                    //Log.d(RMKey.DEBUG_TAG,"LOADING DATA ... $countInScroll $numberPage")
-
                     viewModel.getCharacterByAllSpecies(numberPage)
                 }
             }
@@ -100,6 +98,7 @@ class CharacterFragment : BaseFragment(),CustomState{
                 arrayListOf(),
                 arrayListOf()
             )
+
         }
         val layoutMng = GridLayoutManager(requireContext(),2)
         layoutMng.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
@@ -141,7 +140,7 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                humanList = ArrayList(it.data!!.results)
+                humanList = shuffleItem(it.data!!.results)
                 adapter?.refreshHumanList(humanList)
             }else -> {}
         }
@@ -151,7 +150,7 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                alienList = ArrayList(it.data!!.results)
+                alienList = shuffleItem(it.data!!.results)
                 adapter?.refreshAlienList(alienList)
             }else -> {}
         }
@@ -161,7 +160,7 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                animalList = ArrayList(it.data!!.results)
+                animalList = shuffleItem(it.data!!.results)
                 adapter?.refreshAnimalList(animalList)
             }else -> {}
         }
@@ -171,7 +170,7 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                unknownList = ArrayList(it.data!!.results)
+                unknownList = shuffleItem(it.data!!.results)
                 adapter?.refreshUnknownList(unknownList)
             }else -> {}
         }
@@ -188,7 +187,6 @@ class CharacterFragment : BaseFragment(),CustomState{
                 info = it.data.info
                 Log.d(RMKey.DEBUG_TAG,info.toString())
                 numberPage = getNextPageFromLink(info?.next)
-                count++
                 if(info?.prev.isNullOrEmpty() && info?.next!=null){
                     adapter?.refreshAllList(allList)
                 }else{
@@ -200,7 +198,7 @@ class CharacterFragment : BaseFragment(),CustomState{
         }
     }
 
-    fun getNextPageFromLink(next : String?):String{
+    private fun getNextPageFromLink(next : String?):String{
         val nextPageUri = Uri.parse(next)
         val numberNextPage = nextPageUri.getQueryParameter("page")
         return numberNextPage.toString()
@@ -218,6 +216,27 @@ class CharacterFragment : BaseFragment(),CustomState{
         if(it!= null){
             Toast.makeText(requireContext(), it.toString(),Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun shuffleItem(list : List<Character>):MutableList<Character>{
+        val dataShuffled = list.shuffled()
+        return dataShuffled.subList(0,10).toMutableList()
+    }
+
+    private fun refreshList(){
+        binding.refreshLayout.isRefreshing = false
+        numberPage = ""
+        info = null
+        allList.clear()
+        alienList.clear()
+        animalList.clear()
+        humanList.clear()
+        unknownList.clear()
+        viewModel.getCharacterByAllSpecies()
+        viewModel.getCharacterByAlienSpecies()
+        viewModel.getCharacterByAnimalSpecies()
+        viewModel.getCharacterByHumanSpecies()
+        viewModel.getCharacterByUnknownSpecies()
     }
 
     companion object{
