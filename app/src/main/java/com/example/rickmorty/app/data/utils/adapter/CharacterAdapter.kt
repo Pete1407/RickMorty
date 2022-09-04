@@ -9,6 +9,11 @@ import com.example.rickmorty.databinding.ItemCardCharacterBinding
 
 class CharacterAdapter(val list : List<Character>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var eventClickDetailCharacter : ((data : Character)->Unit)? = null
+    fun setEventClickDetailListener(event : ((data : Character)->Unit)){
+        this.eventClickDetailCharacter = event
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(ItemCardCharacterBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -30,6 +35,9 @@ class CharacterAdapter(val list : List<Character>):RecyclerView.Adapter<Recycler
             Glide.with(binding.root.context)
                 .load(character.image)
                 .into(binding.imageCharacter)
+            binding.root.setOnClickListener {
+                eventClickDetailCharacter?.invoke(character)
+            }
         }
     }
 

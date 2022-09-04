@@ -24,6 +24,7 @@ import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.data.utils.adapter.CharactersAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
+import com.example.rickmorty.feature.character.detail_character.DetailCharacterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.*
@@ -98,6 +99,9 @@ class CharacterFragment : BaseFragment(),CustomState{
                 arrayListOf(),
                 arrayListOf()
             )
+            adapter!!.setEventClickDetailListener { characterData ->
+                DetailCharacterActivity.create(requireContext(),characterData)
+            }
 
         }
         val layoutMng = GridLayoutManager(requireContext(),2)

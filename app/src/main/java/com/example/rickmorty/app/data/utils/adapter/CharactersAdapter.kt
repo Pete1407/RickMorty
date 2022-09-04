@@ -38,6 +38,10 @@ class CharactersAdapter(
 
     private val positionOther = 5
 
+    private var eventClickDetailCharacter : ((data : Character)->Unit)? = null
+    fun setEventClickDetailListener(event : ((data : Character)->Unit)){
+        this.eventClickDetailCharacter = event
+    }
 
     override fun getItemViewType(position: Int): Int {
         return when(position){
@@ -180,6 +184,9 @@ class CharactersAdapter(
             binding.title.setTextTitle(titleText)
             if(adapter == null){
                 adapter = CharacterAdapter(itemList)
+                adapter!!.setEventClickDetailListener {
+                    eventClickDetailCharacter?.invoke(it)
+                }
             }
 
             binding.recyclerView.adapter = adapter
@@ -193,6 +200,9 @@ class CharactersAdapter(
             Glide.with(binding.root.context)
                 .load(character.image)
                 .into(binding.imageCharacter)
+            binding.root.setOnClickListener {
+                eventClickDetailCharacter?.invoke(character)
+            }
         }
     }
 
