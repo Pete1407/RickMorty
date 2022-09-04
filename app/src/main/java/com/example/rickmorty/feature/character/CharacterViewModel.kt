@@ -58,10 +58,6 @@ class CharacterViewModel(
     val allData : LiveData<Resource<Characters>>
         get() = all
 
-    private var page = MutableLiveData<Info?>()
-    val pageData : LiveData<Info?>
-        get() = page
-
     var error = MutableLiveData<String?>()
 
      var isLoading : Boolean = false
@@ -121,7 +117,6 @@ class CharacterViewModel(
             try {
                 val output = getAllCharacterUsecase.getCharacterAllSpecies(next)
                 isLoading = false
-                page.postValue(output.data!!.info)
                 all.postValue(Resource.Success(output.data))
             }
             catch (exception : Exception){
