@@ -36,7 +36,7 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
         characterChosen = intent.getParcelableExtra<Character>(RMKey.ITEM_CHARACTER) as Character
         val view = binding.root
         setContentView(view)
-        binding.mainLayout.visibility = View.GONE
+        //binding.mainLayout.visibility = View.GONE
         //initUI()
         //initViewModel()
         //viewModel.getSingleCharacter(characterChosen?.id.toString())
@@ -44,50 +44,50 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
 
     override fun initUI() {
         characterChosen?.let {
-            binding.toolBar.setTextTitle(it.name)
+            //binding.toolBar.setTextTitle(it.name)
         } ?: kotlin.run {
-            binding.toolBar.setTextTitle(resources.getString(R.string.info_character))
+           // binding.toolBar.setTextTitle(resources.getString(R.string.info_character))
         }
-        binding.toolBar.setOnClickListener {
-            finish()
-        }
+//        binding.toolBar.setOnClickListener {
+//            finish()
+//        }
     }
 
     override fun initListener() {
 
     }
 
-    private fun updateUI(data: Character) {
-        binding.mainLayout.visibility = View.VISIBLE
-        Glide.with(this)
-            .load(data.image)
-            .into(binding.imageProfile)
-        binding.textName.text = data.name
-
-        // set specie
-        if (data.species.equals(RMKey.TYPE_HUMAN, ignoreCase = true)) {
-            binding.textSpecie.text = RMKey.TYPE_HUMAN
-            binding.iconSpecie.setImageResource(R.drawable.icon_person)
-        } else {
-            binding.textSpecie.text = RMKey.TYPE_ALIEN
-            binding.iconSpecie.setImageResource(R.drawable.icon_alien)
-        }
-
-        // set gender
-        if (data.gender.equals(RMKey.TYPE_MALE, ignoreCase = true)) {
-            binding.textGender.text = RMKey.TYPE_MALE
-            binding.iconGender.setImageResource(R.drawable.icon_male)
-        } else {
-            binding.textGender.text = RMKey.TYPE_FEMALE
-            binding.iconGender.setImageResource(R.drawable.icon_female)
-        }
-
-        binding.textOrigin.text = "Name: ${data.origin.name}"
-
-        binding.group2.setBackgroundResource(data.getBackgroundStatus())
-        binding.typeStatus.setImageResource(data.getIconStatus())
-        binding.textStatusType.text = data.getStatus(this)
-    }
+//    private fun updateUI(data: Character) {
+//        binding.mainLayout.visibility = View.VISIBLE
+//        Glide.with(this)
+//            .load(data.image)
+//            .into(binding.imageProfile)
+//        binding.textName.text = data.name
+//
+//        // set specie
+//        if (data.species.equals(RMKey.TYPE_HUMAN, ignoreCase = true)) {
+//            binding.textSpecie.text = RMKey.TYPE_HUMAN
+//            binding.iconSpecie.setImageResource(R.drawable.icon_person)
+//        } else {
+//            binding.textSpecie.text = RMKey.TYPE_ALIEN
+//            binding.iconSpecie.setImageResource(R.drawable.icon_alien)
+//        }
+//
+//        // set gender
+//        if (data.gender.equals(RMKey.TYPE_MALE, ignoreCase = true)) {
+//            binding.textGender.text = RMKey.TYPE_MALE
+//            binding.iconGender.setImageResource(R.drawable.icon_male)
+//        } else {
+//            binding.textGender.text = RMKey.TYPE_FEMALE
+//            binding.iconGender.setImageResource(R.drawable.icon_female)
+//        }
+//
+//        binding.textOrigin.text = "Name: ${data.origin.name}"
+//
+//        binding.group2.setBackgroundResource(data.getBackgroundStatus())
+//        binding.typeStatus.setImageResource(data.getIconStatus())
+//        binding.textStatusType.text = data.getStatus(this)
+//    }
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(CharacterViewModel::class.java)
@@ -111,12 +111,12 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
     }
 
     override fun showLoading() {
-        binding.loading.playAnimation()
-        binding.loading.visibility = View.VISIBLE
+        //binding.loading.playAnimation()
+        //binding.loading.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        binding.loading.visibility = View.GONE
+        //binding.loading.visibility = View.GONE
     }
 
     companion object {

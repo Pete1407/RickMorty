@@ -18,6 +18,7 @@ class CustomToolBar @JvmOverloads constructor(
     private var binding = WidgetCustomToolbarBinding.inflate(LayoutInflater.from(context),this,true)
     private var textTitle : String = ""
     private var isShowButton : Boolean = false
+    private var isShowTitle : Boolean = false
 
     private var onclickListener : (()-> Unit)? = null
 
@@ -32,10 +33,13 @@ class CustomToolBar @JvmOverloads constructor(
 
     private fun setAttributes(attributeSet: AttributeSet?){
         val attr = context.obtainStyledAttributes(attributeSet,R.styleable.CustomToolBar)
-        textTitle = attr.getString(R.styleable.CustomToolBar_addText).toString()
+        textTitle = attr.getString(R.styleable.CustomToolBar_textTitle).toString()
         isShowButton = attr.getBoolean(R.styleable.CustomToolBar_showBackButton,false)
+        isShowTitle = attr.getBoolean(R.styleable.CustomToolBar_showTitle,false)
+
         setTextTitle(textTitle)
         setShowButton(isShowButton)
+        showTitle(isShowTitle)
 
         binding.backButton.setOnClickListener {
             onclickListener?.invoke()
@@ -54,6 +58,14 @@ class CustomToolBar @JvmOverloads constructor(
             binding.backButton.gone()
         }
 
+    }
+
+    private fun showTitle(isShow: Boolean){
+        if(isShow){
+            binding.title.visible()
+        }else{
+            binding.title.gone()
+        }
     }
 
 }

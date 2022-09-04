@@ -3,7 +3,8 @@
     <!-- Toolbar -->
     <declare-styleable name="CustomToolBar">
         <attr name="showBackButton" format="boolean"/>
-        <attr name="addText" format="string"/>
+        <attr name="textTitle" format="string"/>
+        <attr name="showTitle" format="boolean"/>
     </declare-styleable>
 
     <!-- TextView -->
