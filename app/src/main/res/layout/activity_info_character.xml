@@ -63,14 +63,14 @@
               android:orientation="vertical">
               <androidx.appcompat.widget.AppCompatTextView
                   android:id="@+id/specieText"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   style="@style/Title_Detail_Character"
                   tools:text="Specie: Human"/>
 
               <androidx.appcompat.widget.AppCompatTextView
                   android:id="@+id/genderText"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   style="@style/Title_Detail_Character"
                   android:paddingVertical="@dimen/spacing_standard"
@@ -78,7 +78,7 @@
 
               <androidx.appcompat.widget.AppCompatTextView
                   android:id="@+id/typeText"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   style="@style/Title_Detail_Character"
                   tools:text="Type: none"/>

@@ -44,18 +44,38 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
 
     override fun initUI() {
         binding.apply {
-            this.nameCharacter.text = figure?.name
-            this.specieText.text = "${getString(R.string.specie_title)}: ${figure?.species?:"none"}"
-            this.genderText.text = "${getString(R.string.gender_title)}: ${figure?.gender?:"none"}"
             Glide.with(this@DetailCharacterActivity)
-                .load(figure?.image)
-                .into(binding.imageCharacter)
+            .load(figure?.image)
+            .into(this.imageCharacter)
+
+            this.nameCharacter.text = figure?.name
+            if(figure?.species != ""){
+                this.specieText.text = "${getString(R.string.specie_title)}: ${figure?.species.toString().lowercase()}"
+            }else{
+                this.genderText.text = "${getString(R.string.gender_title)}: ${getString(R.string.no_data)}"
+            }
+            if(figure?.gender != ""){
+                this.genderText.text = "${getString(R.string.gender_title)}: ${figure?.gender.toString().lowercase()}"
+            }else{
+                this.genderText.text = "${getString(R.string.gender_title)}: ${getString(R.string.no_data)}"
+            }
+            if(figure?.type != ""){
+                this.typeText.text = "${getString(R.string.type_title)}: ${figure?.type.toString().lowercase()}"
+            }else{
+                this.typeText.text = "${getString(R.string.type_title)}: ${getString(R.string.no_data)}"
+            }
         }
     }
 
     override fun initListener() {
         binding.backButton.setOnClickListener {
             onBackPressed()
+        }
+        binding.clickLocation.setOnClickListener {
+
+        }
+        binding.clickEpsiode.setOnClickListener {
+
         }
     }
 

@@ -30,5 +30,5 @@
     <string name="find_location_text">Find Location</string>
     <string name="find_ep_text">Find Episode</string>
     <string name="click_text">Click</string>
-    
+    <string name="no_data">unspecified</string>
 </resources>
