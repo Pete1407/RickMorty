@@ -23,6 +23,10 @@
     <color name="bg_unknown">#5F3B11</color>
     <color name="color_text_title">#837B18</color>
     <color name="white_75_per">#CCFFFFFF</color>
+    <color name="white_40_per">#66FFFFFF</color>
 
     <color name="black_transparent">#80000000</color>
+    <color name="black_title_detail">#2B2424</color>
+    <color name="bg_button_click">#4DED8554</color>
+    <color name="text_button_click">#462525</color>
 </resources>

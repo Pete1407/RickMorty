@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -23,7 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DetailCharacterActivity : BaseActivity(), CustomState {
     private lateinit var binding: ActivityInfoCharacterBinding
-    private var characterChosen: Character? = null
+    private var figure: Character? = null
 
     @Inject
     lateinit var viewModelFactory: CharacterViewModelFactory
@@ -33,81 +35,33 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInfoCharacterBinding.inflate(layoutInflater)
-        characterChosen = intent.getParcelableExtra<Character>(RMKey.ITEM_CHARACTER) as Character
-        val view = binding.root
-        setContentView(view)
-        //binding.mainLayout.visibility = View.GONE
-        //initUI()
-        //initViewModel()
-        //viewModel.getSingleCharacter(characterChosen?.id.toString())
+        figure = intent.getParcelableExtra<Character>(RMKey.ITEM_CHARACTER) as Character
+        setContentView(binding.root)
+        initListener()
+        initViewModel()
+        initUI()
     }
 
     override fun initUI() {
-        characterChosen?.let {
-            //binding.toolBar.setTextTitle(it.name)
-        } ?: kotlin.run {
-           // binding.toolBar.setTextTitle(resources.getString(R.string.info_character))
+        binding.apply {
+            this.nameCharacter.text = figure?.name
+            this.specieText.text = "${getString(R.string.specie_title)}: ${figure?.species?:"none"}"
+            this.genderText.text = "${getString(R.string.gender_title)}: ${figure?.gender?:"none"}"
+            Glide.with(this@DetailCharacterActivity)
+                .load(figure?.image)
+                .into(binding.imageCharacter)
         }
-//        binding.toolBar.setOnClickListener {
-//            finish()
-//        }
     }
 
     override fun initListener() {
-
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
     }
 
-//    private fun updateUI(data: Character) {
-//        binding.mainLayout.visibility = View.VISIBLE
-//        Glide.with(this)
-//            .load(data.image)
-//            .into(binding.imageProfile)
-//        binding.textName.text = data.name
-//
-//        // set specie
-//        if (data.species.equals(RMKey.TYPE_HUMAN, ignoreCase = true)) {
-//            binding.textSpecie.text = RMKey.TYPE_HUMAN
-//            binding.iconSpecie.setImageResource(R.drawable.icon_person)
-//        } else {
-//            binding.textSpecie.text = RMKey.TYPE_ALIEN
-//            binding.iconSpecie.setImageResource(R.drawable.icon_alien)
-//        }
-//
-//        // set gender
-//        if (data.gender.equals(RMKey.TYPE_MALE, ignoreCase = true)) {
-//            binding.textGender.text = RMKey.TYPE_MALE
-//            binding.iconGender.setImageResource(R.drawable.icon_male)
-//        } else {
-//            binding.textGender.text = RMKey.TYPE_FEMALE
-//            binding.iconGender.setImageResource(R.drawable.icon_female)
-//        }
-//
-//        binding.textOrigin.text = "Name: ${data.origin.name}"
-//
-//        binding.group2.setBackgroundResource(data.getBackgroundStatus())
-//        binding.typeStatus.setImageResource(data.getIconStatus())
-//        binding.textStatusType.text = data.getStatus(this)
-//    }
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(CharacterViewModel::class.java)
-
-//        viewModel.character.observe(this, Observer { state ->
-//            when (state) {
-//                is Resource.Loading -> {
-//                    showLoading()
-//                }
-//                is Resource.Success -> {
-//                    hideLoading()
-//                    state.data?.let {
-//                        updateUI(it)
-//                    }
-//                }
-//                else -> {
-//                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        })
     }
 
     override fun showLoading() {

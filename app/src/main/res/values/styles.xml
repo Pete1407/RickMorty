@@ -45,4 +45,10 @@
         <item name="android:textSize">24dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="Title_Detail_Character">
+        <item name="android:fontFamily">@font/roboto_mono_bold</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">@color/black_title_detail</item>
+    </style>
 </resources>

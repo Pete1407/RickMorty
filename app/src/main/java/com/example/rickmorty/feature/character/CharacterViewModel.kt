@@ -71,7 +71,7 @@ class CharacterViewModel(
 
     // human
     fun getCharacterByHumanSpecies(){
-        viewModelScope.launch {
+        viewModelScope.launch{
             val result = getHumanSpecieUsecase.getCharacterSpecies(RMKey.TYPE_HUMAN)
             result.let {
                 humans.postValue(Resource.Success(it.data))
@@ -81,7 +81,7 @@ class CharacterViewModel(
 
     // alien
     fun getCharacterByAlienSpecies(){
-        viewModelScope.launch {
+        viewModelScope.launch{
             val result = getAlienSpecieUsecase.getCharacterSpecies(RMKey.TYPE_ALIEN)
             result.let {
                 aliens.postValue(Resource.Success(it.data))
@@ -91,7 +91,7 @@ class CharacterViewModel(
 
     // animal
     fun getCharacterByAnimalSpecies(){
-        viewModelScope.launch {
+        viewModelScope.launch{
             val result = getAnimalSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_ANIMAL)
             result.let {
                 animals.postValue(Resource.Success(it.data))
@@ -101,7 +101,7 @@ class CharacterViewModel(
 
     // unknown
     fun getCharacterByUnknownSpecies(){
-        viewModelScope.launch {
+        viewModelScope.launch{
             val result = getUnknownSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_UNKNOWN)
             result.let {
                 unknown.postValue(Resource.Success(it.data))
@@ -111,7 +111,7 @@ class CharacterViewModel(
 
     // all
     fun getCharacterByAllSpecies(next : String? = null){
-        viewModelScope.launch {
+        viewModelScope.launch{
             isLoading = true
             all.postValue(Resource.Loading())
             try {
