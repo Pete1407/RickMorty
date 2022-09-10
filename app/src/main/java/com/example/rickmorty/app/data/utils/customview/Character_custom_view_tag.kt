@@ -14,7 +14,6 @@ class Character_custom_view_tag(context : Context,attrs : AttributeSet): LinearL
         CharacterTagCustomViewBinding.inflate(LayoutInflater.from(context), this, true)
     }
         fun setCharacters(list : List<Character>){
-            //binding.mainlayout.addView()
         }
 
 }
