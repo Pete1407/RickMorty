@@ -13,29 +13,29 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Character(
     @field:Json(name = "created")
-    val created: String,
+    val created: String? = null,
     @field:Json(name = "episode")
-    val episode: List<String>,
+    val episode: List<String> = arrayListOf(),
     @field:Json(name = "gender")
-    val gender: String,
+    val gender: String? = null,
     @field:Json(name = "id")
-    val id: Int,
+    val id: Int = 0,
     @field:Json(name = "image")
-    val image: String,
+    val image: String? = null,
     @field:Json(name = "location")
     val location: Location,
     @field:Json(name = "name")
-    val name: String,
+    val name: String? = null,
     @field:Json(name = "origin")
-    val origin: Origin,
+    val origin: Origin? = null,
     @field:Json(name = "species")
-    val species: String,
+    val species: String? = null,
     @field:Json(name = "status")
-    val status: String,
+    val status: String? = null,
     @field:Json(name = "type")
-    val type: String,
+    val type: String? = null,
     @field:Json(name = "url")
-    val url: String
+    val url: String? = null
 ):Parcelable
 {
     fun getBackgroundStatus():Int{

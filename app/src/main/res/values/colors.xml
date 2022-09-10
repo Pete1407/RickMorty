@@ -29,4 +29,6 @@
     <color name="black_title_detail">#2B2424</color>
     <color name="bg_button_click">#4DED8554</color>
     <color name="text_button_click">#462525</color>
+
+    <color name="bg_location_item">#CCFFFFFF</color>
 </resources>

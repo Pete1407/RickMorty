@@ -2,6 +2,8 @@ package com.example.rickmorty.app.data.remote
 
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
+import com.example.rickmorty.app.data.model.Location
+import com.example.rickmorty.app.data.model.Locations
 import com.example.rickmorty.app.data.utils.Resource
 import retrofit2.Response
 import retrofit2.http.GET
@@ -20,4 +22,7 @@ interface ServiceAPI {
 
     @GET("character")
     suspend fun getCharacterBySpecie(@Query("species") species : String):Response<Characters>
+
+    @GET("location")
+    suspend fun getAllLocation():Response<Locations>
 }

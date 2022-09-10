@@ -26,7 +26,7 @@
     <string name="specie_title">Specie</string>
     <string name="gender_title">Gender</string>
     <string name="type_title">Type</string>
-    
+    <string name="dimension_title">Dimension</string>
     <string name="find_location_text">Find Location</string>
     <string name="find_ep_text">Find Episode</string>
     <string name="click_text">Click</string>

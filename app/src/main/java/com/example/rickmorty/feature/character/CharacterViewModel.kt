@@ -21,11 +21,11 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class CharacterViewModel(
-    private val getHumanSpecieUsecase : GetHumanSpeciesUsecase,
-    private val getAlienSpecieUsecase : GetAlienSpeciesUsecase,
-    private val getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,
-    private val getUnknownSpeciesUsecase: GetUnknownSpeciesUsecase,
-    private val getAllCharacterUsecase: GetAllCharacterUsecase
+    private val getHumanSpecieUseCase : GetHumanSpeciesUsecase,
+    private val getAlienSpecieUseCase : GetAlienSpeciesUsecase,
+    private val getAnimalSpeciesUseCase: GetAnimalSpeciesUsecase,
+    private val getUnknownSpeciesUseCase: GetUnknownSpeciesUsecase,
+    private val getAllCharacterUseCase: GetAllCharacterUsecase
 ) : ViewModel() {
 
     /*
@@ -72,7 +72,7 @@ class CharacterViewModel(
     // human
     fun getCharacterByHumanSpecies(){
         viewModelScope.launch{
-            val result = getHumanSpecieUsecase.getCharacterSpecies(RMKey.TYPE_HUMAN)
+            val result = getHumanSpecieUseCase.getCharacterSpecies(RMKey.TYPE_HUMAN)
             result.let {
                 humans.postValue(Resource.Success(it.data))
             }
@@ -82,7 +82,7 @@ class CharacterViewModel(
     // alien
     fun getCharacterByAlienSpecies(){
         viewModelScope.launch{
-            val result = getAlienSpecieUsecase.getCharacterSpecies(RMKey.TYPE_ALIEN)
+            val result = getAlienSpecieUseCase.getCharacterSpecies(RMKey.TYPE_ALIEN)
             result.let {
                 aliens.postValue(Resource.Success(it.data))
             }
@@ -92,7 +92,7 @@ class CharacterViewModel(
     // animal
     fun getCharacterByAnimalSpecies(){
         viewModelScope.launch{
-            val result = getAnimalSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_ANIMAL)
+            val result = getAnimalSpeciesUseCase.getCharacterSpecies(RMKey.TYPE_ANIMAL)
             result.let {
                 animals.postValue(Resource.Success(it.data))
             }
@@ -102,7 +102,7 @@ class CharacterViewModel(
     // unknown
     fun getCharacterByUnknownSpecies(){
         viewModelScope.launch{
-            val result = getUnknownSpeciesUsecase.getCharacterSpecies(RMKey.TYPE_UNKNOWN)
+            val result = getUnknownSpeciesUseCase.getCharacterSpecies(RMKey.TYPE_UNKNOWN)
             result.let {
                 unknown.postValue(Resource.Success(it.data))
             }
@@ -115,7 +115,7 @@ class CharacterViewModel(
             isLoading = true
             all.postValue(Resource.Loading())
             try {
-                val output = getAllCharacterUsecase.getCharacterAllSpecies(next)
+                val output = getAllCharacterUseCase.getCharacterAllSpecies(next)
                 isLoading = false
                 all.postValue(Resource.Success(output.data))
             }

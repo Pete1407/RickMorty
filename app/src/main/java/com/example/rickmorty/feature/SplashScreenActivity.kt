@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.Window
 import com.example.rickmorty.R
@@ -23,7 +24,7 @@ class SplashScreenActivity : BaseActivity() {
     }
 
     private fun initUI(){
-       Handler().postDelayed(object:Runnable{
+       Handler(Looper.getMainLooper()).postDelayed(object:Runnable{
            override fun run() {
                val intent = Intent(this@SplashScreenActivity,MainActivity::class.java)
                startActivity(intent)

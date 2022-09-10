@@ -2,7 +2,9 @@ package com.example.rickmorty.app.di
 
 import com.example.rickmorty.app.data.remote.ServiceAPI
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
+import com.example.rickmorty.app.data.remote.datasource.LocationRemoteDataSource
 import com.example.rickmorty.app.data.remote.datasourceImpl.CharacterRemoteDataSourceImpl
+import com.example.rickmorty.app.data.remote.datasourceImpl.LocationRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,5 +19,11 @@ class RemoteDataSourceModule {
     @Provides
     fun provideCharacterRemoteDataSource(serviceAPI: ServiceAPI):CharacterRemoteDataSource{
         return CharacterRemoteDataSourceImpl(serviceAPI)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLocationRemoteDataSource(serviceAPI: ServiceAPI):LocationRemoteDataSource{
+        return LocationRemoteDataSourceImpl(serviceAPI)
     }
 }

@@ -2,6 +2,7 @@ package com.example.rickmorty.app.di
 
 import com.example.rickmorty.app.domain.usecase.*
 import com.example.rickmorty.feature.character.CharacterViewModelFactory
+import com.example.rickmorty.feature.location.LocationViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +15,7 @@ class ViewModelFactoryModule {
 
     @Singleton
     @Provides
-    fun provideViewCharacterViewModelFactory(
+    fun provideCharacterViewModelFactory(
         getHumanSpeciesUsecase: GetHumanSpeciesUsecase,
         getAlienSpecieUsecase : GetAlienSpeciesUsecase,
         getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,
@@ -28,5 +29,13 @@ class ViewModelFactoryModule {
             getUnknownSpeciesUsecase,
             getAllCharacterUsecase
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideLocationViewModelFactory(
+        getAllLocationUsecase: GetAllLocationUsecase
+    ):LocationViewModelFactory{
+        return LocationViewModelFactory(getAllLocationUsecase)
     }
 }

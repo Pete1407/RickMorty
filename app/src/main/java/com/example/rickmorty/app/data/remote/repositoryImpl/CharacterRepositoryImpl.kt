@@ -32,68 +32,44 @@ class CharacterRepositoryImpl(
     }
 
     override suspend fun getSingleCharacter(id : String): Resource<Character> {
-       val output = remoteDataSource.getSingleCharacter(id)
-       if(output.isSuccessful) {
-            output.body()?.let {
-                return Resource.Success(it)
-            }
+       return safeApiCall {
+           remoteDataSource.getSingleCharacter(id)
        }
-       return Resource.Error(output.message())
-    }
-
-    override suspend fun getMultipleCharacter(): Resource<Characters> {
-        TODO("Not yet implemented")
     }
 
     override suspend fun getCharacterByHuman(specie: String): Resource<Characters> {
-        val output = remoteDataSource.getHumanSpecies(specie)
-        if(output.isSuccessful) {
-            output.body()?.let {
-                return Resource.Success(it)
-            }
+        return safeApiCall {
+            remoteDataSource.getHumanSpecies(specie)
         }
-        return Resource.Error(output.message())
     }
 
     override suspend fun getCharacterByAlien(specie: String): Resource<Characters> {
-        val output = remoteDataSource.getAlienSpecies(specie)
-        if(output.isSuccessful) {
-            output.body()?.let {
-                return Resource.Success(it)
-            }
+        return safeApiCall {
+            remoteDataSource.getAlienSpecies(specie)
         }
-        return Resource.Error(output.message())
     }
 
     override suspend fun getCharacterByAnimal(specie: String): Resource<Characters> {
-        val output = remoteDataSource.getAnimalSpecies(specie)
-        if(output.isSuccessful) {
-            output.body()?.let {
-                return Resource.Success(it)
-            }
+        return safeApiCall {
+            remoteDataSource.getAnimalSpecies(specie)
         }
-        return Resource.Error(output.message())
     }
 
     override suspend fun getCharacterByUnknown(specie: String): Resource<Characters> {
-        val output = remoteDataSource.getUnknownSpecies(specie)
-        if(output.isSuccessful) {
-            output.body()?.let {
-                return Resource.Success(it)
-            }
+        return safeApiCall {
+            remoteDataSource.getUnknownSpecies(specie)
         }
-        return Resource.Error(output.message())
     }
 
-    private fun convertResponseToResource(response : Response<Characters>):Resource<Characters> {
-        if (response.isSuccessful) {
-            val result = response.body()
-            return Resource.Success(result)
-        }
-        val errorMsg = response.errorBody()
-        return Resource.Error(errorMsg.toString())
-
-    }
+//    private fun convertResponseToResource(response : Response<Characters>):Resource<Characters> {
+//        if (response.isSuccessful) {
+//            val result = response.body()
+//            return Resource.Success(result)
+//        }
+//        val errorMsg = response.errorBody()
+//        return Resource.Error(errorMsg.toString())
+//
+//    }
 
     // we'll use this function in all
     // repos to handle api errors.

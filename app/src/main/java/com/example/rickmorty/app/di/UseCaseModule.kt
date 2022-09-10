@@ -1,6 +1,7 @@
 package com.example.rickmorty.app.di
 
 import com.example.rickmorty.app.domain.repository.CharacterRepository
+import com.example.rickmorty.app.domain.repository.LocationRepository
 import com.example.rickmorty.app.domain.usecase.*
 import dagger.Module
 import dagger.Provides
@@ -40,5 +41,10 @@ class UseCaseModule {
     @Provides
     fun getUnknownSpeciesUseCase(repository: CharacterRepository):GetUnknownSpeciesUsecase{
         return GetUnknownSpeciesUsecase(repository)
+    }
+
+    @Provides
+    fun getAllLocationUseCase(repository : LocationRepository): GetAllLocationUsecase{
+        return GetAllLocationUsecase(repository)
     }
 }

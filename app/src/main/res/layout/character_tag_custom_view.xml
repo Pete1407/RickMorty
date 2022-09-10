@@ -10,28 +10,29 @@
       android:id="@+id/mainlayout"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content">
-<!--      <de.hdodenhof.circleimageview.CircleImageView-->
-<!--          android:id="@+id/characterImage"-->
-<!--          android:layout_width="20dp"-->
-<!--          android:layout_height="20dp"-->
-<!--          android:src="@drawable/rickmorty_icon"-->
-<!--          app:layout_constraintStart_toStartOf="parent"-->
-<!--          app:layout_constraintTop_toTopOf="parent">-->
-<!--      </de.hdodenhof.circleimageview.CircleImageView>-->
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/characterImage"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:src="@drawable/rickmorty_icon"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+      </de.hdodenhof.circleimageview.CircleImageView>
 
-<!--      <com.example.rickmorty.app.base.custom.CustomTextView-->
-<!--          android:id="@+id/numberOfCharacter"-->
-<!--          android:layout_width="20dp"-->
-<!--          android:layout_height="20dp"-->
-<!--          android:text="+4"-->
-<!--          android:textSize="10sp"-->
-<!--          android:padding="3dp"-->
-<!--          android:textColor="@color/black"-->
-<!--          android:gravity="center"-->
-<!--          android:layout_marginStart="@dimen/spacing_standard"-->
-<!--          android:background="@drawable/bg_number_of_character_tag"-->
-<!--          app:layout_constraintStart_toEndOf="@id/characterImage"-->
-<!--          app:layout_constraintTop_toTopOf="parent"/>-->
+      <com.example.rickmorty.app.base.custom.CustomTextView
+          android:id="@+id/numberOfCharacter"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:text="+4"
+          android:textSize="10sp"
+          android:padding="3dp"
+          android:textColor="@color/black"
+          android:gravity="center"
+          android:visibility="gone"
+          android:layout_marginStart="@dimen/spacing_standard"
+          android:background="@drawable/bg_number_of_character_tag"
+          app:layout_constraintStart_toEndOf="@id/characterImage"
+          app:layout_constraintTop_toTopOf="parent"/>
   </FrameLayout>
 
 

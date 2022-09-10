@@ -65,14 +65,14 @@
                   android:id="@+id/specieText"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  style="@style/Title_Detail_Character"
+                  style="@style/Title_detail_character"
                   tools:text="Specie: Human"/>
 
               <androidx.appcompat.widget.AppCompatTextView
                   android:id="@+id/genderText"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  style="@style/Title_Detail_Character"
+                  style="@style/Title_detail_character"
                   android:paddingVertical="@dimen/spacing_standard"
                   tools:text="Gender: Male"/>
 
@@ -80,7 +80,7 @@
                   android:id="@+id/typeText"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  style="@style/Title_Detail_Character"
+                  style="@style/Title_detail_character"
                   tools:text="Type: none"/>
           </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -95,7 +95,7 @@
 
               <androidx.appcompat.widget.AppCompatTextView
                   android:id="@+id/appCompatTextView"
-                  style="@style/Title_Detail_Character"
+                  style="@style/Title_detail_character"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/find_location_text"
@@ -130,7 +130,7 @@
 
               <androidx.appcompat.widget.AppCompatTextView
                   android:id="@+id/appCompatTextView2"
-                  style="@style/Title_Detail_Character"
+                  style="@style/Title_detail_character"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/find_ep_text"
