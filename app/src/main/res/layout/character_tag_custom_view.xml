@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <FrameLayout
+      android:id="@+id/mainlayout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+<!--      <de.hdodenhof.circleimageview.CircleImageView-->
+<!--          android:id="@+id/characterImage"-->
+<!--          android:layout_width="20dp"-->
+<!--          android:layout_height="20dp"-->
+<!--          android:src="@drawable/rickmorty_icon"-->
+<!--          app:layout_constraintStart_toStartOf="parent"-->
+<!--          app:layout_constraintTop_toTopOf="parent">-->
+<!--      </de.hdodenhof.circleimageview.CircleImageView>-->
+
+<!--      <com.example.rickmorty.app.base.custom.CustomTextView-->
+<!--          android:id="@+id/numberOfCharacter"-->
+<!--          android:layout_width="20dp"-->
+<!--          android:layout_height="20dp"-->
+<!--          android:text="+4"-->
+<!--          android:textSize="10sp"-->
+<!--          android:padding="3dp"-->
+<!--          android:textColor="@color/black"-->
+<!--          android:gravity="center"-->
+<!--          android:layout_marginStart="@dimen/spacing_standard"-->
+<!--          android:background="@drawable/bg_number_of_character_tag"-->
+<!--          app:layout_constraintStart_toEndOf="@id/characterImage"-->
+<!--          app:layout_constraintTop_toTopOf="parent"/>-->
+  </FrameLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

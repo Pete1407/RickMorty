@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/bg_detail_character.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.10989583333333333" />
         <entry key="app/src/main/res/drawable/bg_info_character.xml" value="0.11614583333333334" />
+        <entry key="app/src/main/res/drawable/bg_number_of_character_tag.xml" value="0.1475" />
         <entry key="app/src/main/res/drawable/bg_status_alive.xml" value="0.11197916666666667" />
         <entry key="app/src/main/res/drawable/bg_status_dead.xml" value="0.11197916666666667" />
         <entry key="app/src/main/res/drawable/bg_status_unknown.xml" value="0.11197916666666667" />
@@ -37,6 +38,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20334320068359377" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/adapter_characters_part_by_specie.xml" value="0.29201711018880205" />
+        <entry key="app/src/main/res/layout/character_tag_custom_view.xml" value="0.7218582153320312" />
         <entry key="app/src/main/res/layout/custom_toolbar.xml" value="0.2436157226562499" />
         <entry key="app/src/main/res/layout/fragment_character.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_episode.xml" value="0.18115942028985507" />
@@ -44,6 +46,7 @@
         <entry key="app/src/main/res/layout/fragment_location.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/item_card_character.xml" value="0.28263958805770645" />
         <entry key="app/src/main/res/layout/layout_toolbar_back.xml" value="0.1733523611295021" />
+        <entry key="app/src/main/res/layout/widget_character_item.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/layout/widget_custom_toolbar.xml" value="0.29015350341796875" />
         <entry key="app/src/main/res/layout/widget_title_adapter_home.xml" value="0.22864583333333333" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.240625" />
