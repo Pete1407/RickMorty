@@ -7,7 +7,7 @@ import com.example.rickmorty.app.domain.repository.LocationRepository
 
 class GetAllLocationUsecase(private val repository: LocationRepository) {
 
-    suspend fun getAllLocation():Resource<Locations>{
-        return repository.getAllLocation()
+    suspend fun getAllLocation(nextPage : String):Resource<Locations>{
+        return repository.getAllLocation(nextPage)
     }
 }

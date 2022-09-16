@@ -7,5 +7,5 @@ import retrofit2.Response
 
 interface LocationRepository {
 
-    suspend fun getAllLocation():Resource<Locations>
+    suspend fun getAllLocation(nextPage : String):Resource<Locations>
 }

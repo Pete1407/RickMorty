@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/spacing_small"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    app:cardBackgroundColor="@color/bg_location_item">
+    app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_location_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:padding="@dimen/spacing_standard">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -35,7 +33,7 @@
             android:padding="@dimen/spacing_small"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +47,7 @@
             android:padding="@dimen/spacing_small"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"

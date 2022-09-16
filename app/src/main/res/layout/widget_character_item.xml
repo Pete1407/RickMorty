@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.example.rickmorty.app.data.utils.customview.Character_custom_view_tag
+    <com.example.rickmorty.app.data.utils.customview.CharacterCustomViewTag
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />

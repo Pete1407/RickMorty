@@ -7,5 +7,5 @@ import retrofit2.Response
 
 interface LocationRemoteDataSource {
 
-    suspend fun getAllLocation():Response<Locations>
+    suspend fun getAllLocation(nextPage : String):Response<Locations>
 }

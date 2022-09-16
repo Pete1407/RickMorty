@@ -8,7 +8,7 @@ import retrofit2.Response
 
 class LocationRemoteDataSourceImpl(private val apiService : ServiceAPI) : LocationRemoteDataSource {
 
-    override suspend fun getAllLocation(): Response<Locations> {
-        return apiService.getAllLocation()
+    override suspend fun getAllLocation(nextPage : String): Response<Locations> {
+        return apiService.getAllLocation(nextPage)
     }
 }

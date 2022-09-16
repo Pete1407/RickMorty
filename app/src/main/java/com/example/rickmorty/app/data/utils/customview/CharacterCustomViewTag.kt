@@ -8,7 +8,7 @@ import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.databinding.CharacterTagCustomViewBinding
 import de.hdodenhof.circleimageview.CircleImageView
 
-class Character_custom_view_tag(context : Context,attrs : AttributeSet): LinearLayoutCompat(context,attrs) {
+class CharacterCustomViewTag(context : Context, attrs : AttributeSet): LinearLayoutCompat(context,attrs) {
 
     private val binding : CharacterTagCustomViewBinding by lazy {
         CharacterTagCustomViewBinding.inflate(LayoutInflater.from(context), this, true)

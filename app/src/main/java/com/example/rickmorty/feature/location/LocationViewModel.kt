@@ -18,9 +18,14 @@ class LocationViewModel(
     val locationData : LiveData<Resource<Locations>>
         get() = location
 
-    fun getAllLocation(){
+    var isLoading : Boolean = false
+
+    fun getAllLocation(nextPage : String? = null){
+        isLoading = true
+        location.postValue(Resource.Loading())
         viewModelScope.launch {
-            val result = getLocationsUseCase.getAllLocation()
+            val result = getLocationsUseCase.getAllLocation(nextPage.toString())
+            isLoading = false
             location.postValue(result)
         }
     }

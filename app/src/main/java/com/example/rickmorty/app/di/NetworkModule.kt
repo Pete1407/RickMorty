@@ -2,8 +2,6 @@ package com.example.rickmorty.app.di
 
 import com.example.rickmorty.BuildConfig
 import com.example.rickmorty.app.data.remote.ServiceAPI
-import com.example.rickmorty.app.data.utils.ConnectivityInterceptor
-import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

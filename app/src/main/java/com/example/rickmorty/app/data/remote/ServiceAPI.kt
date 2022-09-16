@@ -24,5 +24,5 @@ interface ServiceAPI {
     suspend fun getCharacterBySpecie(@Query("species") species : String):Response<Characters>
 
     @GET("location")
-    suspend fun getAllLocation():Response<Locations>
+    suspend fun getAllLocation(@Query("page")page : String?):Response<Locations>
 }

@@ -13,9 +13,9 @@ import retrofit2.Response
 
 class LocationRepositoryImpl(private val remoteDataSource: LocationRemoteDataSource) : LocationRepository {
 
-    override suspend fun getAllLocation(): Resource<Locations> {
+    override suspend fun getAllLocation(nextPage : String): Resource<Locations> {
         return safeApiCall{
-            remoteDataSource.getAllLocation()
+            remoteDataSource.getAllLocation(nextPage)
         }
     }
 

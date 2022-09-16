@@ -1,15 +1,12 @@
 package com.example.rickmorty.feature.character
 
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.LayoutDirection
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -83,7 +80,7 @@ class CharacterFragment : BaseFragment(),CustomState{
                 val pastVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
                 val totalItem = binding.recyclerView.layoutManager!!.itemCount
                 if((visibleItemCount + pastVisibleItems) >= totalItem && allList.size > 0 && !viewModel.isLoading){
-                    viewModel.getCharacterByAllSpecies(numberPage)
+                    viewModel.getCharacterByAllSpecies(info?.getNextPageFromLink())
                 }
             }
         })
@@ -187,10 +184,10 @@ class CharacterFragment : BaseFragment(),CustomState{
             }
             is Resource.Success -> {
                 hideLoading()
-                allList = ArrayList<Character>(it.data!!.results)
+                allList = ArrayList(it.data!!.results)
                 info = it.data.info
                 Log.d(RMKey.DEBUG_TAG,info.toString())
-                numberPage = getNextPageFromLink(info?.next)
+                //numberPage = getNextPageFromLink(info?.next)
                 if(info?.prev.isNullOrEmpty() && info?.next!=null){
                     adapter?.refreshAllList(allList)
                 }else{
@@ -198,14 +195,7 @@ class CharacterFragment : BaseFragment(),CustomState{
                 }
 
             }
-            else-> {}
         }
-    }
-
-    private fun getNextPageFromLink(next : String?):String{
-        val nextPageUri = Uri.parse(next)
-        val numberNextPage = nextPageUri.getQueryParameter("page")
-        return numberNextPage.toString()
     }
 
     override fun showLoading() {
