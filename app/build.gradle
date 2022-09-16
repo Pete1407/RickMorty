@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -12,7 +14,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.rickmortyfanclubapp"
+        applicationId "com.example.rickmorty"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -102,4 +104,9 @@ dependencies {
 
     // swipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation "com.google.firebase:firebase-crashlytics"
+    implementation "com.google.firebase:firebase-analytics"
 }
