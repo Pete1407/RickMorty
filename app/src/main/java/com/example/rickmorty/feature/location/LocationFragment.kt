@@ -9,8 +9,10 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.rickmorty.R
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.app.base.RMKey
@@ -60,8 +62,10 @@ class LocationFragment : BaseFragment(),CustomState{
         if(adapter == null){
             adapter = LocationAdapter(arrayListOf())
         }
-        //val space = (10 * resources.displayMetrics.density).roundToInt()
-        //binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2,space,false))
+        val spanCount = 2
+        val space = resources.getDimensionPixelOffset(R.dimen.spacing_small)
+        val includeEdge = false
+        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount,space,includeEdge))
         binding.recyclerView.adapter = adapter
     }
 
@@ -85,15 +89,13 @@ class LocationFragment : BaseFragment(),CustomState{
         binding.recyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
-                val firstVisibleItems =  (binding.recyclerView.layoutManager as StaggeredGridLayoutManager).findFirstVisibleItemPositions(IntArray(2))
+                val firstVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
                 val totalItem = binding.recyclerView.layoutManager!!.itemCount
-                if(firstVisibleItems != null && firstVisibleItems.size > 0){
-                    pastVisibleItem = firstVisibleItems[0]
-                    if((pastVisibleItem + visibleItemCount) >= totalItem && locationList.size > 0 && !viewModel.isLoading){
+
+                    if((firstVisibleItems + visibleItemCount) >= totalItem && locationList.size > 0 && !viewModel.isLoading){
                         viewModel.getAllLocation(info?.getNextPageFromLink())
                     }
 
-                }
             }
         })
     }
@@ -124,7 +126,6 @@ class LocationFragment : BaseFragment(),CustomState{
                     totalPage = info!!.pages!!
                     adapter?.refreshList(locationList)
                 }
-                //else if(totalPage == info?.){ }
                 else{
                     adapter?.addNewItems(locationList)
                 }

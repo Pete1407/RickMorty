@@ -43,6 +43,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20334320068359377" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/adapter_characters_part_by_specie.xml" value="0.29201711018880205" />
+        <entry key="app/src/main/res/layout/adapter_location.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/character_tag_custom_view.xml" value="0.7218582153320312" />
         <entry key="app/src/main/res/layout/custom_toolbar.xml" value="0.2436157226562499" />
         <entry key="app/src/main/res/layout/fragment_character.xml" value="0.25" />
