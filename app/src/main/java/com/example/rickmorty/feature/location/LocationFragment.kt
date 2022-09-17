@@ -64,7 +64,7 @@ class LocationFragment : BaseFragment(),CustomState{
         }
         val spanCount = 2
         val space = resources.getDimensionPixelOffset(R.dimen.spacing_small)
-        val includeEdge = false
+        val includeEdge = true
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount,space,includeEdge))
         binding.recyclerView.adapter = adapter
     }
@@ -93,7 +93,7 @@ class LocationFragment : BaseFragment(),CustomState{
                 val totalItem = binding.recyclerView.layoutManager!!.itemCount
 
                     if((firstVisibleItems + visibleItemCount) >= totalItem && locationList.size > 0 && !viewModel.isLoading){
-                        viewModel.getAllLocation(info?.getNextPageFromLink())
+                       // viewModel.getAllLocation(info?.getNextPageFromLink())
                     }
 
             }
