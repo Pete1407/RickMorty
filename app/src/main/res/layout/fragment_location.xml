@@ -35,11 +35,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/spacing_small"
-            android:paddingVertical="@dimen/spacing_small"
             android:background="@color/main_background"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/adapter_location" />
 

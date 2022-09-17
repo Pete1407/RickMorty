@@ -16,9 +16,24 @@ data class Info(
     @field:Json(name = "prev")
     var prev: String? = null
 ){
-    fun getNextPageFromLink():String{
-        val nextPageUri = Uri.parse(next)
-        val numberNextPage = nextPageUri.getQueryParameter("page")
-        return numberNextPage.toString()
+    fun getNextPageFromLink():String?{
+        if(next != null){
+            val nextPageUri = Uri.parse(next)
+            val numberNextPage = nextPageUri.getQueryParameter("page")
+            return numberNextPage.toString()
+        }else{
+            return null
+        }
+
+    }
+
+    fun getPreviousPageFromLink():String?{
+        if(prev != null){
+            val nextPageUri = Uri.parse(prev)
+            val numberNextPage = nextPageUri.getQueryParameter("page")
+            return numberNextPage.toString()
+        }else{
+            return null
+        }
     }
 }

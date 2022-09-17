@@ -1,15 +1,19 @@
 package com.example.rickmorty.feature.location
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
+import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.model.Location
 import com.example.rickmorty.app.data.model.Locations
@@ -29,6 +33,8 @@ class LocationFragment : BaseFragment(),CustomState{
     private var locationList = ArrayList<Location>()
 
     private var info : Info? = null
+    private var totalPage : Int = 0
+    private var pastVisibleItem = 0
 
     @Inject
     lateinit var viewModelFactory: LocationViewModelFactory
@@ -54,8 +60,8 @@ class LocationFragment : BaseFragment(),CustomState{
         if(adapter == null){
             adapter = LocationAdapter(arrayListOf())
         }
-        val space = (10 * resources.displayMetrics.density).roundToInt()
-        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2,space,false))
+        //val space = (10 * resources.displayMetrics.density).roundToInt()
+        //binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2,space,false))
         binding.recyclerView.adapter = adapter
     }
 
@@ -79,10 +85,14 @@ class LocationFragment : BaseFragment(),CustomState{
         binding.recyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
-                val pastVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
+                val firstVisibleItems =  (binding.recyclerView.layoutManager as StaggeredGridLayoutManager).findFirstVisibleItemPositions(IntArray(2))
                 val totalItem = binding.recyclerView.layoutManager!!.itemCount
-                if((visibleItemCount + pastVisibleItems) >= totalItem && locationList.size > 0 && !viewModel.isLoading){
-                    viewModel.getAllLocation(info?.getNextPageFromLink())
+                if(firstVisibleItems != null && firstVisibleItems.size > 0){
+                    pastVisibleItem = firstVisibleItems[0]
+                    if((pastVisibleItem + visibleItemCount) >= totalItem && locationList.size > 0 && !viewModel.isLoading){
+                        viewModel.getAllLocation(info?.getNextPageFromLink())
+                    }
+
                 }
             }
         })
@@ -108,10 +118,14 @@ class LocationFragment : BaseFragment(),CustomState{
                 hideLoading()
                 val result = it.data
                 info = result?.info
+                Log.d(RMKey.DEBUG_TAG,"NextPage is ${info?.getNextPageFromLink()} and PrevPage is ${info?.getPreviousPageFromLink()?:"none"} and now is ")
                 locationList = ArrayList(result!!.results)
                 if(info?.prev.isNullOrEmpty() && info?.next!=null){
+                    totalPage = info!!.pages!!
                     adapter?.refreshList(locationList)
-                }else{
+                }
+                //else if(totalPage == info?.){ }
+                else{
                     adapter?.addNewItems(locationList)
                 }
             }
