@@ -58,4 +58,10 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="TitleDetail">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">60sp</item>
+    </style>
 </resources>

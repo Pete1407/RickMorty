@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/main_background"
-    tools:context=".feature.character.detail_character.DetailCharacterActivity">
+    tools:context=".feature.character.DetailCharacterActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -48,9 +48,7 @@
               android:layout_height="wrap_content"
               android:layout_marginHorizontal="10dp"
               android:layout_marginVertical="10dp"
-              android:fontFamily="@font/roboto_regular"
-              android:textColor="@color/black"
-              android:textSize="60sp"
+              style="@style/TitleDetail"
               tools:text="Morty Smith"/>
 
           <androidx.appcompat.widget.LinearLayoutCompat

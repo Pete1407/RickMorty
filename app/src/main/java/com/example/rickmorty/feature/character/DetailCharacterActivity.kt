@@ -1,13 +1,8 @@
-package com.example.rickmorty.feature.character.detail_character
+package com.example.rickmorty.feature.character
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.rickmorty.R
@@ -15,10 +10,7 @@ import com.example.rickmorty.app.base.BaseActivity
 import com.example.rickmorty.app.base.CustomState
 import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
-import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.databinding.ActivityInfoCharacterBinding
-import com.example.rickmorty.feature.character.CharacterViewModel
-import com.example.rickmorty.feature.character.CharacterViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
