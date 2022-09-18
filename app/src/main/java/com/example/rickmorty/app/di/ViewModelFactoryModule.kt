@@ -34,8 +34,9 @@ class ViewModelFactoryModule {
     @Singleton
     @Provides
     fun provideLocationViewModelFactory(
-        getAllLocationUsecase: GetAllLocationUsecase
+        getAllLocationUsecase: GetAllLocationUsecase,
+        getSingleLocationUsecase: GetSingleLocationUsecase
     ):LocationViewModelFactory{
-        return LocationViewModelFactory(getAllLocationUsecase)
+        return LocationViewModelFactory(getAllLocationUsecase,getSingleLocationUsecase)
     }
 }

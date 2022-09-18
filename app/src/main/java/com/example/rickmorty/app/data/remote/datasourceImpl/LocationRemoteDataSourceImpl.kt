@@ -11,4 +11,8 @@ class LocationRemoteDataSourceImpl(private val apiService : ServiceAPI) : Locati
     override suspend fun getAllLocation(nextPage : String): Response<Locations> {
         return apiService.getAllLocation(nextPage)
     }
+
+    override suspend fun getSingleLocation(id: String): Response<Location> {
+        return apiService.getSpecificLocation(id)
+    }
 }

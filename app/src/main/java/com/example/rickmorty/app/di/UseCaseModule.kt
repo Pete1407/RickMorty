@@ -47,4 +47,9 @@ class UseCaseModule {
     fun getAllLocationUseCase(repository : LocationRepository): GetAllLocationUsecase{
         return GetAllLocationUsecase(repository)
     }
+
+    @Provides
+    fun getSingleLocationUseCase(repository: LocationRepository):GetSingleLocationUsecase{
+        return GetSingleLocationUsecase(repository)
+    }
 }

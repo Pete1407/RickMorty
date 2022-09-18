@@ -4,10 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.rickmorty.R
 import com.example.rickmorty.app.base.BaseActivity
 import com.example.rickmorty.app.base.CustomState
+import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Location
+import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.databinding.ActivityDetailLocationBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -18,7 +22,7 @@ class DetailLocationActivity : BaseActivity(),CustomState {
     private var location : Location? = null
     @Inject
     lateinit var viewModelFactory : LocationViewModelFactory
-    private var viewModel : LocationViewModel? = null
+    private lateinit var viewModel : LocationViewModel
 
     private val binding : ActivityDetailLocationBinding by lazy{
          ActivityDetailLocationBinding.inflate(layoutInflater)
@@ -38,6 +42,7 @@ class DetailLocationActivity : BaseActivity(),CustomState {
             binding.locationName.text = it.name
             binding.dimensionText.text = it.dimension
             binding.typeText.text = it.type
+            binding.numberOfResidents.text = "${resources.getString(R.string.number_resident)}(${it.residents.size})"
         }
 
     }
@@ -50,14 +55,30 @@ class DetailLocationActivity : BaseActivity(),CustomState {
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(LocationViewModel::class.java)
+        viewModel.aLocationData.observe(this,singleLocation)
     }
 
     override fun showLoading() {
-
+        binding.loading.showLoading()
     }
 
     override fun hideLoading() {
+        binding.loading.hideLoading()
+    }
 
+    private val singleLocation = Observer<Resource<Location>>{ result ->
+        when(result){
+            is Resource.Loading -> {
+                showLoading()
+            }
+            is Resource.Success -> {
+                hideLoading()
+                result.data?.let {
+                    this.location = it
+                }
+            }
+            else -> {}
+        }
     }
 
     companion object{

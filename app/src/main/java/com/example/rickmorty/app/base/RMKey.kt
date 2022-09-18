@@ -27,6 +27,8 @@ object RMKey {
     const val TYPE_ALIEN = "alien"
     const val TYPE_ANIMAL = "animal"
 
+    const val PATH_IMAGE = "https://rickandmortyapi.com/api/character/avatar/"
+
   /*  1. Human
     2. Alien
     3. Animal
