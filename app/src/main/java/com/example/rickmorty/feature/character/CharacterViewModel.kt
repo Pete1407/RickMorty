@@ -1,6 +1,5 @@
 package com.example.rickmorty.feature.character
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,19 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
-import com.example.rickmorty.app.data.model.Info
-import com.example.rickmorty.app.data.utils.ApiException
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.*
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okio.IOException
-import retrofit2.HttpException
-import java.net.ConnectException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
+import javax.inject.Inject
 
-class CharacterViewModel(
+@HiltViewModel
+class CharacterViewModel @Inject constructor(
     private val getHumanSpecieUseCase : GetHumanSpeciesUsecase,
     private val getAlienSpecieUseCase : GetAlienSpeciesUsecase,
     private val getAnimalSpeciesUseCase: GetAnimalSpeciesUsecase,

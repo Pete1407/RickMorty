@@ -8,9 +8,12 @@ import com.example.rickmorty.app.data.model.Location
 import com.example.rickmorty.app.data.model.Locations
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.GetAllLocationUsecase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LocationViewModel(
+@HiltViewModel
+class LocationViewModel @Inject constructor(
     private val getLocationsUseCase : GetAllLocationUsecase
 ) : ViewModel() {
 

@@ -57,7 +57,7 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     override fun onResume() {
         super.onResume()
-        refreshList()
+        //refreshList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,6 +87,7 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     override fun initUI() {
+        refreshList()
         if (adapter == null) {
             adapter = CharactersAdapter(
                 requireContext(),
