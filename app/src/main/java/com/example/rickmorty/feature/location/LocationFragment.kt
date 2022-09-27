@@ -36,10 +36,7 @@ class LocationFragment : BaseFragment(),CustomState{
 
     private var info : Info? = null
     private var totalPage : Int = 0
-    private var pastVisibleItem = 0
 
-//    @Inject
-//    lateinit var viewModelFactory: LocationViewModelFactory
     private lateinit var viewModel : LocationViewModel
 
     override fun onCreateView(
@@ -61,10 +58,13 @@ class LocationFragment : BaseFragment(),CustomState{
     override fun initUI() {
         if(adapter == null){
             adapter = LocationAdapter(arrayListOf())
+            adapter!!.setEventClickLocationListener {
+                DetailLocationActivity.start(requireContext(),it)
+            }
         }
         val spanCount = 2
         val space = resources.getDimensionPixelOffset(R.dimen.spacing_small)
-        val includeEdge = false
+        val includeEdge = true
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount,space,includeEdge))
         binding.recyclerView.adapter = adapter
     }
@@ -91,11 +91,9 @@ class LocationFragment : BaseFragment(),CustomState{
                 val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
                 val firstVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
                 val totalItem = binding.recyclerView.layoutManager!!.itemCount
-
                     if((firstVisibleItems + visibleItemCount) >= totalItem && locationList.size > 0 && !viewModel.isLoading){
-                        viewModel.getAllLocation(info?.getNextPageFromLink())
+                       viewModel.getAllLocation(info?.getNextPageFromLink())
                     }
-
             }
         })
     }
@@ -130,6 +128,7 @@ class LocationFragment : BaseFragment(),CustomState{
                     adapter?.addNewItems(locationList)
                 }
             }
+            else -> {}
         }
     }
 

@@ -11,6 +11,11 @@ import com.example.rickmorty.databinding.AdapterLocationBinding
 
 class LocationAdapter(val list : ArrayList<Location>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var eventClickLocationListener : ((location : Location) -> Unit)? = null
+    fun setEventClickLocationListener(event : ((location : Location) -> Unit)){
+        eventClickLocationListener = event
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return LocationViewHolder(AdapterLocationBinding.inflate(LayoutInflater.from(parent.context),null,false))
     }
@@ -44,6 +49,9 @@ class LocationAdapter(val list : ArrayList<Location>) : RecyclerView.Adapter<Rec
             binding.nameLocation.text = itemLocation.name
             binding.typeLocation.text = "${context.getString(R.string.type_title)}: ${itemLocation.type}"
             binding.dimensionLocation.text = "${context.getString(R.string.dimension_title)}: ${itemLocation.dimension}"
+            binding.root.setOnClickListener {
+                eventClickLocationListener?.invoke(itemLocation)
+            }
 
         }
     }

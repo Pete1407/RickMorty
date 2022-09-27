@@ -8,4 +8,6 @@ import retrofit2.Response
 interface LocationRemoteDataSource {
 
     suspend fun getAllLocation(nextPage : String):Response<Locations>
+
+    suspend fun getSingleLocation(id : String):Response<Location>
 }

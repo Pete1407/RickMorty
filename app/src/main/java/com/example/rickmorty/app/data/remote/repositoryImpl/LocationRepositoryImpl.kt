@@ -19,6 +19,12 @@ class LocationRepositoryImpl(private val remoteDataSource: LocationRemoteDataSou
         }
     }
 
+    override suspend fun getSingleLocation(id: String): Resource<Location> {
+        return safeApiCall {
+            remoteDataSource.getSingleLocation(id)
+        }
+    }
+
     // we'll use this function in all
     // repos to handle api errors.
     suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): Resource<T> {

@@ -25,4 +25,7 @@ interface ServiceAPI {
 
     @GET("location")
     suspend fun getAllLocation(@Query("page")page : String?):Response<Locations>
+
+    @GET("location/{id}")
+    suspend fun getSpecificLocation(@Path("id") id : String):Response<Location>
 }

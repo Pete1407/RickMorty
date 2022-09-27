@@ -21,7 +21,6 @@ import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.data.utils.adapter.CharactersAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
-import com.example.rickmorty.feature.character.detail_character.DetailCharacterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.*
@@ -31,8 +30,6 @@ import kotlinx.coroutines.*
 class CharacterFragment : BaseFragment(),CustomState{
     private lateinit var binding : FragmentCharacterBinding
 
-//    @Inject
-//    lateinit var viewModelFactory : CharacterViewModelFactory
     private lateinit var viewModel : CharacterViewModel
     private var adapter : CharactersAdapter?= null
 
@@ -196,6 +193,7 @@ class CharacterFragment : BaseFragment(),CustomState{
                 }
 
             }
+            else -> {}
         }
     }
 
