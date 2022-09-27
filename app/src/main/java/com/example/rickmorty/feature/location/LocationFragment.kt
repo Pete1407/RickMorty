@@ -38,8 +38,8 @@ class LocationFragment : BaseFragment(),CustomState{
     private var totalPage : Int = 0
     private var pastVisibleItem = 0
 
-    @Inject
-    lateinit var viewModelFactory: LocationViewModelFactory
+//    @Inject
+//    lateinit var viewModelFactory: LocationViewModelFactory
     private lateinit var viewModel : LocationViewModel
 
     override fun onCreateView(
@@ -70,7 +70,7 @@ class LocationFragment : BaseFragment(),CustomState{
     }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this,viewModelFactory).get(LocationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
         viewModel.locationData.observe(viewLifecycleOwner,allLocationState)
     }
 

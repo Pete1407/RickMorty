@@ -3,8 +3,9 @@ package com.example.rickmorty.feature.character
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickmorty.app.domain.usecase.*
+import javax.inject.Inject
 
-class CharacterViewModelFactory(
+class CharacterViewModelFactory @Inject constructor(
     private val getHumanSpeciesUsecase: GetHumanSpeciesUsecase,
     private val getAlienSpecieUsecase : GetAlienSpeciesUsecase,
     private val getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,

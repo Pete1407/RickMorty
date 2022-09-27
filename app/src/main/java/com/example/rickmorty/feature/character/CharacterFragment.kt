@@ -31,8 +31,8 @@ import kotlinx.coroutines.*
 class CharacterFragment : BaseFragment(),CustomState{
     private lateinit var binding : FragmentCharacterBinding
 
-    @Inject
-    lateinit var viewModelFactory : CharacterViewModelFactory
+//    @Inject
+//    lateinit var viewModelFactory : CharacterViewModelFactory
     private lateinit var viewModel : CharacterViewModel
     private var adapter : CharactersAdapter?= null
 
@@ -118,7 +118,7 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this,viewModelFactory).get(CharacterViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CharacterViewModel::class.java)
         viewModel.allData.observe(viewLifecycleOwner,allState)
         viewModel.humanData.observe(viewLifecycleOwner,humanState)
         viewModel.alienData.observe(viewLifecycleOwner,alienState)
