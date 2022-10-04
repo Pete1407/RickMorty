@@ -1,23 +1,18 @@
 package com.example.rickmorty.app.data.utils.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.rickmorty.app.data.model.Character
-import com.example.rickmorty.databinding.ItemCardCharacterBinding
-import android.widget.LinearLayout
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.rickmorty.R
-import com.example.rickmorty.app.base.RMKey
-import com.example.rickmorty.app.data.utils.customview.WidgetCharactersBySpecie
+import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.databinding.AdapterCharactersPartBySpecieBinding
-import com.example.rickmorty.databinding.AdapterCharactersPartBySpecieBinding.bind
-import com.example.rickmorty.databinding.AdapterCharactersPartBySpecieBinding.inflate
+import com.example.rickmorty.databinding.ItemCardCharacterBinding
 import com.example.rickmorty.databinding.WidgetTitleAdapterHomeBinding
-import okhttp3.internal.addHeaderLenient
 
 
 class CharactersAdapter(
@@ -197,8 +192,11 @@ class CharactersAdapter(
 
         fun setCharacter(character : Character){
             binding.nameCharacter.text = character.name
+            var requestOptions = RequestOptions()
+            requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(16))
             Glide.with(binding.root.context)
                 .load(character.image)
+                .apply(requestOptions)
                 .into(binding.imageCharacter)
             binding.root.setOnClickListener {
                 eventClickDetailCharacter?.invoke(character)

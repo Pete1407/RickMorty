@@ -18,7 +18,9 @@ import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.model.Info
+import com.example.rickmorty.app.data.utils.GridSpacingItemDecoration
 import com.example.rickmorty.app.data.utils.Resource
+import com.example.rickmorty.app.data.utils.SpacesItemDecoration
 import com.example.rickmorty.app.data.utils.adapter.CharactersAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -111,6 +113,7 @@ class CharacterFragment : BaseFragment(),CustomState{
 
         }
         binding.recyclerView.layoutManager = layoutMng
+        binding.recyclerView.addItemDecoration(SpacesItemDecoration(20))
         binding.recyclerView.adapter = adapter
     }
 
