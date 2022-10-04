@@ -2,6 +2,7 @@ package com.example.rickmorty.app.domain.usecase
 
 import com.example.rickmorty.app.data.model.Location
 import com.example.rickmorty.app.data.model.Locations
+import com.example.rickmorty.app.data.remote.repositoryImpl.LocationRepositoryImpl
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.repository.LocationRepository
 

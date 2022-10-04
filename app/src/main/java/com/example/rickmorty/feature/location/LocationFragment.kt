@@ -89,11 +89,15 @@ class LocationFragment : BaseFragment(),CustomState{
         binding.recyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = binding.recyclerView.layoutManager!!.childCount
-                val firstVisibleItems =  (binding.recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+                var positionArray = intArrayOf(0,0)
+                val firstVisibleItems =  (binding.recyclerView.layoutManager as StaggeredGridLayoutManager).findFirstVisibleItemPositions(positionArray)
                 val totalItem = binding.recyclerView.layoutManager!!.itemCount
-                    if((firstVisibleItems + visibleItemCount) >= totalItem && locationList.size > 0 && !viewModel.isLoading){
-                       viewModel.getAllLocation(info?.getNextPageFromLink())
-                    }
+//                Log.d("scroll","$visibleItemCount")
+//                Log.d("scroll","size --> ${firstVisibleItems.size} ,${firstVisibleItems[0]} ${firstVisibleItems[1]}")
+//                Log.d("scroll","size of item --> $totalItem")
+                if(visibleItemCount + firstVisibleItems[0] >= totalItem){
+                    viewModel.getAllLocation(info?.getNextPageFromLink())
+                }
             }
         })
     }

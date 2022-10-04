@@ -2,6 +2,7 @@ package com.example.rickmorty.app.di
 
 import com.example.rickmorty.app.domain.usecase.*
 import com.example.rickmorty.feature.character.CharacterViewModelFactory
+import com.example.rickmorty.feature.episode.EpisodeViewModelFactory
 import com.example.rickmorty.feature.location.LocationViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -38,5 +39,13 @@ class ViewModelFactoryModule {
         getSingleLocationUsecase: GetSingleLocationUsecase
     ):LocationViewModelFactory{
         return LocationViewModelFactory(getAllLocationUsecase,getSingleLocationUsecase)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEpisodeViewModelFactory(
+        getAllEpisodeUsecase: GetAllEpisodeUsecase
+    ):EpisodeViewModelFactory{
+        return EpisodeViewModelFactory(getAllEpisodeUsecase)
     }
 }

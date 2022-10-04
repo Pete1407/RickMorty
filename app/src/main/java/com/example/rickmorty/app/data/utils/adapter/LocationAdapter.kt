@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickmorty.R
 import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.app.data.model.Location
-import com.example.rickmorty.databinding.AdapterLocationBinding
+import com.example.rickmorty.databinding.ItemAdapterLocationBinding
 
 class LocationAdapter(val list : ArrayList<Location>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -17,7 +17,7 @@ class LocationAdapter(val list : ArrayList<Location>) : RecyclerView.Adapter<Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return LocationViewHolder(AdapterLocationBinding.inflate(LayoutInflater.from(parent.context),null,false))
+        return LocationViewHolder(ItemAdapterLocationBinding.inflate(LayoutInflater.from(parent.context),null,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -42,7 +42,7 @@ class LocationAdapter(val list : ArrayList<Location>) : RecyclerView.Adapter<Rec
         notifyItemRangeInserted(lastPosition,newList.size)
     }
 
-    inner class LocationViewHolder(val binding : AdapterLocationBinding): RecyclerView.ViewHolder(binding.root){
+    inner class LocationViewHolder(val binding : ItemAdapterLocationBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(itemLocation : Location){
             val context = binding.root.context

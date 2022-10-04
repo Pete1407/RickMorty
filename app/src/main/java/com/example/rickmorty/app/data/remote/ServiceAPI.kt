@@ -1,10 +1,6 @@
 package com.example.rickmorty.app.data.remote
 
-import com.example.rickmorty.app.data.model.Character
-import com.example.rickmorty.app.data.model.Characters
-import com.example.rickmorty.app.data.model.Location
-import com.example.rickmorty.app.data.model.Locations
-import com.example.rickmorty.app.data.utils.Resource
+import com.example.rickmorty.app.data.model.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -28,4 +24,7 @@ interface ServiceAPI {
 
     @GET("location/{id}")
     suspend fun getSpecificLocation(@Path("id") id : String):Response<Location>
+
+    @GET("episode")
+    suspend fun getAllEpsiode():Response<Episodes>
 }

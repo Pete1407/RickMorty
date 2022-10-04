@@ -93,8 +93,8 @@ class CharacterRepositoryImpl(
                     // response in ExampleErrorResponse pojo
                     val errorResponse: ErrorResponse? = convertErrorBody(response.errorBody())
                     // Simply returning api's own failure message
-                    //Resource.Error(msg = errorResponse?.failureMessage ?: "Something went wrong")
-                    throw ApiException(errorResponse.toString())
+                    return Resource.Error(msg = errorResponse?.failureMessage ?: "Something went wrong")
+                    //throw ApiException(errorResponse.toString())
                 }
     }
 

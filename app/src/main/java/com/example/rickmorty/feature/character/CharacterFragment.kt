@@ -121,7 +121,7 @@ class CharacterFragment : BaseFragment(),CustomState{
         viewModel.alienData.observe(viewLifecycleOwner,alienState)
         viewModel.animalData.observe(viewLifecycleOwner,animalState)
         viewModel.unknownData.observe(viewLifecycleOwner,unknownState)
-        viewModel.error.observe(viewLifecycleOwner,errorState)
+        //viewModel.error.observe(viewLifecycleOwner,errorState)
     }
 
     private fun showLoadingProgress(isLoad : Boolean) {
@@ -193,7 +193,6 @@ class CharacterFragment : BaseFragment(),CustomState{
                 }
 
             }
-            else -> {}
         }
     }
 

@@ -1,10 +1,13 @@
 package com.example.rickmorty.app.di
 
 import com.example.rickmorty.app.data.remote.datasource.CharacterRemoteDataSource
+import com.example.rickmorty.app.data.remote.datasource.EpisodeRemoteDataSource
 import com.example.rickmorty.app.data.remote.datasource.LocationRemoteDataSource
 import com.example.rickmorty.app.data.remote.repositoryImpl.CharacterRepositoryImpl
+import com.example.rickmorty.app.data.remote.repositoryImpl.EpisodeRepositoryImpl
 import com.example.rickmorty.app.data.remote.repositoryImpl.LocationRepositoryImpl
 import com.example.rickmorty.app.domain.repository.CharacterRepository
+import com.example.rickmorty.app.domain.repository.EpisodeRepository
 import com.example.rickmorty.app.domain.repository.LocationRepository
 import dagger.Module
 import dagger.Provides
@@ -26,5 +29,11 @@ class RepositoryModule {
     @Provides
     fun provideLocationRepository(remoteDataSource: LocationRemoteDataSource):LocationRepository{
         return LocationRepositoryImpl(remoteDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEpisodeRepository(remoteDataSource : EpisodeRemoteDataSource):EpisodeRepository{
+        return EpisodeRepositoryImpl(remoteDataSource)
     }
 }

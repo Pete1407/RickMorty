@@ -52,7 +52,9 @@ class CharacterViewModel @Inject constructor(
     val allData : LiveData<Resource<Characters>>
         get() = all
 
-    var error = MutableLiveData<String?>()
+    private var error = MutableLiveData<String>()
+    val errorData : LiveData<String>
+        get() = error
 
      var isLoading : Boolean = false
 
@@ -106,16 +108,20 @@ class CharacterViewModel @Inject constructor(
     // all
     fun getCharacterByAllSpecies(next : String? = null){
         viewModelScope.launch{
-            isLoading = true
+            //isLoading = true
             all.postValue(Resource.Loading())
-            try {
                 val output = getAllCharacterUseCase.getCharacterAllSpecies(next)
-                isLoading = false
+                //isLoading = false
+                when(output){
+                    is Resource.Success ->{
+
+                    }
+                    is Resource.Error ->{
+                        error.postValue(output.message.toString())
+                    }
+                }
                 all.postValue(Resource.Success(output.data))
-            }
-            catch (exception : Exception){
-                error.postValue(exception.message)
-            }
+
         }
     }
 
