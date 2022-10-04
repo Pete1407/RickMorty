@@ -189,7 +189,7 @@ class CharacterFragment : BaseFragment(),CustomState{
                 info = it.data.info
                 Log.d(RMKey.DEBUG_TAG,info.toString())
                 //numberPage = getNextPageFromLink(info?.next)
-                if(info?.prev.isNullOrEmpty() && info?.next!=null){
+                if(info?.prev.isNullOrEmpty() && info?.getNextPageFromLink()?.toInt() == 2){
                     adapter?.refreshAllList(allList)
                 }else{
                     adapter?.addNewItems(allList)

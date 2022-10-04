@@ -108,10 +108,10 @@ class CharacterViewModel @Inject constructor(
     // all
     fun getCharacterByAllSpecies(next : String? = null){
         viewModelScope.launch{
-            //isLoading = true
+            isLoading = true
             all.postValue(Resource.Loading())
                 val output = getAllCharacterUseCase.getCharacterAllSpecies(next)
-                //isLoading = false
+                isLoading = false
                 when(output){
                     is Resource.Success ->{
 
