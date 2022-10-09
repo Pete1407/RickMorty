@@ -8,6 +8,6 @@ import retrofit2.Response
 class EpisodeRemoteDataSourceImpl(val serviceAPI: ServiceAPI) : EpisodeRemoteDataSource {
 
     override suspend fun getAllEpisode(): Response<Episodes> {
-            return serviceAPI.getAllEpsiode()
+            return serviceAPI.getAllEpisode()
     }
 }
