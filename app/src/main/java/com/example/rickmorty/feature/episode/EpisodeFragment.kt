@@ -10,20 +10,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
-import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Episodes
 import com.example.rickmorty.app.data.utils.Resource
+import com.example.rickmorty.app.data.utils.adapter.EpisodesAdapter
 import com.example.rickmorty.app.data.utils.adapter.LocationAdapter
 import com.example.rickmorty.databinding.FragmentEpisodeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class EpisodeFragment : BaseFragment(),CustomState {
-    private lateinit var binding : FragmentEpisodeBinding
 
-    private var adapter : LocationAdapter? = null
+    private lateinit var binding : FragmentEpisodeBinding
     private lateinit var viewModel : EpisodeViewModel
     private var episodes : Episodes? = null
+    private var adapter : EpisodesAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,7 +63,11 @@ class EpisodeFragment : BaseFragment(),CustomState {
     }
 
     fun setRecyclerViewAdapter(){
+        if(adapter == null){
+            adapter = EpisodesAdapter(arrayListOf())
 
+        }
+        binding.recyclerView.adapter = adapter
     }
 
     private val allEpisode = Observer<Resource<Episodes>>{

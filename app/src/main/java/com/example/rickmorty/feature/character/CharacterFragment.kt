@@ -218,7 +218,6 @@ class CharacterFragment : BaseFragment(),CustomState{
         return dataShuffled.subList(0,10).toMutableList()
     }
 
-    // refresh
     private fun refreshList(){
         binding.refreshLayout.isRefreshing = false
         numberPage = ""

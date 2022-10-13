@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/characterImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/icon_morty_character"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.example.rickmorty.app.base.custom.CustomTextView
+        android:id="@+id/numberOfCharacter"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/characterImage"
+        app:layout_constraintStart_toEndOf="@id/characterImage"
+        app:layout_constraintTop_toTopOf="@+id/characterImage"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/bg_number_of_character"
+        tools:textColor="@color/white"
+        tools:text="+3"/>
+
+</FrameLayout>

@@ -53,11 +53,13 @@
             app:layout_constraintTop_toBottomOf="@id/typeLocation"
             tools:text="Type: Dimension c-137" />
 
-        <!--        <com.example.rickmorty.app.data.utils.customview.Character_custom_view_tag-->
-        <!--            android:id="@+id/charactersTag"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/dimensionLocation"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"/>-->
+        <com.example.rickmorty.app.base.custom.CustomCharacterTagView
+            android:id="@+id/characterTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dimensionLocation"
+            tools:layout_width="30dp"
+            tools:layout_height="30dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
