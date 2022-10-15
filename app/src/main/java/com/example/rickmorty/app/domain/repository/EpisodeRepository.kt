@@ -5,5 +5,5 @@ import com.example.rickmorty.app.data.utils.Resource
 
 interface EpisodeRepository {
 
-    suspend fun getAllEpisode():Resource<Episodes>
+    suspend fun getAllEpisode(nextPage : String?):Resource<Episodes>
 }

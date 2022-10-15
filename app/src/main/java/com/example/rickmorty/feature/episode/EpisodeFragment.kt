@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
+import com.example.rickmorty.app.base.RMKey
+import com.example.rickmorty.app.data.model.Episode
 import com.example.rickmorty.app.data.model.Episodes
+import com.example.rickmorty.app.data.model.SeasonModel
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.data.utils.adapter.EpisodesAdapter
-import com.example.rickmorty.app.data.utils.adapter.LocationAdapter
 import com.example.rickmorty.databinding.FragmentEpisodeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,12 @@ class EpisodeFragment : BaseFragment(),CustomState {
     private lateinit var viewModel : EpisodeViewModel
     private var episodes : Episodes? = null
     private var adapter : EpisodesAdapter? = null
+
+    private var allEpisodeSeason = ArrayList<Episode>()
+    private var season1 = ArrayList<SeasonModel>()
+    private var season2 = ArrayList<SeasonModel>()
+    private var season3 = ArrayList<SeasonModel>()
+    private var season4 = ArrayList<SeasonModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +49,8 @@ class EpisodeFragment : BaseFragment(),CustomState {
     }
 
     override fun initUI() {
-        viewModel.getAllEpisode()
+        setRecyclerViewAdapter()
+        viewModel.getAllEpisode(null)
     }
 
     override fun initViewModel() {
@@ -62,10 +70,9 @@ class EpisodeFragment : BaseFragment(),CustomState {
         binding.loading.hideLoading()
     }
 
-    fun setRecyclerViewAdapter(){
+    private fun setRecyclerViewAdapter(){
         if(adapter == null){
             adapter = EpisodesAdapter(arrayListOf())
-
         }
         binding.recyclerView.adapter = adapter
     }
@@ -75,13 +82,34 @@ class EpisodeFragment : BaseFragment(),CustomState {
             is Resource.Loading -> {showLoading()}
             is Resource.Success ->{
                 hideLoading()
-                this.episodes = it.data
-
+                episodes = it.data
+                if(episodes?.info?.prev.isNullOrEmpty() && episodes?.info?.getNextPageFromLink()?.toInt() == 2){
+                    viewModel.getAllEpisode(episodes?.info?.getNextPageFromLink())
+                }else if(episodes?.info?.next != null && episodes?.info?.prev != null){
+                    viewModel.getAllEpisode(episodes?.info?.getNextPageFromLink())
+                }
+                allEpisodeSeason.addAll(episodes?.results!!)
+                Log.d("size","${allEpisodeSeason.size}")
             }
             is Resource.Error ->{
 
             }
         }
+    }
+
+    private fun setAllEpisodeIntoSpecifySeason(allEpisode : Episodes){
+        allEpisode.results.forEach {
+            val splitedText = it.episode.split("E")
+            val seasonText = splitedText[0]
+            val episodeText = splitedText[1]
+            //Log.d(RMKey.DEBUG_TAG,"$seasonText $episodeText")
+            //val episodeBySeasonModel = EpisodeBySeasonModel(seasonText,episodeText,allEpisode.)
+
+        }
+    }
+
+    fun convertEpisodesData(){
+
     }
 
     companion object{

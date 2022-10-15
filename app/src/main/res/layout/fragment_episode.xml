@@ -37,7 +37,7 @@
             android:paddingBottom="@dimen/spacing_xxl"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            tools:listitem="@layout/adapter_characters_part_by_specie" />
+            tools:listitem="@layout/adapter_specify_season"/>
 
         <FrameLayout
             android:id="@+id/layoutLoading"

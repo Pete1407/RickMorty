@@ -11,8 +11,8 @@ import retrofit2.Response
 
 class EpisodeRepositoryImpl(private val remoteDataSource: EpisodeRemoteDataSource) : EpisodeRepository {
 
-    override suspend fun getAllEpisode(): Resource<Episodes> {
-       return safeApiCall { remoteDataSource.getAllEpisode() }
+    override suspend fun getAllEpisode(nextPage : String?): Resource<Episodes> {
+       return safeApiCall { remoteDataSource.getAllEpisode(nextPage) }
     }
 
     // we'll use this function in all

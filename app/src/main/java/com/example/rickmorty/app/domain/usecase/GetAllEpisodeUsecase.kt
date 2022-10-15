@@ -6,7 +6,7 @@ import com.example.rickmorty.app.domain.repository.EpisodeRepository
 
 class GetAllEpisodeUsecase(private val repository: EpisodeRepository) {
 
-    suspend fun getAllEpisode():Resource<Episodes>{
-        return repository.getAllEpisode()
+    suspend fun getAllEpisode(nextPage : String?):Resource<Episodes>{
+        return repository.getAllEpisode(nextPage)
     }
 }

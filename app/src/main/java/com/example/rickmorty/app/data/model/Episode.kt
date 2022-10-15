@@ -18,5 +18,7 @@ data class Episode(
     @field:Json(name = "name")
     val name: String,
     @field:Json(name = "url")
-    val url: String
+    val url: String,
+    @field:Json(name = "episodeText")
+    val episodeText : String? = ""
 )

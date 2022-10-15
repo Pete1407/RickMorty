@@ -3,11 +3,10 @@ package com.example.rickmorty.app.data.utils.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickmorty.app.data.model.Episode
-import com.example.rickmorty.app.data.utils.extension.gone
+import com.example.rickmorty.app.data.model.SeasonModel
 import com.example.rickmorty.databinding.ItemAdapterEpisodeBinding
 
-class EpisodesAdapter(val list : List<Episode>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EpisodesAdapter(val list : MutableList<SeasonModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return EpisodeViewHolder(ItemAdapterEpisodeBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -23,12 +22,16 @@ class EpisodesAdapter(val list : List<Episode>) : RecyclerView.Adapter<RecyclerV
         return list.size
     }
 
+//    fun refreshList(newData : ArrayList<Episode>){
+//        list.clear()
+//        list.addAll(newData)
+//        notifyDataSetChanged()
+//    }
+
     inner class EpisodeViewHolder(val binding : ItemAdapterEpisodeBinding):RecyclerView.ViewHolder(binding.root){
 
-        fun bind(episode : Episode){
-            binding.nameLocation.text = episode.name
-            binding.characterTag.gone()
-            //binding.typeLocation.text = episode.
+        fun bind(item : SeasonModel){
+            //binding.seasonView.setDataEachSeason(item.episodeList)
         }
     }
 

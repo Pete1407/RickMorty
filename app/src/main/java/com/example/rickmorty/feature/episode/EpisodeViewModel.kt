@@ -20,10 +20,10 @@ class EpisodeViewModel @Inject constructor(
     val episodesData : LiveData<Resource<Episodes>>
         get() = epsiodes
 
-    fun getAllEpisode(){
+    fun getAllEpisode(nextPage : String?){
         epsiodes.postValue(Resource.Loading())
         viewModelScope.launch {
-            val result = getAllEpisodeUsecase.getAllEpisode()
+            val result = getAllEpisodeUsecase.getAllEpisode(nextPage)
             epsiodes.postValue(Resource.Success(result.data))
         }
     }

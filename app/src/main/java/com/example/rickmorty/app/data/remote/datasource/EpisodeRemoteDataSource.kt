@@ -5,5 +5,5 @@ import retrofit2.Response
 
 interface EpisodeRemoteDataSource {
 
-    suspend fun getAllEpisode():Response<Episodes>
+    suspend fun getAllEpisode(nextPage : String?):Response<Episodes>
 }

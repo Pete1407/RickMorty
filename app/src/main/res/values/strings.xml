@@ -32,4 +32,7 @@
     <string name="click_text">Click</string>
     <string name="no_data">unspecified</string>
     <string name="number_resident">Residents</string>
+
+    <string name="title_season">Season %d</string>
+    <string name="title_see_more">see more</string>
 </resources>

@@ -31,4 +31,5 @@
     <color name="text_button_click">#462525</color>
 
     <color name="bg_location_item">#CCFFFFFF</color>
+    <color name="bg_see_more">#B32E9599</color>
 </resources>
