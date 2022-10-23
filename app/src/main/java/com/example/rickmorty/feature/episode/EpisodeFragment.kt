@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickmorty.app.base.BaseFragment
@@ -14,6 +15,7 @@ import com.example.rickmorty.app.data.model.Episodes
 import com.example.rickmorty.app.data.model.SeasonModel
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.data.utils.adapter.EpisodesAdapter
+import com.example.rickmorty.app.data.utils.extension.visible
 import com.example.rickmorty.databinding.FragmentEpisodeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,7 +62,9 @@ class EpisodeFragment : BaseFragment(),CustomState {
     }
 
     override fun initListener() {
-
+        binding.refreshLayout.setOnRefreshListener {
+            refreshList()
+        }
     }
 
     override fun showLoading() {
@@ -78,19 +82,30 @@ class EpisodeFragment : BaseFragment(),CustomState {
         binding.recyclerView.adapter = adapter
     }
 
+    private fun refreshList(){
+        episodes = null
+        showLoading()
+        seasonCollection.clear()
+        allEpisodeSeason.clear()
+        viewModel.getAllEpisode(null)
+    }
+
     private val allEpisode = Observer<Resource<Episodes>>{
         when(it){
-            is Resource.Loading -> {showLoading()}
+            is Resource.Loading -> {
+                showLoading()
+            }
             is Resource.Success ->{
-                hideLoading()
+                //hideLoading()
                 episodes = it.data
                 allEpisodeSeason.addAll(episodes?.results!!)
-                //Log.d("size","size --> ${allEpisodeSeason.size}")
                 if(episodes?.info?.prev.isNullOrEmpty() && episodes?.info?.getNextPageFromLink()?.toInt() == 2){
                     viewModel.getAllEpisode(episodes?.info?.getNextPageFromLink())
                 }else if(episodes?.info?.next != null && episodes?.info?.prev != null){
                     viewModel.getAllEpisode(episodes?.info?.getNextPageFromLink())
                 }else{
+                    hideLoading()
+                    binding.refreshLayout.isRefreshing = false
                     setAllEpisodeIntoSpecifySeason(allEpisodeSeason)
                 }
             }
@@ -101,6 +116,7 @@ class EpisodeFragment : BaseFragment(),CustomState {
     }
 
     private fun setAllEpisodeIntoSpecifySeason(list : ArrayList<Episode>){
+        binding.refreshLayout.isRefreshing = false
         convertEpisodesData(list)
     }
 
@@ -113,7 +129,7 @@ class EpisodeFragment : BaseFragment(),CustomState {
         list.forEach {
             val fullEpText = it.episode.split("E")
             val ssText = fullEpText[0]
-            val epText = fullEpText[1]
+            //val epText = fullEpText[1]
             when(ssText[2]){
                 '1' ->{
                     epListBySeasonOne.add(it)
