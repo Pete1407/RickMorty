@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
-import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Episode
 import com.example.rickmorty.app.data.model.Episodes
 import com.example.rickmorty.app.data.model.SeasonModel
@@ -27,10 +26,12 @@ class EpisodeFragment : BaseFragment(),CustomState {
     private var adapter : EpisodesAdapter? = null
 
     private var allEpisodeSeason = ArrayList<Episode>()
-    private var season1 = ArrayList<SeasonModel>()
-    private var season2 = ArrayList<SeasonModel>()
-    private var season3 = ArrayList<SeasonModel>()
-    private var season4 = ArrayList<SeasonModel>()
+    private var seasonCollection = ArrayList<SeasonModel>()
+    private var season1 : SeasonModel? = null
+    private var season2 : SeasonModel? = null
+    private var season3 : SeasonModel? = null
+    private var season4 : SeasonModel? = null
+    private var season5 : SeasonModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,33 +84,65 @@ class EpisodeFragment : BaseFragment(),CustomState {
             is Resource.Success ->{
                 hideLoading()
                 episodes = it.data
+                allEpisodeSeason.addAll(episodes?.results!!)
+                //Log.d("size","size --> ${allEpisodeSeason.size}")
                 if(episodes?.info?.prev.isNullOrEmpty() && episodes?.info?.getNextPageFromLink()?.toInt() == 2){
                     viewModel.getAllEpisode(episodes?.info?.getNextPageFromLink())
                 }else if(episodes?.info?.next != null && episodes?.info?.prev != null){
                     viewModel.getAllEpisode(episodes?.info?.getNextPageFromLink())
+                }else{
+                    setAllEpisodeIntoSpecifySeason(allEpisodeSeason)
                 }
-                allEpisodeSeason.addAll(episodes?.results!!)
-                Log.d("size","${allEpisodeSeason.size}")
             }
             is Resource.Error ->{
-
+                //Log.e("error",it.)
             }
         }
     }
 
-    private fun setAllEpisodeIntoSpecifySeason(allEpisode : Episodes){
-        allEpisode.results.forEach {
-            val splitedText = it.episode.split("E")
-            val seasonText = splitedText[0]
-            val episodeText = splitedText[1]
-            //Log.d(RMKey.DEBUG_TAG,"$seasonText $episodeText")
-            //val episodeBySeasonModel = EpisodeBySeasonModel(seasonText,episodeText,allEpisode.)
-
-        }
+    private fun setAllEpisodeIntoSpecifySeason(list : ArrayList<Episode>){
+        convertEpisodesData(list)
     }
 
-    fun convertEpisodesData(){
-
+    private fun convertEpisodesData(list : ArrayList<Episode>){
+        val epListBySeasonOne = ArrayList<Episode>()
+        val epListBySeasonTwo = ArrayList<Episode>()
+        val epListBySeasonThree = ArrayList<Episode>()
+        val epListBySeasonFour = ArrayList<Episode>()
+        val epListBySeasonFive = ArrayList<Episode>()
+        list.forEach {
+            val fullEpText = it.episode.split("E")
+            val ssText = fullEpText[0]
+            val epText = fullEpText[1]
+            when(ssText[2]){
+                '1' ->{
+                    epListBySeasonOne.add(it)
+                }
+                '2' ->{
+                    epListBySeasonTwo.add(it)
+                }
+                '3' ->{
+                    epListBySeasonThree.add(it)
+                }
+                '4' ->{
+                    epListBySeasonFour.add(it)
+                }
+                else ->{
+                    epListBySeasonFive.add(it)
+                }
+            }
+        }
+        season1 = SeasonModel("Season 1",epListBySeasonOne)
+        season2 = SeasonModel("Season 2",epListBySeasonTwo)
+        season3 = SeasonModel("Season 3",epListBySeasonThree)
+        season4 = SeasonModel("Season 4",epListBySeasonFour)
+        season5 = SeasonModel("Season 5",epListBySeasonFive)
+        seasonCollection.add(season1!!)
+        seasonCollection.add(season2!!)
+        seasonCollection.add(season3!!)
+        seasonCollection.add(season4!!)
+        seasonCollection.add(season5!!)
+        adapter?.refreshList(seasonCollection)
     }
 
     companion object{
@@ -118,5 +151,9 @@ class EpisodeFragment : BaseFragment(),CustomState {
 
         }
     }
-
+//        Log.d("sizeEpisode","SS1 --> ${epListBySeasonOne.size}")
+//        Log.d("sizeEpisode","SS2 --> ${epListBySeasonTwo.size}")
+//        Log.d("sizeEpisode","SS3 --> ${epListBySeasonThree.size}")
+//        Log.d("sizeEpisode","SS4 --> ${epListBySeasonFour.size}")
+//        Log.d("sizeEpisode","SS5 --> ${epListBySeasonFive.size}")
 }
