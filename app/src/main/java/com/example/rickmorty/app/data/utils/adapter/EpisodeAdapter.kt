@@ -38,7 +38,7 @@ class EpisodeAdapter(val list : List<Episode>):RecyclerView.Adapter<RecyclerView
 
         fun setEpisode(aEpisode : Episode){
             binding.episodeName.text = aEpisode.name
-            binding.episodeNumber.text = aEpisode.episodeText
+            binding.episodeNumber.text = aEpisode.episodeText?:""
             binding.episodeOnAir.text = aEpisode.air_date
             binding.root.setOnClickListener {
                 eventClickDetailCharacter?.invoke(aEpisode)

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickmorty.app.base.BaseFragment
 import com.example.rickmorty.app.base.CustomState
+import com.example.rickmorty.app.base.RMKey
 import com.example.rickmorty.app.data.model.Episode
 import com.example.rickmorty.app.data.model.Episodes
 import com.example.rickmorty.app.data.model.SeasonModel
@@ -129,7 +130,8 @@ class EpisodeFragment : BaseFragment(),CustomState {
         list.forEach {
             val fullEpText = it.episode.split("E")
             val ssText = fullEpText[0]
-            //val epText = fullEpText[1]
+            val epText = "${RMKey.TEXT_EPISODE}: ${fullEpText[1]}"
+            it.episodeText = epText
             when(ssText[2]){
                 '1' ->{
                     epListBySeasonOne.add(it)

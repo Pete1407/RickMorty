@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.*
 
-
+// character Page
 @AndroidEntryPoint
 class CharacterFragment : BaseFragment(),CustomState{
     private lateinit var binding : FragmentCharacterBinding
@@ -43,7 +43,6 @@ class CharacterFragment : BaseFragment(),CustomState{
 
     private var numberPage : String = ""
     private var info : Info? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

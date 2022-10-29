@@ -18,20 +18,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Season 1" />
 
-    <com.example.rickmorty.app.base.custom.CustomTextView
-        android:id="@+id/seeMore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_standard"
-        android:background="@drawable/bg_see_more_button"
-        android:fontFamily="@font/roboto_mono_bold"
-        android:text="@string/title_see_more"
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        android:padding="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/titleSeason"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/titleSeason"/>
+<!--    <com.example.rickmorty.app.base.custom.CustomTextView-->
+<!--        android:id="@+id/seeMore"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="@dimen/spacing_standard"-->
+<!--        android:background="@drawable/bg_see_more_button"-->
+<!--        android:fontFamily="@font/roboto_mono_bold"-->
+<!--        android:text="@string/title_see_more"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="10sp"-->
+<!--        android:padding="6dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/titleSeason"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/titleSeason"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/seasonRecyclerView"
