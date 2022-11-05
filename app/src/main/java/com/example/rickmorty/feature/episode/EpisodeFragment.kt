@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickmorty.app.base.BaseFragment
@@ -15,8 +14,8 @@ import com.example.rickmorty.app.data.model.Episode
 import com.example.rickmorty.app.data.model.Episodes
 import com.example.rickmorty.app.data.model.SeasonModel
 import com.example.rickmorty.app.data.utils.Resource
+import com.example.rickmorty.app.data.utils.ToastView
 import com.example.rickmorty.app.data.utils.adapter.EpisodesAdapter
-import com.example.rickmorty.app.data.utils.extension.visible
 import com.example.rickmorty.databinding.FragmentEpisodeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -79,6 +78,10 @@ class EpisodeFragment : BaseFragment(),CustomState {
     private fun setRecyclerViewAdapter(){
         if(adapter == null){
             adapter = EpisodesAdapter(arrayListOf())
+            adapter?.setEventClickDetailListener{ data, seasonData ->
+                //Log.d("episode","$data")
+                EpisodeDetailActivity.startEpisodeDetailActivity(requireContext(),data,seasonData)
+            }
         }
         binding.recyclerView.adapter = adapter
     }

@@ -34,5 +34,7 @@
     <string name="number_resident">Residents</string>
 
     <string name="title_season">Season %d</string>
+    <string name="tag_season">season:%s</string>
+    <string name="tag_episode">episode:%s</string>
     <string name="title_see_more">see more</string>
 </resources>

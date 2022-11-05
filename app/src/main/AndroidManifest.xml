@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".feature.episode.EpisodeDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.location.DetailLocationActivity"
             android:exported="false" />
         <activity

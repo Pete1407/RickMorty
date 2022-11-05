@@ -13,6 +13,12 @@ class SpecifySeasonView(context : Context, attrs : AttributeSet? = null):LinearL
 
     private var adapter : EpisodeAdapter? = null
 
+    private var eventClickDetailCharacter : ((data : Episode,seasonData : String)->Unit)? = null
+
+    fun setEventClickDetailListener(event : ((data : Episode,seasonData : String)->Unit)){
+        this.eventClickDetailCharacter = event
+    }
+
     private val binding : AdapterSpecifySeasonBinding by lazy {
         AdapterSpecifySeasonBinding.inflate(LayoutInflater.from(context),this,true)
     }
@@ -20,6 +26,9 @@ class SpecifySeasonView(context : Context, attrs : AttributeSet? = null):LinearL
     fun setDataEachSeason(seasonText : String,list : ArrayList<Episode>){
         binding.titleSeason.text = seasonText
         adapter = EpisodeAdapter(list)
+        adapter?.setEventClickDetailListener {
+            eventClickDetailCharacter?.invoke(it,seasonText?:"")
+        }
         binding.seasonRecyclerView.adapter = adapter
     }
 

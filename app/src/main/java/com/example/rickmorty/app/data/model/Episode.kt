@@ -1,8 +1,11 @@
 package com.example.rickmorty.app.data.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class Episode(
     @field:Json(name = "air_date")
@@ -21,4 +24,4 @@ data class Episode(
     var url: String,
     @field:Json(name = "episodeText")
     var episodeText : String? = ""
-)
+):Parcelable

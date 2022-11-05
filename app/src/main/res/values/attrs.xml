@@ -14,4 +14,8 @@
         <attr name="titleText" format="string"/>
         <attr name="styleText" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="SpecifyTagWidget">
+        <attr name="titleTag" format="string"/>
+    </declare-styleable>
 </resources>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickmorty.app.data.model.Episode
 import com.example.rickmorty.app.data.model.SeasonModel
 import com.example.rickmorty.databinding.ItemAdapterEpisodeBinding
 
@@ -13,6 +14,12 @@ class EpisodesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return EpisodeViewHolder(ItemAdapterEpisodeBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    }
+
+    private var eventClickDetailCharacter : ((data : Episode,seasonData : String)->Unit)? = null
+
+    fun setEventClickDetailListener(event : ((data : Episode,seasonData : String)->Unit)){
+        this.eventClickDetailCharacter = event
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -35,6 +42,9 @@ class EpisodesAdapter(
 
         fun bind(item : SeasonModel){
             binding.seasonView.setDataEachSeason(item.seasonText?:"",ArrayList(item.episodes))
+            binding.seasonView.setEventClickDetailListener { data, seasonData ->
+                eventClickDetailCharacter?.invoke(data, seasonData)
+            }
         }
     }
 

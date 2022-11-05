@@ -9,11 +9,43 @@
         android:id="@+id/characterFragment"
         android:name="com.example.rickmorty.feature.character.CharacterFragment"
         android:label="CharacterFragment"
-        tools:layout="@layout/fragment_character"/>
+        tools:layout="@layout/fragment_character">
+        <action
+            android:id="@+id/action_characterFragment_to_detailCharacterActivity"
+            app:destination="@id/detailCharacterActivity" />
+    </fragment>
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.rickmorty.feature.location.LocationFragment"
         android:label="LocationFragment"
-        tools:layout="@layout/fragment_location"/>
+        tools:layout="@layout/fragment_location">
+        <action
+            android:id="@+id/action_locationFragment_to_detailLocationActivity"
+            app:destination="@id/detailLocationActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/detailCharacterActivity"
+        android:name="com.example.rickmorty.feature.character.DetailCharacterActivity"
+        android:label="activity_info_character"
+        tools:layout="@layout/activity_info_character" />
+    <activity
+        android:id="@+id/detailLocationActivity"
+        android:name="com.example.rickmorty.feature.location.DetailLocationActivity"
+        android:label="activity_detail_location"
+        tools:layout="@layout/activity_detail_location" />
+    <fragment
+        android:id="@+id/episodeFragment"
+        android:name="com.example.rickmorty.feature.episode.EpisodeFragment"
+        android:label="EpisodeFragment"
+        tools:layout="@layout/fragment_episode">
+        <action
+            android:id="@+id/action_episodeFragment_to_episodeDetailActivity"
+            app:destination="@id/episodeDetailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/episodeDetailActivity"
+        android:name="com.example.rickmorty.feature.episode.EpisodeDetailActivity"
+        android:label="activity_episode_detail"
+        tools:layout="@layout/activity_episode_detail" />
 
 </navigation>

@@ -32,4 +32,5 @@
 
     <color name="bg_location_item">#CCFFFFFF</color>
     <color name="bg_see_more">#B32E9599</color>
+    <color name="bg_tag_episode">#2E9599</color>
 </resources>

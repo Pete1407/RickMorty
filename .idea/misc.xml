@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/drawable/background_tag_episode.xml" value="0.142" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/drawable/bg_detail_character.xml" value="0.164" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/drawable/bg_gradient.xml" value="0.164" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/drawable/bg_info_character.xml" value="0.2703125" />
@@ -13,6 +14,7 @@
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/drawable/selector_bottom_nav.xml" value="0.143" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/activity_detail_location.xml" value="0.152" />
+        <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/activity_episode_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/activity_info_character.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/activity_splash_screen.xml" value="0.176" />
@@ -32,6 +34,7 @@
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/widget_character_item.xml" value="0.264" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/widget_custom_loading.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/widget_custom_toolbar.xml" value="0.176" />
+        <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/widget_specify_tag.xml" value="0.264" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/layout/widget_title_adapter_home.xml" value="0.13854166666666667" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/USER/Documents/Projects/rickandmorty-android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.135" />
