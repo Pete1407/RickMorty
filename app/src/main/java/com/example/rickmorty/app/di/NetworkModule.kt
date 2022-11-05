@@ -2,6 +2,7 @@ package com.example.rickmorty.app.di
 
 import com.example.rickmorty.BuildConfig
 import com.example.rickmorty.app.data.remote.ServiceAPI
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -21,9 +22,13 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder().addInterceptor(interceptor).build()
+        //val interceptor = HttpLoggingInterceptor()
+        //interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val okhttpBuilder = OkHttpClient.Builder()
+        if(BuildConfig.DEBUG){
+            okhttpBuilder.addInterceptor(OkHttpProfilerInterceptor()).build()
+        }
+        return okhttpBuilder.build()
     }
 
     @Singleton
