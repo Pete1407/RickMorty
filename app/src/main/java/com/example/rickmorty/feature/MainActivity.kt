@@ -14,6 +14,7 @@ import com.example.rickmorty.feature.episode.EpisodeFragment
 import com.example.rickmorty.feature.favorite_character.FavoriteFragment
 import com.example.rickmorty.feature.location.LocationFragment
 import com.example.rickmorty.app.data.utils.adapter.PagerAdapter
+import com.example.rickmorty.feature.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +27,7 @@ class MainActivity : BaseActivity() {
     private var characterFragment : CharacterFragment? = null
     private var locationFragment : LocationFragment? = null
     private var episodeFragment : EpisodeFragment? = null
+    private var searchFragment : SearchFragment? = null
     private var defaultFragment : BaseFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +38,7 @@ class MainActivity : BaseActivity() {
         characterFragment = CharacterFragment()
         locationFragment = LocationFragment()
         episodeFragment = EpisodeFragment()
+        searchFragment = SearchFragment()
 
         // set default fragment
 
@@ -43,6 +46,7 @@ class MainActivity : BaseActivity() {
         setDefaultMenu(defaultFragment!!)
 
         fragmentList.let {
+            it.add(searchFragment!!)
             it.add(episodeFragment!!)
             it.add(locationFragment!!)
             it.add(characterFragment!!)
@@ -65,9 +69,14 @@ class MainActivity : BaseActivity() {
                     defaultFragment = locationFragment
                     return@setOnItemSelectedListener true
                 }
-                else ->{
+                R.id.episode ->{
                     fragmentTransaction.hide(defaultFragment!!).show(episodeFragment!!).commit()
                     defaultFragment = episodeFragment
+                    return@setOnItemSelectedListener true
+                }
+                else ->{
+                    fragmentTransaction.hide(defaultFragment!!).show(searchFragment!!).commit()
+                    defaultFragment = searchFragment
                     return@setOnItemSelectedListener true
                 }
             }
@@ -86,6 +95,9 @@ class MainActivity : BaseActivity() {
                 }
                 is LocationFragment ->{
                     fragmentTransaction.add(R.id.frameLayout,item,"tag_location").hide(item)
+                }
+                else ->{
+                    fragmentTransaction.add(R.id.frameLayout,item,"tag_search").hide(item)
                 }
             }
 

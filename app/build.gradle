@@ -70,7 +70,7 @@ dependencies {
 
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-    // coroutine
+    // coroutine (include kotlin Flow)
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 

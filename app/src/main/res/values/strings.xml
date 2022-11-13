@@ -6,6 +6,7 @@
     <string name="menu_location">Locations</string>
     <string name="menu_episode">Episodes</string>
     <string name="menu_favorite">Favorite</string>
+    <string name="menu_search">Search</string>
     <string name="info_character">Info</string>
 
     <!-- Info Character -->
@@ -37,4 +38,6 @@
     <string name="tag_season">season:%s</string>
     <string name="tag_episode">episode:%s</string>
     <string name="title_see_more">see more</string>
+
+    <string name="hint_search">search name character</string>
 </resources>
