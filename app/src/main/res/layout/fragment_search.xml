@@ -19,16 +19,33 @@
         android:id="@+id/recylcerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/spacing_standard"
+        android:layout_margin="@dimen/spacing_standard"
+        android:paddingBottom="@dimen/spacing_xl"
         android:orientation="vertical"
-        app:spanCount="3"
+        android:clipToPadding="false"
+        app:spanCount="2"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBarWidget" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBarWidget"
+        tools:listitem="@layout/item_card_character"/>
 
     <com.example.rickmorty.app.base.custom.CustomLoading
         android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <com.example.rickmorty.app.base.custom.CustomTextView
+        android:id="@+id/notFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_found"
+        android:fontFamily="@font/roboto_mono_bold"
+        android:textColor="@color/not_found_gray"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/loading"
+        app:layout_constraintStart_toStartOf="@+id/loading"
+        app:layout_constraintTop_toBottomOf="@+id/searchBarWidget" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

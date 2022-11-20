@@ -19,7 +19,7 @@
                 android:id="@+id/imageCharacter"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 tools:src="@drawable/icon_morty_character" />
 
         <com.example.rickmorty.app.base.custom.CustomTextView

@@ -58,4 +58,9 @@ class UseCaseModule {
     fun getAllEpisodeUseCase(repository : EpisodeRepository):GetAllEpisodeUsecase{
         return GetAllEpisodeUsecase(repository)
     }
+
+    @Provides
+    fun getCharacterBySearcingUsecase(repository: CharacterRepository):GetCharacterBySearchingUsecase{
+        return GetCharacterBySearchingUsecase(repository)
+    }
 }

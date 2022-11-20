@@ -21,14 +21,16 @@ class ViewModelFactoryModule {
         getAlienSpecieUsecase : GetAlienSpeciesUsecase,
         getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,
         getUnknownSpeciesUsecase: GetUnknownSpeciesUsecase,
-        getAllCharacterUsecase: GetAllCharacterUsecase
+        getAllCharacterUsecase: GetAllCharacterUsecase,
+        getCharacterBySearchingUsecase: GetCharacterBySearchingUsecase
     ):CharacterViewModelFactory{
         return CharacterViewModelFactory(
             getHumanSpeciesUsecase,
             getAlienSpecieUsecase,
             getAnimalSpeciesUsecase,
             getUnknownSpeciesUsecase,
-            getAllCharacterUsecase
+            getAllCharacterUsecase,
+            getCharacterBySearchingUsecase
         )
     }
 

@@ -10,7 +10,8 @@ class CharacterViewModelFactory @Inject constructor(
     private val getAlienSpecieUsecase : GetAlienSpeciesUsecase,
     private val getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,
     private val getUnknownSpeciesUsecase: GetUnknownSpeciesUsecase,
-    private val getAllCharacterUsecase: GetAllCharacterUsecase
+    private val getAllCharacterUsecase: GetAllCharacterUsecase,
+    private val getCharacterBySearchingUsecase: GetCharacterBySearchingUsecase
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -20,7 +21,8 @@ class CharacterViewModelFactory @Inject constructor(
                 getAlienSpecieUsecase,
                 getAnimalSpeciesUsecase,
                 getUnknownSpeciesUsecase,
-                getAllCharacterUsecase
+                getAllCharacterUsecase,
+                getCharacterBySearchingUsecase
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")

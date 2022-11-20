@@ -178,7 +178,7 @@ class CharactersAdapter(
             val context = binding.root.context
             binding.title.setTextTitle(titleText)
             if(adapter == null){
-                adapter = CharacterAdapter(itemList)
+                adapter = CharacterAdapter(ArrayList(itemList))
                 adapter!!.setEventClickDetailListener {
                     eventClickDetailCharacter?.invoke(it)
                 }

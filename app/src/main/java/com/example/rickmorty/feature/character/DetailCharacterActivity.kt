@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.example.rickmorty.R
 import com.example.rickmorty.app.base.BaseActivity
@@ -28,6 +29,7 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
         super.onCreate(savedInstanceState)
         binding = ActivityInfoCharacterBinding.inflate(layoutInflater)
         figure = intent.getParcelableExtra<Character>(RMKey.ITEM_CHARACTER) as Character
+
         setContentView(binding.root)
         initListener()
         initViewModel()

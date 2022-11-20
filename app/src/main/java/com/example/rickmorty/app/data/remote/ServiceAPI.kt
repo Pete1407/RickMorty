@@ -1,6 +1,7 @@
 package com.example.rickmorty.app.data.remote
 
 import com.example.rickmorty.app.data.model.*
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,4 +30,9 @@ interface ServiceAPI {
     suspend fun getAllEpisode(
         @Query("page") page : String?
     ):Response<Episodes>
+
+    @GET("character/")
+    suspend fun getCharacterBySeaching(
+        @Query("name") name : String
+    ):Response<Characters>
 }

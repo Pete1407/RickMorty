@@ -12,6 +12,9 @@ import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.repository.CharacterRepository
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.HttpException
@@ -60,6 +63,21 @@ class CharacterRepositoryImpl(
             remoteDataSource.getUnknownSpecies(specie)
         }
     }
+
+    override suspend fun getCharacterBySearchName(name: String): Resource<Characters> {
+        return safeApiCall {
+            remoteDataSource.getCharacterBySearchingName(name)
+        }
+    }
+
+
+    // use flow
+//    override suspend fun getCharacterBySearchName(name: String): Flow<Resource<Characters>> {
+//        return flow<Resource<Characters>> {
+//            val result = remoteDataSource.getCharacterBySearchingName(name)
+//            emit(safeApiCall { result })
+//        }.flowOn(Dispatchers.IO)
+//    }
 
 //    private fun convertResponseToResource(response : Response<Characters>):Resource<Characters> {
 //        if (response.isSuccessful) {

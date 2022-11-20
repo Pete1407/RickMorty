@@ -22,7 +22,7 @@ class WidgetCharactersBySpecie(context : Context, attrs : AttributeSet):LinearLa
     fun setCharacterBySpecie(titleText : String, list : List<Character>){
         binding.title.setTextTitle(titleText)
         if(adapter == null){
-            adapter = CharacterAdapter(list)
+            adapter = CharacterAdapter(ArrayList(list))
         }
         binding.recyclerView.adapter = adapter
 

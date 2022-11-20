@@ -40,4 +40,5 @@
     <string name="title_see_more">see more</string>
 
     <string name="hint_search">search name character</string>
+    <string name="not_found">Sorry! no result found</string>
 </resources>

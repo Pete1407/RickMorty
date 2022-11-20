@@ -11,7 +11,7 @@ import com.example.rickmorty.app.data.model.Character
 import com.example.rickmorty.databinding.ItemCardCharacterBinding
 
 
-class CharacterAdapter(val list : List<Character>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CharacterAdapter(val list : ArrayList<Character>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var eventClickDetailCharacter : ((data : Character)->Unit)? = null
     fun setEventClickDetailListener(event : ((data : Character)->Unit)){
@@ -30,6 +30,12 @@ class CharacterAdapter(val list : List<Character>):RecyclerView.Adapter<Recycler
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    fun refreshAllData(newData : List<Character>){
+        list.clear()
+        list.addAll(newData)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(val binding : ItemCardCharacterBinding):RecyclerView.ViewHolder(binding.root){

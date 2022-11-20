@@ -18,6 +18,11 @@ class SearchBarWidget (
 
     private lateinit var binding : WidgetCustomSearchbarBinding
 
+    private var eventSearchListener : ((searchText : String) -> Unit)? = null
+    fun setEventSearchListener(event : ((searchText : String) -> Unit)){
+        this.eventSearchListener = event
+    }
+
     init {
         initUI()
     }
@@ -30,13 +35,13 @@ class SearchBarWidget (
         }
     }
 
-    fun getText():String{
+    private fun getText():String{
         return binding.search.text.toString()
     }
 
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
         if(actionId == EditorInfo.IME_ACTION_SEARCH){
-            Log.d("search","search text --> ${v!!.text.toString()}")
+            eventSearchListener?.invoke(getText())
             return true
         }
         return false
