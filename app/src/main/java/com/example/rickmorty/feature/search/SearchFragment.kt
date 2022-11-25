@@ -60,8 +60,6 @@ class SearchFragment : BaseFragment(),CustomState {
             adapter = CharacterAdapter(arrayListOf())
             adapter!!.setEventClickDetailListener {
                 DetailCharacterActivity.create(requireContext(),it)
-//               val bundle = bundleOf("character" to it)
-//               navController?.navigate(R.id.action_global_detailCharacterActivity,bundle)
             }
         }
         binding.recylcerView.adapter = adapter
@@ -72,13 +70,11 @@ class SearchFragment : BaseFragment(),CustomState {
         binding.searchBarWidget.setEventSearchListener {
             viewModel.getCharactersBySearchingName(it)
         }
-
     }
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this).get(CharacterViewModel::class.java)
         viewModel.searchResultData.observe(viewLifecycleOwner,state)
-        //viewModel.errorData.observe(viewLifecycleOwner,errorValue)
     }
 
     override fun showLoading() {
@@ -93,6 +89,8 @@ class SearchFragment : BaseFragment(),CustomState {
         when(it){
             is Resource.Success ->{
                 hideLoading()
+                hideKeyBoardInSearch()
+                binding.recylcerView.visible()
                 binding.notFound.gone()
                 it.data?.let { result ->
                     charactersObj = result
@@ -103,19 +101,16 @@ class SearchFragment : BaseFragment(),CustomState {
                 showLoading()
             }
             else ->{
-                  ToastView(requireContext()).showLongToast(it.message.toString())
-//                binding.notFound.visible()
-//                binding.recylcerView.gone()
+                hideLoading()
+                hideKeyBoardInSearch()
+                binding.notFound.visible()
+                binding.recylcerView.gone()
             }
         }
     }
 
-    private val errorValue = Observer<String> {
-        Log.e("error",it)
-        if(!it.isNullOrBlank()){
-            binding.notFound.visible()
-            binding.recylcerView.gone()
-        }
+    private fun hideKeyBoardInSearch(){
+        hideKeyboard(requireActivity())
     }
 
     companion object {

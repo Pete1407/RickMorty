@@ -9,13 +9,7 @@ class GetCharacterBySearchingUsecase(
     private val repository: CharacterRepository
 ) {
 
-
     suspend fun getCharacterBySearchName(name: String): Resource<Characters> {
         return repository.getCharacterBySearchName(name)
     }
-
-//    use flow
-//    suspend fun getCharacterBySearchName(name: String): Flow<Resource<Characters>> {
-//        return repository.getCharacterBySearchName(name)
-//    }
 }

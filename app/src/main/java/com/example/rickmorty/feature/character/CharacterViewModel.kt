@@ -11,8 +11,10 @@ import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -137,26 +139,8 @@ class CharacterViewModel @Inject constructor(
     fun getCharactersBySearchingName(name: String) {
         searchResult.postValue(Resource.Loading())
         viewModelScope.launch {
-            try {
-                val result = getCharacterBySearchingUsecase.getCharacterBySearchName(name)
-                searchResult.postValue(Resource.Success(result.data))
-            }
-            catch (exception : HttpException){
-                searchResult.postValue(Resource.Error(exception.toString()))
-                Log.e("error",exception.message.toString())
-            }
-
-            // use flow
-//            getCharacterBySearchingUsecase.getCharacterBySearchName(name)
-//                .catch { flowCollector ->
-//                    Log.e("error", flowCollector.message.toString())
-//                    error.value = flowCollector.message
-//                    searchResult.postValue(Resource.Error(flowCollector.message.toString()))
-//                }.collect {
-//                    searchResult.postValue(Resource.Success(it.data))
-//                }
+            val result = getCharacterBySearchingUsecase.getCharacterBySearchName(name)
+            searchResult.postValue(result)
         }
     }
-
-
 }

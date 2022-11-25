@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="@string/not_found"
         android:fontFamily="@font/roboto_mono_bold"
-        android:textColor="@color/not_found_gray"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

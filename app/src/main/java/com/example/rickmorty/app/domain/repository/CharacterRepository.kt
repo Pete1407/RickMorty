@@ -21,7 +21,5 @@ interface CharacterRepository {
     suspend fun getCharacterByUnknown(specie : String):Resource<Characters>
 
     suspend fun getCharacterBySearchName(name : String):Resource<Characters>
-    // use flow
-    //suspend fun getCharacterBySearchName(name : String):Flow<Resource<Characters>>
 
 }

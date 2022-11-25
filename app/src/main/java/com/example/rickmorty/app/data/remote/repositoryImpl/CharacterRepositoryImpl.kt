@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -65,8 +66,14 @@ class CharacterRepositoryImpl(
     }
 
     override suspend fun getCharacterBySearchName(name: String): Resource<Characters> {
-        return safeApiCall {
-            remoteDataSource.getCharacterBySearchingName(name)
+        val result = remoteDataSource.getCharacterBySearchingName(name)
+        return if(result.isSuccessful && result.body()!= null){
+            Resource.Success(result.body())
+        }else if(result.errorBody()!= null){
+            val errorObject = JSONObject(result.errorBody()!!.charStream().readText())
+            Resource.Error(errorObject.getString("error"))
+        }else{
+            Resource.Error("Something Went Wrong!!")
         }
     }
 
@@ -75,7 +82,17 @@ class CharacterRepositoryImpl(
 //    override suspend fun getCharacterBySearchName(name: String): Flow<Resource<Characters>> {
 //        return flow<Resource<Characters>> {
 //            val result = remoteDataSource.getCharacterBySearchingName(name)
-//            emit(safeApiCall { result })
+//
+//            if(result.isSuccessful && result.body()!= null){
+//                emit(Resource.Success(result.body()))
+//            }
+//            else if(result.errorBody()!= null){
+//                val errorObj = JSONObject(result.errorBody()!!.charStream().readText())
+//                emit(Resource.Error(errorObj.getString("error")))
+//            }
+//            else{
+//                emit(Resource.Error("Something Went Wrong!!"))
+//            }
 //        }.flowOn(Dispatchers.IO)
 //    }
 
