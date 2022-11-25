@@ -69,20 +69,11 @@ class CharacterViewModel @Inject constructor(
 
      var isLoading : Boolean = false
 
-
-    sealed class BaseState{
-        data class Loading(var isLoad: Boolean) : BaseState()
-        data class Error(var errorMessage : String): BaseState()
-        data class Success(var data : List<Character>):BaseState()
-    }
-
     // human
     fun getCharacterByHumanSpecies(){
         viewModelScope.launch{
             val result = getHumanSpecieUseCase.getCharacterSpecies(RMKey.TYPE_HUMAN)
-            result.let {
-                humans.postValue(Resource.Success(it.data))
-            }
+            humans.postValue(result)
         }
     }
 
@@ -90,9 +81,7 @@ class CharacterViewModel @Inject constructor(
     fun getCharacterByAlienSpecies(){
         viewModelScope.launch{
             val result = getAlienSpecieUseCase.getCharacterSpecies(RMKey.TYPE_ALIEN)
-            result.let {
-                aliens.postValue(Resource.Success(it.data))
-            }
+            aliens.postValue(result)
         }
     }
 
@@ -100,9 +89,7 @@ class CharacterViewModel @Inject constructor(
     fun getCharacterByAnimalSpecies(){
         viewModelScope.launch{
             val result = getAnimalSpeciesUseCase.getCharacterSpecies(RMKey.TYPE_ANIMAL)
-            result.let {
-                animals.postValue(Resource.Success(it.data))
-            }
+            animals.postValue(result)
         }
     }
 
@@ -110,9 +97,7 @@ class CharacterViewModel @Inject constructor(
     fun getCharacterByUnknownSpecies(){
         viewModelScope.launch{
             val result = getUnknownSpeciesUseCase.getCharacterSpecies(RMKey.TYPE_UNKNOWN)
-            result.let {
-                unknown.postValue(Resource.Success(it.data))
-            }
+            unknown.postValue(result)
         }
     }
 

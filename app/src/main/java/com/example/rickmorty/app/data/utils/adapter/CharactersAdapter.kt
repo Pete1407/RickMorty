@@ -17,10 +17,10 @@ import com.example.rickmorty.databinding.WidgetTitleAdapterHomeBinding
 
 class CharactersAdapter(
     val context: Context,
-    val humanList: ArrayList<Character>,
-    val alienList : ArrayList<Character>,
-    val animalList : ArrayList<Character>,
-    val unknownList : ArrayList<Character>,
+    var humanList: ArrayList<Character>,
+    var alienList : ArrayList<Character>,
+    var animalList : ArrayList<Character>,
+    var unknownList : ArrayList<Character>,
     var allList : ArrayList<Character>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -90,42 +90,33 @@ class CharactersAdapter(
             TYPE_HUMAN -> {
                 if(holder is CategoryCharacterBySpecie){
                     holder.setPartOfSpecie(context.getString(R.string.category_human),humanList)
-                    //Log.d(RMKey.DEBUG_TAG,"HUMAN :: $position")
                 }
             }
             TYPE_ANIMAL -> {
                 if(holder is CategoryCharacterBySpecie){
                     holder.setPartOfSpecie(context.getString(R.string.category_animal),animalList)
-                    //Log.d(RMKey.DEBUG_TAG,"ANIMAL :: $position")
                 }
             }
             TYPE_ALIEN -> {
                 if(holder is CategoryCharacterBySpecie){
                     holder.setPartOfSpecie(context.getString(R.string.category_alien),alienList)
-                    //Log.d(RMKey.DEBUG_TAG,"ALIEN :: $position")
                 }
             }
             TYPE_UNKNOWN -> {
                 if (holder is CategoryCharacterBySpecie) {
                     holder.setPartOfSpecie(context.getString(R.string.category_unknown), unknownList)
-                    //Log.d(RMKey.DEBUG_TAG,"UNKNOWN :: $position")
                 }
             }
             TYPE_ALL -> {
                 if(holder is AllTitleViewHolder){
                     holder.setTitle(context.getString(R.string.category_all))
-                    //Log.d(RMKey.DEBUG_TAG,"ALL :: $position")
                 }
             }
             TYPE_ITEM -> {
-                //Log.d(RMKey.DEBUG_TAG,"ITEM :: $position")
-                //Log.d(RMKey.DEBUG_TAG,"All List --> ${allList.size}")
-                //Log.d(RMKey.DEBUG_TAG,"$position   $positionOther  --> ${position-positionOther}")
                 if(holder is SpecificedCharacter){
                     holder.setCharacter(allList[position-positionOther])
                 }
             }
-
         }
 
     }
@@ -159,8 +150,7 @@ class CharactersAdapter(
     }
 
     fun refreshAllList(list : List<Character>){
-        allList.clear()
-        allList.addAll(list)
+        allList = ArrayList(list)
         notifyDataSetChanged()
     }
 
@@ -174,14 +164,12 @@ class CharactersAdapter(
 
         private var adapter : CharacterAdapter? = null
 
-        fun setPartOfSpecie(titleText : String,itemList : List<Character>){
+        fun setPartOfSpecie(titleText: String, itemList: List<Character>) {
             val context = binding.root.context
             binding.title.setTextTitle(titleText)
-            if(adapter == null){
-                adapter = CharacterAdapter(ArrayList(itemList))
-                adapter!!.setEventClickDetailListener {
-                    eventClickDetailCharacter?.invoke(it)
-                }
+            adapter = CharacterAdapter(ArrayList(itemList))
+            adapter!!.setEventClickDetailListener {
+                eventClickDetailCharacter?.invoke(it)
             }
 
             binding.recyclerView.adapter = adapter

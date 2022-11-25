@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.UiThread
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,11 +22,13 @@ import com.example.rickmorty.app.data.model.Info
 import com.example.rickmorty.app.data.utils.GridSpacingItemDecoration
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.data.utils.SpacesItemDecoration
+import com.example.rickmorty.app.data.utils.ToastView
 import com.example.rickmorty.app.data.utils.adapter.CharactersAdapter
 import com.example.rickmorty.databinding.FragmentCharacterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Runnable
 
 // character Page
 @AndroidEntryPoint
@@ -123,27 +126,18 @@ class CharacterFragment : BaseFragment(),CustomState{
         viewModel.alienData.observe(viewLifecycleOwner,alienState)
         viewModel.animalData.observe(viewLifecycleOwner,animalState)
         viewModel.unknownData.observe(viewLifecycleOwner,unknownState)
-        //viewModel.error.observe(viewLifecycleOwner,errorState)
-    }
-
-    private fun showLoadingProgress(isLoad : Boolean) {
-        if(isLoad){
-            showLoading()
-        }else{
-            Handler(Looper.getMainLooper()).postDelayed(Runnable {
-                hideLoading()
-                Log.d(RMKey.DEBUG_TAG,"Tag for show loading")
-            },2000)
-        }
     }
 
     private val humanState = Observer<Resource<Characters>>{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                humanList = shuffleItem(it.data!!.results)
-                adapter?.refreshHumanList(humanList)
-            }else -> {}
+                it.data?.let { result ->
+                    adapter?.refreshHumanList(result.results)
+                }
+            }else -> {
+                ToastView(requireContext()).showShortToast(it.message.toString())
+            }
         }
     }
 
@@ -151,9 +145,12 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                alienList = shuffleItem(it.data!!.results)
-                adapter?.refreshAlienList(alienList)
-            }else -> {}
+                it.data?.let { result ->
+                    adapter?.refreshAlienList(result.results)
+                }
+            }else -> {
+                ToastView(requireContext()).showShortToast(it.message.toString())
+            }
         }
     }
 
@@ -161,9 +158,13 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                animalList = shuffleItem(it.data!!.results)
-                adapter?.refreshAnimalList(animalList)
-            }else -> {}
+                it.data?.let { result ->
+                    adapter?.refreshAnimalList(result.results)
+                }
+
+            }else -> {
+                ToastView(requireContext()).showShortToast(it.message.toString())
+            }
         }
     }
 
@@ -171,9 +172,13 @@ class CharacterFragment : BaseFragment(),CustomState{
         when(it){
             is Resource.Loading -> {}
             is Resource.Success ->{
-                unknownList = shuffleItem(it.data!!.results)
-                adapter?.refreshUnknownList(unknownList)
-            }else -> {}
+                it.data?.let { result ->
+                    adapter?.refreshUnknownList(result.results)
+                }
+
+            }else -> {
+                ToastView(requireContext()).showShortToast(it.message.toString())
+            }
         }
     }
 
@@ -184,16 +189,17 @@ class CharacterFragment : BaseFragment(),CustomState{
             }
             is Resource.Success -> {
                 hideLoading()
-                allList = ArrayList(it.data!!.results)
-                info = it.data.info
-                Log.d(RMKey.DEBUG_TAG,info.toString())
-                //numberPage = getNextPageFromLink(info?.next)
-                if(info?.prev.isNullOrEmpty() && info?.getNextPageFromLink()?.toInt() == 2){
-                    adapter?.refreshAllList(allList)
-                }else{
-                    adapter?.addNewItems(allList)
+                it.data?.let { result ->
+                    allList = ArrayList(result.results)
+                    info = result.info
+                    Log.d(RMKey.DEBUG_TAG,info.toString())
+                    //numberPage = getNextPageFromLink(info?.next)
+                    if(info?.prev.isNullOrEmpty() && info?.getNextPageFromLink()?.toInt() == 2){
+                        adapter?.refreshAllList(allList)
+                    }else{
+                        adapter?.addNewItems(allList)
+                    }
                 }
-
             }
         }
     }
@@ -218,7 +224,16 @@ class CharacterFragment : BaseFragment(),CustomState{
     }
 
     private fun refreshList(){
+        clearData()
         binding.refreshLayout.isRefreshing = false
+        viewModel.getCharacterByHumanSpecies()
+        viewModel.getCharacterByAlienSpecies()
+        viewModel.getCharacterByAnimalSpecies()
+        viewModel.getCharacterByUnknownSpecies()
+        viewModel.getCharacterByAllSpecies()
+    }
+
+    private fun clearData(){
         numberPage = ""
         info = null
         allList.clear()
@@ -226,11 +241,6 @@ class CharacterFragment : BaseFragment(),CustomState{
         animalList.clear()
         humanList.clear()
         unknownList.clear()
-        viewModel.getCharacterByAllSpecies()
-        viewModel.getCharacterByAlienSpecies()
-        viewModel.getCharacterByAnimalSpecies()
-        viewModel.getCharacterByHumanSpecies()
-        viewModel.getCharacterByUnknownSpecies()
     }
 
     companion object{

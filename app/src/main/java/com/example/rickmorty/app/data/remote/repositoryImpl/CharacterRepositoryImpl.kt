@@ -42,26 +42,50 @@ class CharacterRepositoryImpl(
     }
 
     override suspend fun getCharacterByHuman(specie: String): Resource<Characters> {
-        return safeApiCall {
-            remoteDataSource.getHumanSpecies(specie)
+        val result = remoteDataSource.getHumanSpecies(specie)
+        return if(result.isSuccessful && result.body()!= null){
+            Resource.Success(result.body())
+        }else if(result.errorBody()!= null){
+            val errorObject = JSONObject(result.errorBody()!!.charStream().readText())
+            Resource.Error(errorObject.getString("error"))
+        }else{
+            Resource.Error("Something Went Wrong!!")
         }
     }
 
     override suspend fun getCharacterByAlien(specie: String): Resource<Characters> {
-        return safeApiCall {
-            remoteDataSource.getAlienSpecies(specie)
+        val result = remoteDataSource.getAlienSpecies(specie)
+        return if(result.isSuccessful && result.body()!= null){
+            Resource.Success(result.body())
+        }else if(result.errorBody()!= null){
+            val errorObject = JSONObject(result.errorBody()!!.charStream().readText())
+            Resource.Error(errorObject.getString("error"))
+        }else{
+            Resource.Error("Something Went Wrong!!")
         }
     }
 
     override suspend fun getCharacterByAnimal(specie: String): Resource<Characters> {
-        return safeApiCall {
-            remoteDataSource.getAnimalSpecies(specie)
+        val result = remoteDataSource.getAnimalSpecies(specie)
+        return if(result.isSuccessful && result.body()!= null){
+            Resource.Success(result.body())
+        }else if(result.errorBody()!= null){
+            val errorObject = JSONObject(result.errorBody()!!.charStream().readText())
+            Resource.Error(errorObject.getString("error"))
+        }else{
+            Resource.Error("Something Went Wrong!!")
         }
     }
 
     override suspend fun getCharacterByUnknown(specie: String): Resource<Characters> {
-        return safeApiCall {
-            remoteDataSource.getUnknownSpecies(specie)
+        val result = remoteDataSource.getUnknownSpecies(specie)
+        return if(result.isSuccessful && result.body()!= null){
+            Resource.Success(result.body())
+        }else if(result.errorBody()!= null){
+            val errorObject = JSONObject(result.errorBody()!!.charStream().readText())
+            Resource.Error(errorObject.getString("error"))
+        }else{
+            Resource.Error("Something Went Wrong!!")
         }
     }
 

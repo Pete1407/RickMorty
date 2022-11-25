@@ -90,6 +90,7 @@ class SearchFragment : BaseFragment(),CustomState {
             is Resource.Success ->{
                 hideLoading()
                 hideKeyBoardInSearch()
+                binding.recylcerView.scrollToPosition(0)
                 binding.recylcerView.visible()
                 binding.notFound.gone()
                 it.data?.let { result ->

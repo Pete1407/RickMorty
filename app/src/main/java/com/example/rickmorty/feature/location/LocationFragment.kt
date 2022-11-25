@@ -56,6 +56,7 @@ class LocationFragment : BaseFragment(),CustomState{
     }
 
     override fun initUI() {
+        viewModel.getAllLocation()
         if(adapter == null){
             adapter = LocationAdapter(arrayListOf())
             adapter!!.setEventClickLocationListener {
@@ -104,7 +105,7 @@ class LocationFragment : BaseFragment(),CustomState{
 
     override fun onResume() {
         super.onResume()
-        refreshList()
+        //refreshList()
     }
 
     private fun refreshList(){
