@@ -17,7 +17,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailCharacterActivity : BaseActivity(), CustomState {
-    private lateinit var binding: ActivityInfoCharacterBinding
+    private val binding: ActivityInfoCharacterBinding by lazy {
+        ActivityInfoCharacterBinding.inflate(layoutInflater)
+    }
     private var figure: Character? = null
 
     @Inject
@@ -27,10 +29,9 @@ class DetailCharacterActivity : BaseActivity(), CustomState {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityInfoCharacterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         figure = intent.getParcelableExtra<Character>(RMKey.ITEM_CHARACTER) as Character
 
-        setContentView(binding.root)
         initListener()
         initViewModel()
         initUI()

@@ -10,16 +10,17 @@ import android.view.LayoutInflater
 import android.view.Window
 import com.example.rickmorty.R
 import com.example.rickmorty.app.base.BaseActivity
+import com.example.rickmorty.databinding.ActivityMainBinding
 import com.example.rickmorty.databinding.ActivitySplashScreenBinding
 
 class SplashScreenActivity : BaseActivity() {
-    private lateinit var binding : ActivitySplashScreenBinding
+    private val binding : ActivitySplashScreenBinding by lazy {
+        ActivitySplashScreenBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
         initUI()
     }
 
