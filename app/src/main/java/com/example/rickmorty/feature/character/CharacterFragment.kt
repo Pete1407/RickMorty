@@ -133,7 +133,7 @@ class CharacterFragment : BaseFragment(),CustomState{
             is Resource.Loading -> {}
             is Resource.Success ->{
                 it.data?.let { result ->
-                    adapter?.refreshHumanList(result.results)
+                    adapter?.refreshHumanList(shuffleItem(result.results))
                 }
             }else -> {
                 ToastView(requireContext()).showShortToast(it.message.toString())
@@ -146,7 +146,7 @@ class CharacterFragment : BaseFragment(),CustomState{
             is Resource.Loading -> {}
             is Resource.Success ->{
                 it.data?.let { result ->
-                    adapter?.refreshAlienList(result.results)
+                    adapter?.refreshAlienList(shuffleItem(result.results))
                 }
             }else -> {
                 ToastView(requireContext()).showShortToast(it.message.toString())
@@ -159,7 +159,7 @@ class CharacterFragment : BaseFragment(),CustomState{
             is Resource.Loading -> {}
             is Resource.Success ->{
                 it.data?.let { result ->
-                    adapter?.refreshAnimalList(result.results)
+                    adapter?.refreshAnimalList(shuffleItem(result.results))
                 }
 
             }else -> {
@@ -173,7 +173,7 @@ class CharacterFragment : BaseFragment(),CustomState{
             is Resource.Loading -> {}
             is Resource.Success ->{
                 it.data?.let { result ->
-                    adapter?.refreshUnknownList(result.results)
+                    adapter?.refreshUnknownList(shuffleItem(result.results))
                 }
 
             }else -> {

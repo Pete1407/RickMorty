@@ -17,7 +17,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical"
-           android:padding="@dimen/spacing_standard">
+           android:padding="4dp">
 
            <com.example.rickmorty.app.data.utils.customview.TitleAdapterWidget
                android:id="@+id/title"
