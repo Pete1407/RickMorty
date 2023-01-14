@@ -11,12 +11,7 @@ import com.example.rickmorty.app.data.model.Characters
 import com.example.rickmorty.app.data.utils.Resource
 import com.example.rickmorty.app.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +21,8 @@ class CharacterViewModel @Inject constructor(
     private val getAnimalSpeciesUseCase: GetAnimalSpeciesUsecase,
     private val getUnknownSpeciesUseCase: GetUnknownSpeciesUsecase,
     private val getAllCharacterUseCase: GetAllCharacterUsecase,
-    private val getCharacterBySearchingUsecase: GetCharacterBySearchingUsecase
+    private val getCharacterBySearchingUsecase: GetCharacterBySearchingUsecase,
+    private val getSingleCharacterUsecase: GetSingleCharacterUsecase
 ) : ViewModel() {
 
     /*
@@ -62,6 +58,10 @@ class CharacterViewModel @Inject constructor(
     private var searchResult = MutableLiveData<Resource<Characters>>()
     val searchResultData : LiveData<Resource<Characters>>
         get() = searchResult
+
+    private var specificCharacter = MutableLiveData<Resource<Character>>()
+    val specificData : LiveData<Resource<Character>>
+        get() = specificCharacter
 
     private var error = MutableLiveData<String>()
     val errorData : LiveData<String>
@@ -126,6 +126,14 @@ class CharacterViewModel @Inject constructor(
         viewModelScope.launch {
             val result = getCharacterBySearchingUsecase.getCharacterBySearchName(name)
             searchResult.postValue(result)
+        }
+    }
+
+    fun getCharacterBySpecific(id: String) {
+        specificCharacter.postValue(Resource.Loading())
+        viewModelScope.launch {
+            val result = getSingleCharacterUsecase.execute(id)
+            specificCharacter.postValue(result)
         }
     }
 }

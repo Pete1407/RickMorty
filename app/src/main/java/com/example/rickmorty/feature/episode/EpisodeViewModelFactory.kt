@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickmorty.app.domain.usecase.GetAllEpisodeUsecase
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class EpisodeViewModelFactory @Inject constructor(
     private val getAllEpisodeUsecase: GetAllEpisodeUsecase
 ): ViewModelProvider.Factory {

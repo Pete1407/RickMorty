@@ -20,8 +20,7 @@
             android:id="@+id/imageCharacter"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/rickmorty_icon" />
+            android:scaleType="centerCrop" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/backButton"
@@ -152,5 +151,10 @@
       </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.example.rickmorty.app.base.custom.CustomLoading
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

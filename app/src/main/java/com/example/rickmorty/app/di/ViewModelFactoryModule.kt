@@ -22,7 +22,8 @@ class ViewModelFactoryModule {
         getAnimalSpeciesUsecase: GetAnimalSpeciesUsecase,
         getUnknownSpeciesUsecase: GetUnknownSpeciesUsecase,
         getAllCharacterUsecase: GetAllCharacterUsecase,
-        getCharacterBySearchingUsecase: GetCharacterBySearchingUsecase
+        getCharacterBySearchingUsecase: GetCharacterBySearchingUsecase,
+        getSingleCharacterUsecase: GetSingleCharacterUsecase
     ):CharacterViewModelFactory{
         return CharacterViewModelFactory(
             getHumanSpeciesUsecase,
@@ -30,7 +31,8 @@ class ViewModelFactoryModule {
             getAnimalSpeciesUsecase,
             getUnknownSpeciesUsecase,
             getAllCharacterUsecase,
-            getCharacterBySearchingUsecase
+            getCharacterBySearchingUsecase,
+            getSingleCharacterUsecase
         )
     }
 

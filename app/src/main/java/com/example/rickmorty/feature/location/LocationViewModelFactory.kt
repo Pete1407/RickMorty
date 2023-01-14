@@ -6,7 +6,9 @@ import com.example.rickmorty.app.domain.usecase.GetAllLocationUsecase
 import com.example.rickmorty.app.domain.usecase.GetSingleLocationUsecase
 import com.example.rickmorty.feature.character.CharacterViewModel
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LocationViewModelFactory @Inject constructor(
     private val getAllLocationUsecase: GetAllLocationUsecase,
     private val getSingleLocationUsecase: GetSingleLocationUsecase
