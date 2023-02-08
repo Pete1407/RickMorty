@@ -51,6 +51,7 @@ class EpisodeFragment : BaseFragment(),CustomState {
         initUI()
         // message 1
         // message 2
+        // message 3
     }
 
     override fun initUI() {
