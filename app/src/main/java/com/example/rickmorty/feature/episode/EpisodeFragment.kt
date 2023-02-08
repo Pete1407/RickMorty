@@ -49,6 +49,7 @@ class EpisodeFragment : BaseFragment(),CustomState {
         initViewModel()
         initListener()
         initUI()
+        // message 1
     }
 
     override fun initUI() {
